@@ -50,6 +50,10 @@ $users = UserController::getAllUsers();
                         </select>
                         <button type="submit">Changer le rôle</button>
                     </form>
+                    <form method="POST" action="../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                        <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

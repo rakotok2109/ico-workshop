@@ -104,6 +104,10 @@ else if($_GET['id'] == 'updateRole') {
     UserController::updateRole();
 }
 
+else if($_GET['id'] == 'deleteUser') {
+    UserController::deleteUser();
+}
+
 else{
     header('Location: /pages/home.php');
 }
