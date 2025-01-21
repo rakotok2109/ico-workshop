@@ -1,9 +1,28 @@
+<?php
+require_once (__DIR__ . '/../../config/init.php');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['email'], $_POST['password'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $user = UserController::login($email, $password);
+        
+        if ($user) {
+            header('Location: dashboard.php'); 
+            exit();
+        } else {
+            $error = "Email ou mot de passe incorrect.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | ICO</title>
+    <title>Login | ICO</title>
     <link rel="stylesheet" href="../../ressources/css/login.css">
 </head>
 <body>
@@ -15,25 +34,26 @@
             <img src="../../ressources/img/img1.png" alt="ICO Image">
         </div>
         <div class="form-container">
-            <h2 class="form-title">Sign Up</h2>
+            <h2 class="form-title">Connexion</h2>
+            
+            <?php if (isset($error)) : ?>
+                <p style="color: red; text-align: center;"><?php echo $error; ?></p>
+            <?php endif; ?>
+
             <form action="login.php" method="POST" class="form">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" placeholder="Entrer le nom" required>
-
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" placeholder="Entrer le prénom" required>
-
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" placeholder="Entrer l'Email" required>
-
-                <label for="telephone">Téléphone :</label>
-                <input type="text" id="telephone" name="telephone" placeholder="Entrer le téléphone" required>
 
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required>
 
-                <input type="submit" value="S'inscrire">
+                <input style="background-color:red;" type="submit" value="Se connecter">
             </form>
+            <div class="form-footer">
+                <a href="register.php"><button>Créer un compte</button></a>
+                <a href="register.php"><button>Mot de passe oublié ? </button></a>
+
+            </div>
         </div>
     </div>
 </body>
