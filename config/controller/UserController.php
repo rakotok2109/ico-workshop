@@ -109,7 +109,16 @@ class UserController {
         }
     }
 
+    public static function updateRole()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_user = $_POST['id_user'];
+            $role = $_POST['role'];
 
-
-
+            $user = new User();
+            $user->updateRole($id_user, $role);
+            header("Location: /dashboard");
+            exit();
+        }
+    }
 }
