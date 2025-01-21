@@ -11,5 +11,4 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/model/Order.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/model/User.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/model/DetailsOrder.php');
 
-
 ?>
