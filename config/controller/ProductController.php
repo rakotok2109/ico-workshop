@@ -24,13 +24,27 @@ class ProductController {
     public static function updateProduct(Product $product)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE products SET (id, name, price, description, image) VALUES (?, ?, ?, ?, ?) WHERE id = ?', [$product->getId(), $product->getName(), $product->getPrice(), $product->getDescription(), $product->getImage()]);
+        $pdo->execSQL('UPDATE products SET name = ?, price = ?, description = ?, image = ? WHERE id = ?',
+        [
+            $product->getName(),
+            $product->getPrice(),
+            $product->getDescription(),
+            $product->getImage(),
+            $product->getId()
+        ]);
+
+        header("Location: ../pages/DashboardAdminView.php");
+        exit();
+
     }
 
     public static function addProduct(Product $product)
     {   
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)', [$product->getName(), $product->getPrice(), $product->getDescription(), $product->getImage()]);
+
+        header("Location: ../pages/DashboardAdminView.php");
+        exit();
     }
 
     public static function deleteProduct()

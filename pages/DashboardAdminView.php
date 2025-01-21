@@ -71,10 +71,14 @@ $products = ProductController::getAllProducts();
     <tbody>
         <?php foreach($products as $product): ?>
             <tr>
-                <td><?= $product['name']?></td>
-                <td><?= $product['price']?></td>
-                <td><?= $product['description']?></td>
-                <td><img src="<?= $product['image']?>"/></td>
+                <form method="POST" action="../routes/product.php?id=updateProduct" style="display:inline;">
+                    <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
+                    <td><input type="text" name="name" value="<?= $product['name'] ?>" required></td>
+                    <td><input type="number" name="price" value="<?= $product['price'] ?>" step="0.01" required></td>
+                    <td><textarea name="description"><?= $product['description'] ?></textarea></td>
+                    <td><input type="text" name="image" value="<?= $product['image'] ?>" required></td>
+                    <td><button type="submit">Modifier</button></td>
+                </form>
                 <td><form method="POST" action="../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
                     <input type="hidden" name="id" value="<?= $product['id'] ?>">
                     <button type="submit" style="background-color:red; color:white;">Supprimer le produit</button>
