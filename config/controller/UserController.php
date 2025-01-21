@@ -1,6 +1,6 @@
 <?php 
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
+require_once ('../config/init.php');
 
 
 class UserController {
@@ -107,6 +107,16 @@ class UserController {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
             $_SESSION['inscriptionErreur'][] = 10; // Veuillez entrer un numéro de téléphone valide
         }
+    }
+
+    public static function getAllUsers($offset = null, $limit = null) {
+        $pdo = PDOUtils::getSharedInstance();
+        $results = $pdo->requestSQL('SELECT * FROM users');
+        $users = [];
+        foreach ($results as $result) {
+            $users[] = new User($result['name'], $result['firstname'], $result['mail'], $result['phone'], $result['location'], $result['role'], $result['id']);
+        }
+        return $users;
     }
 
     public static function updateRole()

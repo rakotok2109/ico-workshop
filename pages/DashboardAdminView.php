@@ -10,8 +10,8 @@
 </head>
 <body>
 <?php 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
-if($_SESSION['user'] == null){
+require_once '../config/init.php';
+/*if($_SESSION['user'] == null){
     header('Location: /pages/auth/login.php');
 }
 else{
@@ -19,16 +19,26 @@ else{
     //if($user->getRole() != 1){
     //    header('Location: /pages/home.php');
     //}
-}
+}*/
+
+$users = UserController::getAllUsers();
 ?>
 
 <div class="list-user-container">
     <?php foreach($users as $user): ?>
-        <td><?= $user['id'] ?></td>
-        <td><?= $user['name'] ?></td>
-        <td><?= $user['firstname'] ?></td>
-        <td><?= $user['phone'] ?></td>
-        <td><?= $user['mail'] ?></td>
-        <td><?= $user['role'] == 1 ? 'Admin' : 'Utilisateur' ?></td>
+        <td><?= $user->getName() ?></td>
+        <td><?= $user->getFirstname() ?></td>
+        <td><?= $user->getPhone() ?></td>
+        <td><?= $user->getMail() ?></td>
+        <td><?php
+            if ($user->getRole() == 2) {
+                    echo 'Super Admin';
+            }if ($user->getRole() == 1) {
+                echo 'Admin';
+                } else {
+                    echo 'Utilisateur';
+                }
+            ?>
+        </td>
     <?php endforeach; ?>
 </div>
