@@ -42,20 +42,31 @@ try {
     ]);
 
     if ($paymentIntent->status === 'succeeded') {
-         $user = unserialize($_SESSION['user']);
-        // // Enregistrement de la commande dans la base de données
-        // $pdo = PDOUtils::getSharedInstance();
-        // $pdo->execSQL('INSERT INTO orders (id_user, date) VALUES (?, ?)', [$user->getId(), date('Y-m-d H:i:s')]);
+        //  $user = unserialize($_SESSION['user']);
+         // Enregistrement de la commande dans la base de données
+        //  $order = new Order(null, date('Y-m-d H:i:s'), $user->getId());
+         $order = new Order(null, date('Y-m-d H:i:s'), 1);
+         $orderId =  OrderController::addOrder($order);
+       
+if($orderId == null ){
+    echo json_encode(['error' => 'Erreur avec la base de données.']);
 
-        // $orderId = $pdo->getLastInsertId();
+}
+else
+{
 
-        // foreach ($cart as $item) {
-        //     $pdo->execSQL('INSERT INTO detail_order (id_order, id_product, quantity, amount) VALUES (?, ?, ?, ?)',
-        //         [$orderId, $item['id'], $item['quantite'], $item['prix'] * $item['quantite']]
-        //     );
-        // }
-
+    foreach($cart as $item){
+        $details = new DetailsOrder(null, $orderId, $item['id'], $item['quantite'], $item['prix'] * $item['quantite']);
+        DetailsOrderController::addOrderDetails($details);
         echo json_encode(['success' => true]);
+
+    }
+
+}
+     
+       
+
+     
         exit;
     } else {
         echo json_encode(['error' => 'Le paiement a échoué.']);

@@ -7,7 +7,7 @@ class DetailsOrder {
     public $quantite;
     public $prix;
 
-    public function __construct($id, $id_order, $id_produit, $quantite, $prix) {
+    public function __construct($id=null, $id_order, $id_produit, $quantite, $prix) {
         $this->id = $id;
         $this->id_order = $id_order;
         $this->id_produit = $id_produit;

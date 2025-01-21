@@ -166,9 +166,9 @@
         document.getElementById('payment-message').textContent = data.error;
     }
 })
-// .catch(error => {
-//     console.log('Erreur:', error);
-// });
+.catch(error => {
+    console.log('Erreur:', error);
+});
 
         });
     });
