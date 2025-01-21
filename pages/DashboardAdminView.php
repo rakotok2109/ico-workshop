@@ -23,22 +23,35 @@ else{
 
 $users = UserController::getAllUsers();
 ?>
-
-<div class="list-user-container">
-    <?php foreach($users as $user): ?>
-        <td><?= $user->getName() ?></td>
-        <td><?= $user->getFirstname() ?></td>
-        <td><?= $user->getPhone() ?></td>
-        <td><?= $user->getMail() ?></td>
-        <td><?php 
-                if ($user->getRole() == 1) {
-                    echo 'Admin';
-                } elseif ($user->getRole() == 2) {
-                    echo 'Super Admin';
-                } else {
-                    echo 'Utilisateur';
-                }
-            ?>
-        </td>
-    <?php endforeach; ?>
-</div>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Mail</th>
+        <th>Phone</th>
+        <th>Adresse</th>
+        <th>Rôle</th>
+    </tr>
+    <tbody>
+        <?php foreach($users as $user): ?>
+            <tr>
+                <td><?= $user['name']?></td>
+                <td><?= $user['firstname']?></td>
+                <td><?= $user['mail']?></td>
+                <td><?= $user['phone']?></td>
+                <td><?= $user['location']?></td>
+                <td>
+                    <form method="POST" action="/update-role">
+                        <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
+                        <select name="role">
+                            <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
+                            <option value="1" <?= $user['role'] == 1 ? 'selected' : '' ?>>Administrateur</option>
+                            <option value="2" <?= $user['role'] == 2 ? 'selected' : '' ?>>Super Administrateur</option>
+                        </select>
+                        <button type="submit">Changer le rôle</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

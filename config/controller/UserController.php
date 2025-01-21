@@ -109,14 +109,10 @@ class UserController {
         }
     }
 
-    public static function getAllUsers($offset = null, $limit = null) {
+    public static function getAllUsers() {
         $pdo = PDOUtils::getSharedInstance();
-        $results = $pdo->requestSQL('SELECT * FROM users');
-        $users = [];
-        foreach ($results as $result) {
-            $users[] = new User( $result['id'], $result['name'], $result['firstname'], $result['mail'], $result['phone'], $result['location'], $result['role']);
-        }
-        return $users;
+        $results = $pdo->requestSQL('SELECT id, name, firstname, mail, phone, location, role FROM users');
+        return $results;
     }
 
     public static function updateRole()
