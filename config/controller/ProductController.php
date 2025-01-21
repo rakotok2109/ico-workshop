@@ -38,7 +38,7 @@ class ProductController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_product = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
-            if ($id_user === null) {
+            if ($id_product === null) {
                 $_SESSION['error'] = "ID produit invalide.";
                 header("Location: ../pages/DashboardAdminView.php");
                 exit();

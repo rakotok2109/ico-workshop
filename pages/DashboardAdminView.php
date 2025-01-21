@@ -75,6 +75,11 @@ $products = ProductController::getAllProducts();
                 <td><?= $product['price']?></td>
                 <td><?= $product['description']?></td>
                 <td><img src="<?= $product['image']?>"/></td>
+                <td><form method="POST" action="../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                    <button type="submit" style="background-color:red; color:white;">Supprimer le produit</button>
+                    </form>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>

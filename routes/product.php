@@ -11,6 +11,11 @@ if($_GET['id'] == 'addProduct') {
 
     ProductController::addProduct($product);
 }
+
+else if($_GET['id'] == 'deleteProduct') {
+    ProductController::deleteProduct();
+}
+
 else{
     header('Location: /pages/home.php');
 }
