@@ -9,10 +9,11 @@ class User {
     private $phone_;
     private $location_;
     private $role_;
+    
 
     public function __construct($name, $firstname, $password, $mail, $phone, $location, $role, $id = null) {
         $this->name_ = $name;
-        $this->firstname_ = $firstname;
+        $this->firstname_ = $firstname; 
         $this->password_ = $password;
         $this->mail_ = strtolower(trim($mail));
         $this->phone_ = $phone;

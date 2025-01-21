@@ -1,6 +1,6 @@
 <?php 
 
-require_once (__DIR__ . '/../init.php');  
+require_once ('../config/init.php');
 
 
 class UserController {
@@ -109,7 +109,22 @@ class UserController {
         }
     }
 
+    public static function getAllUsers() {
+        $pdo = PDOUtils::getSharedInstance();
+        $results = $pdo->requestSQL('SELECT id, name, firstname, mail, phone, location, role FROM users');
+        return $results;
+    }
 
+    public static function updateRole()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_user = $_POST['id_user'];
+            $role = $_POST['role'];
 
-
+            $user = new User();
+            $user->updateRole($id_user, $role);
+            header("Location: /dashboard");
+            exit();
+        }
+    }
 }

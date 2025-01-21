@@ -8,10 +8,7 @@ if (isset($_SESSION['user']) && time() > $_SESSION['user']['expiration']) {
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-require_once (__DIR__ . '/../config/conf.inc.php');
-require_once (__DIR__ . '/../config/controller/PDOUtils.php');
-require_once (__DIR__ . '/../config/controller/UserController.php');
-require_once (__DIR__ . '/../config/model/User.php');
-
+require_once ('../config/controller/PDOUtils.php');
+require_once ('../config/controller/UserController.php');
+require_once ('../config/model/User.php');
 ?>
