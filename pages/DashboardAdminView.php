@@ -22,6 +22,7 @@ else{
 }*/
 
 $users = UserController::getAllUsers();
+$products = ProductController::getAllProducts();
 ?>
 <table>
     <tr>
@@ -30,7 +31,7 @@ $users = UserController::getAllUsers();
         <th>Mail</th>
         <th>Phone</th>
         <th>Adresse</th>
-        <th>Rôle</th>
+        <th>Paramètres</th>
     </tr>
     <tbody>
         <?php foreach($users as $user): ?>
@@ -55,6 +56,24 @@ $users = UserController::getAllUsers();
                         <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
                     </form>
                 </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    <tbody>
+        <?php foreach($products as $product): ?>
+            <tr>
+                <td><?= $product['name']?></td>
+                <td><?= $product['price']?></td>
+                <td><?= $product['description']?></td>
+                <td><img src="<?= $product['image']?>"/></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
