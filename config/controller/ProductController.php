@@ -21,10 +21,42 @@ class ProductController {
             return null;
         }
     }
+    public static function updateProduct(Product $product)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $pdo->execSQL('UPDATE products SET (id, name, price, description) VALUES (?, ?, ?, ?) WHERE id = ?', [$product->getId(), $product->getName(), $product->getPrice(), $product->getDescription()]);
+    }
 
     public static function addProduct(Product $product)
     {   
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO products (name, price, description) VALUES (?, ?, ?)', [$product->getNom(), $product->getPrix(), $product->getDescription()]);
+        $pdo->execSQL('INSERT INTO products (name, price, description) VALUES (?, ?, ?)', [$product->getName(), $product->getPrice(), $product->getDescription()]);
+    }
+
+    public static function deleteProduct()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_product = isset($_POST['id']) ? (int) $_POST['id'] : null;
+
+            if ($id_user === null) {
+                $_SESSION['error'] = "ID produit invalide.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "DELETE FROM products WHERE id = ?";
+                $pdo->execSQL($sql, [$id_product]);
+
+                $_SESSION['success'] = "Le produit a été supprimé avec succès.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+                header("Location: ../../pages/DashboardAdminView.php");
+                exit();
+            }
+        }
     }
 }
