@@ -30,7 +30,7 @@
                             onclick="addToCart(<?= $product->id; ?>, '<?= $product->nom; ?>', <?= $product->prix; ?>)">
                             Ajouter au panier
                         </button>
-                        <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/pages/products'; ?>" class="block mt-4 text-[#00253e] underline"> ← Retour aux produits</a>
+                        <a href="/pages/products/" class="block mt-4 text-[#00253e] underline"> ← Retour aux produits</a>
                     </div>
                 </div>
             <?php } else { ?>
