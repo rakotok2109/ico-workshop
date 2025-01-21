@@ -60,6 +60,7 @@ $products = ProductController::getAllProducts();
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <table>
     <tr>
         <th>Nom</th>
@@ -78,3 +79,11 @@ $products = ProductController::getAllProducts();
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<form method="POST" action="../routes/product.php?id=addProduct">
+    <input type="text" name="name" placeholder="Nom du produit" required>
+    <input type="number" name="price" placeholder="Prix en €" step="0.01" required>
+    <textarea name="description" placeholder="Description du produit" required></textarea>
+    <input type="text" name="image" placeholder="Lien de l'image" required>
+    <button type="submit">Ajouter le produit</button>
+</form>
