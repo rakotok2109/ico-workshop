@@ -30,11 +30,11 @@ $users = UserController::getAllUsers();
         <td><?= $user->getFirstname() ?></td>
         <td><?= $user->getPhone() ?></td>
         <td><?= $user->getMail() ?></td>
-        <td><?php
-            if ($user->getRole() == 2) {
+        <td><?php 
+                if ($user->getRole() == 1) {
+                    echo 'Admin';
+                } elseif ($user->getRole() == 2) {
                     echo 'Super Admin';
-            }if ($user->getRole() == 1) {
-                echo 'Admin';
                 } else {
                     echo 'Utilisateur';
                 }

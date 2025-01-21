@@ -114,7 +114,7 @@ class UserController {
         $results = $pdo->requestSQL('SELECT * FROM users');
         $users = [];
         foreach ($results as $result) {
-            $users[] = new User($result['name'], $result['firstname'], $result['mail'], $result['phone'], $result['location'], $result['role'], $result['id']);
+            $users[] = new User( $result['id'], $result['name'], $result['firstname'], $result['mail'], $result['phone'], $result['location'], $result['role']);
         }
         return $users;
     }
