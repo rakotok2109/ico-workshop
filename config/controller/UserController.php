@@ -118,13 +118,32 @@ class UserController {
     public static function updateRole()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_user = $_POST['id_user'];
-            $role = $_POST['role'];
+            $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
+            $role = isset($_POST['role']) ? (int) $_POST['role'] : null;
 
-            $user = new User();
-            $user->updateRole($id_user, $role);
-            header("Location: /dashboard");
-            exit();
+            if ($id_user === null || $role === null) {
+                $_SESSION['error'] = "Données invalides.";
+                header("Location: /dashboard");
+                exit();
+            }
+
+            if (!in_array($role, [0, 1, 2])) {
+                $_SESSION['error'] = "Rôle invalide.";
+                header("Location: /dashboard");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "UPDATE users SET role = ? WHERE id = ?";
+                $pdo->execSQL($sql, [$role, $id_user]);
+
+                $_SESSION['success'] = "Le rôle de l'utilisateur a été mis à jour avec succès.";
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur SQL : " . $e->getMessage();
+                exit();
+            }
         }
     }
 }

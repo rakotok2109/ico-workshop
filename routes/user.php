@@ -100,6 +100,10 @@ else if($_GET['id'] == 'update') {
     header('Location: /');
 }
 
+else if($_GET['id'] == 'updateRole') {
+    UserController::updateRole();
+}
+
 else{
     header('Location: /pages/home.php');
 }

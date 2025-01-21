@@ -41,7 +41,7 @@ $users = UserController::getAllUsers();
                 <td><?= $user['phone']?></td>
                 <td><?= $user['location']?></td>
                 <td>
-                    <form method="POST" action="../../routes/user.php?id=updateRole">
+                    <form method="POST" action="../routes/user.php?id=updateRole">
                         <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
                         <select name="role">
                             <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
