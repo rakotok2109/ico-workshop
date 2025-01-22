@@ -1,0 +1,42 @@
+
+.container-navbar{
+    position :relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 80px;
+    z-index: 10;
+}
+.container-logo a img{
+    height: 100px;
+    width: 100px;
+    padding-top: 10px;
+    border-radius: 50%;
+}
+.container-navigation ul li {
+    list-style: none;
+}
+.container-navigation ul li a{
+    color: black;
+}
+.container-login-user img{
+    height: 50px;
+    width:50px;
+    border-radius: 50%;
+}
+.container-navigation ul{
+    display: flex;
+    justify-content: space-around;
+    gap:30px;
+    align-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+.container-navigation{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding-right: 30px;
+
+} 

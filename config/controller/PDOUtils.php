@@ -5,9 +5,11 @@ class PDOUtils {
     private static $sharedInstance_;
 
     private function __construct() {
-        $this->pdo_ = new PDO('mysql:host=localhost;dbname=workshop_ico', 'root', '', [  PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',]); }
 
-      
+        $this->pdo_ = new PDO('mysql:host=localhost;dbname=workshop-ico', 'root', '', [  PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',]); }
+
+
+    
         public static function getSharedInstance()
         {
             if (!isset(PDOUtils::$sharedInstance_)) {

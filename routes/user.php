@@ -9,15 +9,18 @@ if($_GET['id'] == 'register') {
         unset( $_SESSION['inscriptionErreur']);
     }
     $user = new User(
-        $_POST['name'],
-        $_POST['firstname'],
+        $_POST['nom'],
+        $_POST['prenom'],
         $_POST['password'],
-        $_POST['mail'],
-        $_POST['phone'],
+        $_POST['email'],
+     
+    
+        $_POST['telephone'],
         $_POST['location'],
         0 
     );
 
+    UserController::validateMail($user->getMail());
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
@@ -30,9 +33,10 @@ if($_GET['id'] == 'register') {
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
         $_SESSION['email'] = $user->getMail();
+        $_SESSION['email'] = $user->getMail();
      
 
-        header('Location: /pages/register.php');
+        header('Location: /pages/authentification/register.php');
         exit();
 
     }
@@ -40,19 +44,20 @@ if($_GET['id'] == 'register') {
     else{
 
         UserController::register($user);
-        header('Location: /');
+        header('Location: /pages/authentification/login.php');
     
     }
 
    
    
-    header('Location: /');
+  
 }
 else if($_GET['id'] == 'login') {
-    $result = UserController::login($_POST['mail'], $_POST['password']);
+    $result = UserController::login($_POST['email'], $_POST['password']);
     if($result) {
     //   echo $_SESSION['user']->getName();
     $user= unserialize($_SESSION['user']);
+    var_dump($user);
     if($user->getRole() < 1)
     {
         header('Location: ../pages/home.php');
@@ -80,6 +85,7 @@ else if($_GET['id'] == 'update') {
     $user = new User(
         $_POST['name'],
         $_POST['firstname'],
+        null,
         $_POST['mail'],
         $_POST['phone'],
         $_POST['location'],
@@ -87,19 +93,20 @@ else if($_GET['id'] == 'update') {
     );
 
     UserController::validateMail($user->getMail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
 
-    UserController::update($user);
+    UserController::updateUser($user);
    
    
     header('Location: /');
 }
 
 else if($_GET['id'] == 'updateRole') {
-    UserController::updateRole();
+    // UserController::updateRole();
 }
 
 else if($_GET['id'] == 'deleteUser') {

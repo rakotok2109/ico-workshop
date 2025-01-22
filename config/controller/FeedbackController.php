@@ -1,6 +1,7 @@
 <?php 
 
 require_once (dirname(__DIR__).'/init.php');
+require_once (dirname(__DIR__).'/init.php');
 
 
 class FeedbackController {
@@ -17,11 +18,14 @@ class FeedbackController {
         $feedback = $pdo->requestSQL('SELECT * FROM feedbacks WHERE id = ?', [intval($id)]);
         if ($feedback) {
             return new Product($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
+        if ($feedback) {
+            return new Product($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
         } else {
             return null;
         }
     }
 
+    public static function addFeedback(Feedback $feedback)
     public static function addFeedback(Feedback $feedback)
     {   
         $pdo = PDOUtils::getSharedInstance();
@@ -29,10 +33,15 @@ class FeedbackController {
     }
 
     public static function updateFeedback(Feedback $feedback)
+    public static function updateFeedback(Feedback $feedback)
     {
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('UPDATE feedbacks SET fisrtname = ?, wording = ?, rate = ? WHERE id = ?',
         [
+            $feedback->getFirstname(),
+            $feedback->getWording(),
+            $feedback->getRate(),
+            $feedback->getId()
             $feedback->getFirstname(),
             $feedback->getWording(),
             $feedback->getRate(),
@@ -48,7 +57,9 @@ class FeedbackController {
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_feedback = isset($_POST['id']) ? (int) $_POST['id'] : null;
+            $id_feedback = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
+            if ($id_feedback === null) {
             if ($id_feedback === null) {
                 $_SESSION['error'] = "ID feedback invalide.";
                 header("Location: ../pages/admin/dashboard.php");
