@@ -21,27 +21,13 @@
     
 
 
+    <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
 <div class="container-main-header">
-    <div class="container-navbar">
-        <div class="container-logo">
-            <a href="#"><img src="../ressources/image/ICO_Logo.png" alt="logo-ico"></a>
-        </div>
-        <div class="container-navigation">
-            <ul>
-                <li><a href="dashboard">Dashboard</a></li>
-                <li><a href="avis.php">Avis</a></li>
-                <li><a href="faq.php">FAQ</a></li>
-                <li><a href="contact.php">contact</a></li>
-                <li><a href="acheter.php">Acheter</a></li>
-            </ul>
-            <div class="container-login-user">
-                <img src="../ressources/image/utilisateur.png" alt="logo-utilisateur">
-            </div>
-        </div>
-    </div>
+<?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
     <div class="logo-ico">
         <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
     </div>

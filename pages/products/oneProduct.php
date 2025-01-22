@@ -7,8 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#FCD3A1] text-primary font-sans">
-    <!-- todo: include header -->
+<div class="bg-[#3B60BC] sticky">
+        <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
 
+
+        </div>
+<div class="container mx-auto p-8">
+       
     <div class="container mx-auto p-8 flex">
         <div class="w-3/4 pr-8">
             <?php 
@@ -19,7 +24,7 @@
                 if ($product) { 
             ?>
                 <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="../../ressources/images/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-80 object-cover">
+                    <img src="../../ressources/image/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-80 object-cover">
                     <div class="p-6">
                         <h2 class="text-3xl font-bold text-[#af2127]"> <?= $product->nom; ?> </h2>
                         <p class="text-gray-600 mt-4"> <?= $product->description; ?> </p>

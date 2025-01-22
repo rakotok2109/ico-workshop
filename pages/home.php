@@ -1,8 +1,8 @@
 <?php
-require 'components/headerHero.php';
+require_once ($_SERVER['DOCUMENT_ROOT']. '/pages/components/headerHero.php');
 ?> 
 <div class="element-titre">
-    <h2>News :</h2>
+    <h2>Les dernières nouveautés :</h2>
 </div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">

@@ -11,7 +11,7 @@ class User {
     private $role_;
     
 
-    public function __construct($name, $firstname, $password, $mail, $phone, $location, $role, $id = null) {
+    public function __construct($name, $firstname, $password=null, $mail, $phone, $location, $role, $id = null) {
         $this->name_ = $name;
         $this->firstname_ = $firstname; 
         $this->password_ = $password;
@@ -59,7 +59,7 @@ class User {
     }
 
     public function setMail($email) {
-        $this->mail_ = $mail;
+        $this->mail_ = $email;
     }
 
     public function getPhone() {

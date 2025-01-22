@@ -11,6 +11,11 @@
 </head>
 <body class="bg-[#FCD3A1] text-[#00253e] font-sans">
     <div class="container mx-auto p-8">
+        <div class="bg-[#3B60BC] sticky">
+        <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+
+
+        </div>
         <h1 class="text-3xl font-bold text-center mb-8">Récapitulatif de votre commande</h1>
         
         <div class="bg-white shadow-lg rounded-lg p-6">
