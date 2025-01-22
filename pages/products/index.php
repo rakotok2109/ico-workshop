@@ -25,7 +25,7 @@
             foreach ($products as $product) { 
             ?>
 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <img src="../../ressources/image/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-48 object-cover">
+    <img src="../../ressources/images/<?= $product['image'] ?>" alt="Produit" class="w-full h-48 object-cover">
     <div class="p-4">
         <h3 class="text-xl font-bold"><?= $product->getName(); ?></h3>
         <p class="text-gray-600 text-wrap"><?= $product->getDescription(); ?>...</p>

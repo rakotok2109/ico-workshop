@@ -23,6 +23,7 @@ if($_GET['id'] == 'register') {
 
     UserController::validateMail($user->getMail());
     UserController::validateMail($user->getMail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
@@ -33,6 +34,7 @@ if($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
+        $_SESSION['email'] = $user->getMail();
         $_SESSION['email'] = $user->getMail();
         $_SESSION['email'] = $user->getMail();
      
@@ -55,6 +57,7 @@ if($_GET['id'] == 'register') {
 }
 else if($_GET['id'] == 'login') {
     $result = UserController::login($_POST['mail'], $_POST['password']);
+    $result = UserController::login($_POST['mail'], $_POST['password']);
     if($result) {
     //   echo $_SESSION['user']->getName();
     $user= unserialize($_SESSION['user']);
@@ -74,7 +77,7 @@ else if($_GET['id'] == 'login') {
 }
 else if($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
-    header('Location: /pages/home.php');
+    header('Location: ../pages/home.php');
 }
 
 else if($_GET['id'] == 'update') {
@@ -93,6 +96,7 @@ else if($_GET['id'] == 'update') {
         $_POST['role'],
     );
 
+    UserController::validateMail($user->getMail());
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());

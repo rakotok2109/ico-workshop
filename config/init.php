@@ -1,7 +1,7 @@
 <?php 
 if (isset($_SESSION['user']) && time() > $_SESSION['user']['expiration']) {
-    session_unset();
-    session_destroy();
+    session_unset(); 
+    session_destroy(); 
 }
 
 if (session_status() === PHP_SESSION_NONE) {

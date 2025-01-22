@@ -18,7 +18,7 @@ class ProductController {
     public static function getProductbyId($id)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $product = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [intval($id)]);
+        $product = $pdo->requestSQL('SELECT id, name, price, description, image FROM products WHERE id = ?', [intval($id)]);
         if ($product) {
             return new Product($product[0]['name'], $product[0]['price'], $product[0]['description'], $product[0]['image'],$product[0]['id']);
         } else {

@@ -16,7 +16,7 @@ class FeedbackController {
         $pdo = PDOUtils::getSharedInstance();
         $feedback = $pdo->requestSQL('SELECT * FROM feedbacks WHERE id = ?', [intval($id)]);
         if ($feedback) {
-            return new Product($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
+            return new Feedback($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
         } else {
             return null;
         }

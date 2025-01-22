@@ -27,9 +27,8 @@ class UserController {
         }
     }
 
-    // Méthode de connexion d'un utilisateur
     public static function login($mail, $password) {
-        try {
+        try{
             $pdo = PDOUtils::getSharedInstance();
             $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
             
@@ -49,41 +48,22 @@ class UserController {
 
                     // Stockage dans la session
                     $_SESSION['user'] = serialize($user);
-                    $_SESSION['user_expiration'] = time() + 86400; // 1 jour de session
+                    $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
                     return true;
+                   
                 } else {
-                    $_SESSION['loginErreur'][] = "Mot de passe incorrect.";
+                    $_SESSION['loginErreur'][] = 0;
                     return false;
                 }
             } else {
-                $_SESSION['loginErreur'][] = "Adresse e-mail introuvable.";
-                return false;
+                $_SESSION['loginErreur'][] = 0;
+                    return false;
             }
-        } catch (PDOException $e) {
-            die("Erreur lors de la connexion : " . $e->getMessage());
         }
-    }
-
-    // Méthode de mise à jour d'un utilisateur
-    public static function updateUser(User $user) {
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $pdo->execSQL(
-                'UPDATE users
-                SET name = ?, firstname = ?, mail = ?, phone = ?, location = ?
-                WHERE id = ?',
-                [
-                    $user->getName(),
-                    $user->getFirstname(),
-                    $user->getMail(),
-                    $user->getPhone(),
-                    $user->getLocation(),
-                    $user->getId()
-                ]
-            );
-        } catch (PDOException $e) {
-            die("Erreur lors de la mise à jour : " . $e->getMessage());
+        catch(PDOException $e){
+            die($e->getMessage());
         }
+       
     }
 
     public static function deleteUser($id_user)
@@ -120,9 +100,12 @@ class UserController {
         }
     }
 
-    // Validation d'un email
-    public static function validateMail($mail) {
+
+
+    public static function validateMail ($mail)
+    {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['inscriptionErreur'][] = 3;
             $_SESSION['inscriptionErreur'][] = 3;
         }
 
@@ -131,15 +114,15 @@ class UserController {
         }
     }
 
-    // Validation du nom
-    public static function validateName($name) {
+    public static function validateName($name)
+    {
         if (strlen($name) < 3) {
             $_SESSION['inscriptionErreur'][] =0;
         }
     }
 
-    // Validation du prénom
-    public static function validateFirstname($firstname) {
+    public static function validateFirstname($firstname)
+    {
         if (strlen($firstname) < 3) {
             $_SESSION['inscriptionErreur'][] = "Le prénom doit contenir au moins 3 caractères.";
         }
@@ -163,8 +146,8 @@ class UserController {
         }
     }
 
-    // Validation du téléphone
-    public static function validatePhone($phone) {
+    public static function validatePhone($phone)
+    {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
             $_SESSION['inscriptionErreur'][] = 9; // Veuillez entrer un numéro de téléphone valide
         }
