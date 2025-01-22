@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../config/init.php');
-require_once(__DIR__ . '/components/headerHero.php');
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupère les nouvelles informations du formulaire
     $name = $_POST['name'];
     $firstname = $_POST['firstname'];
-    $email = $_POST['email'];
+    $email = $_POST['mail'];
     $phone = $_POST['phone'];
     $location = $_POST['location'];
 
@@ -79,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="mb-4">
                     <label for="email" class="block font-medium">Email:</label>
-                    <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded-md" value="<?= htmlspecialchars($user->getMail()); ?>" required>
+                    <input type="mail" id="mail" name="mail" class="w-full p-2 border border-gray-300 rounded-md" value="<?= htmlspecialchars($user->getMail()); ?>" required>
                 </div>
 
                 <div class="mb-4">
