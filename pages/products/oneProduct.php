@@ -20,19 +20,19 @@
                 require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
                 $id = $_GET['id'] ?? 0;
             
-                $product = ProductController::getProduct($id);
+                $product = ProductController::getProductbyId($id);
                 if ($product) { 
             ?>
                 <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="../../ressources/image/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-80 object-cover">
                     <div class="p-6">
-                        <h2 class="text-3xl font-bold text-[#af2127]"> <?= $product->nom; ?> </h2>
-                        <p class="text-gray-600 mt-4"> <?= $product->description; ?> </p>
-                        <p class="text-[#af2127] font-semibold text-2xl mt-4"> <?= $product->prix; ?> € </p>
+                        <h2 class="text-3xl font-bold text-[#af2127]"> <?= $product->getName(); ?> </h2>
+                        <p class="text-gray-600 mt-4"> <?= $product->getDescription(); ?> </p>
+                        <p class="text-[#af2127] font-semibold text-2xl mt-4"> <?= $product->getPrice(); ?> € </p>
                         
                         <button 
                             class="mt-6 bg-[#00253e] text-white py-3 px-6 rounded hover:bg-[#2A4D8D] transition-all duration-300 ease-in-out hover:shadow-lg" 
-                            onclick="addToCart(<?= $product->id; ?>, '<?= $product->nom; ?>', <?= $product->prix; ?>)">
+                            onclick="addToCart(<?= $product->getId(); ?>, '<?= $product->getName(); ?>', <?= $product->getPrice(); ?>)">
                             Ajouter au panier
                         </button>
                         <a href="/pages/products/" class="block mt-4 text-[#00253e] underline"> ← Retour aux produits</a>

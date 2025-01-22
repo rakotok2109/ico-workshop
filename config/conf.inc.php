@@ -11,7 +11,8 @@ $listOfSubscribeErrors =[
     6=> "Une erreur est survenue lors de l'inscription",
     7=> "Veuillez remplir tous les champs",
     8=> "Veuillez accepter les conditions d'utilisation",
-    9=> "Veuillez entrer un numéro de téléphone valide"
+    9=> "Veuillez entrer un numéro de téléphone valide",
+    10=> "Le rôle est obligatoire"
 
 ];
 

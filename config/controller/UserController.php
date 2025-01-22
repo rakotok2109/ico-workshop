@@ -123,18 +123,18 @@ class UserController {
     // Validation d'un email
     public static function validateMail($mail) {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['inscriptionErreur'][] = "Format de l'email invalide.";
+            $_SESSION['inscriptionErreur'][] = 3;
         }
 
         if (self::mailExists($mail)) {
-            $_SESSION['inscriptionErreur'][] = "L'adresse email est déjà utilisée.";
+            $_SESSION['inscriptionErreur'][] = 2;
         }
     }
 
     // Validation du nom
     public static function validateName($name) {
         if (strlen($name) < 3) {
-            $_SESSION['inscriptionErreur'][] = "Le nom doit contenir au moins 3 caractères.";
+            $_SESSION['inscriptionErreur'][] =0;
         }
     }
 
@@ -148,7 +148,7 @@ class UserController {
     // Validation du rôle
     public static function validateRole($role) {
         if (empty($role)) {
-            $_SESSION['inscriptionErreur'][] = "Le rôle est obligatoire.";
+            $_SESSION['inscriptionErreur'][] = 10;
         }
     }
 
@@ -159,7 +159,6 @@ class UserController {
             !preg_match('/[a-z]/', $password) || 
             !preg_match('/[0-9]/', $password) || 
             !preg_match('/[\W]/', $password)) {
-            $_SESSION['inscriptionErreur'][] = "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
             $_SESSION['inscriptionErreur'][] = 4; // Le mot de passe doit respecter les critères
         }
     }
@@ -210,26 +209,5 @@ class UserController {
         }
     }
 
-    public static function deleteUser($id_user)
-    {
-        if ($id_user === null) {
-            $_SESSION['error'] = "ID utilisateur invalide.";
-            header("Location: ../pages/admin/dashboard.php");
-            exit();
-        }
-
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $sql = "DELETE FROM users WHERE id = ?";
-            $pdo->execSQL($sql, [$id_user]);
-
-            $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
-            header("Location: ../pages/admin/dashboard.php");
-            exit();
-        } catch (PDOException $e) {
-            $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-            header("Location: ../pages/admin/dashboard.php");
-            exit();
-        }
-    }
+   
 }
