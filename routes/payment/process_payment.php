@@ -4,12 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
+require_once (dirname(dirname(__DIR__)).'/config/init.php');
+require_once (dirname(dirname(__DIR__)) . '/vendor/autoload.php');
 use Dotenv\Dotenv;
 
 // Charger le fichier .env
-$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/');
+$dotenv = Dotenv::createImmutable(dirname(dirname(__DIR__)) . '/');
 $dotenv->load();
 
 if (!isset($_ENV['STRIPE_API_KEY'])) {

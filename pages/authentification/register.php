@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
+require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
 </head>
 <body>
     <header>
-    <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+    <?/*php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); */?>
 
     </header>
     <div class="container">
@@ -42,17 +42,17 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
         
             
             <form action="../../routes/user.php?id=register" method="POST" class="form">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom" placeholder="Entrer le nom" required>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" placeholder="Entrer le nom" required>
 
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" placeholder="Entrer le prénom" required>
+                <label for="firstname">Prénom :</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Entrer le prénom" required>
 
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" placeholder="Entrer l'Email" required>
+                <label for="mail">Email :</label>
+                <input type="mail" id="mail" name="mail" placeholder="Entrer l'Email" required>
 
-                <label for="telephone">Téléphone :</label>
-                <input type="text" id="telephone" name="telephone" placeholder="Entrer le téléphone" required>
+                <label for="phone">Téléphone :</label>
+                <input type="number" id="phone" name="phone" placeholder="Entrer le téléphone" required>
 
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required>

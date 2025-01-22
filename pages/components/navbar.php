@@ -3,6 +3,11 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
 
 ?>
 
+<head>
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/ressources/css/navbar.css">
+    <link rel="stylesheet" href="/ressources/css/home.css">
+</head>
 <div class="container-navbar">
         <div class="container-logo">
             <a href="#"><img src="../ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
@@ -25,16 +30,16 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                     ?>
                     <div class="sous-container-login">
                         <ul>
-                            <li><a  href="/pages/account">
-                            <!-- <i class="fas fa-user"></i> -->
+                            <li><a  href="../../pages/Profile.php">
+                           
                                 <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
-                                <!-- <span><?php echo $user->getId();?></span> -->
+                            
                             <i class="fas fa-user white"></i>
 
                                 </a></li>
                             <li><a style="color: #FCD3A1;" href="../routes/user.php?id=logout">Déconnexion</a></li>
                         <?php else : ?>
-                            <li><a style="color: #FCD3A1;" href="/pages/authentification/login.php">Se connecter</a></li>
+                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
                         </ul>
                         <?php endif; ?>
                     </div>

@@ -1,5 +1,5 @@
 <?php 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
+require_once (dirname(__DIR__).'/config/init.php');
 
 
 if($_GET['id'] == 'register') {
@@ -17,10 +17,10 @@ if($_GET['id'] == 'register') {
     
         $_POST['telephone'],
         $_POST['location'],
-        0,
-        null
+        0 
     );
 
+    UserController::validateMail($user->getMail());
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
@@ -32,6 +32,7 @@ if($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
+        $_SESSION['email'] = $user->getMail();
         $_SESSION['email'] = $user->getMail();
      
 
@@ -52,27 +53,27 @@ if($_GET['id'] == 'register') {
   
 }
 else if($_GET['id'] == 'login') {
-    $result = UserController::login($_POST['email'], $_POST['password']);
+    $result = UserController::login($_POST['mail'], $_POST['password']);
     if($result) {
     //   echo $_SESSION['user']->getName();
     $user= unserialize($_SESSION['user']);
     var_dump($user);
     if($user->getRole() < 1)
     {
-        header('Location: /pages/home.php');
+        header('Location: ../pages/home.php');
 
     }
-    else{
-        header('Location: /pages/DashboardAdminView.php');
+    else if($user->getRole() >= 1){
+        header('Location: ../pages/admin/dashboard.php');
     }
     }
     else {
-        header('Location: /pages/authentification/login.php');
+        header('Location: ../pages/authentification/login.php');
     }
 }
 else if($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
-    header('Location: /pages/home.php');
+    header('Location: ../pages/home.php');
 }
 
 else if($_GET['id'] == 'update') {
@@ -92,24 +93,25 @@ else if($_GET['id'] == 'update') {
     );
 
     UserController::validateMail($user->getMail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
 
-    UserController::update($user);
+    UserController::updateUser($user);
    
    
     header('Location: /');
 }
 
 else if($_GET['id'] == 'updateRole') {
-    UserController::updateRole();
+    // UserController::updateRole();
 }
 
 else if($_GET['id'] == 'deleteUser') {
-    UserController::deleteUser();
+    $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
+    UserController::deleteUser($id_user);
 }
 
 else{

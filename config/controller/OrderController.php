@@ -26,7 +26,8 @@ class OrderController {
     public static function getOrdersForUser($idUser) {
         $pdo = PDOUtils::getSharedInstance();
         $result = $pdo->requestSQL('SELECT * FROM orders WHERE id_user = ?', [$idUser]);
-      
+
+
         $orders = [];
         foreach ($result as $row) {
             $order = new Order($row['id'], $row['date'], $row['id_user'] );
