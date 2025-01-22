@@ -1,5 +1,5 @@
 <?php 
- require_once ('../config/init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
 
 
 if($_GET['id'] == 'register') {
@@ -9,18 +9,20 @@ if($_GET['id'] == 'register') {
         unset( $_SESSION['inscriptionErreur']);
     }
     $user = new User(
-        $_POST['name'],
-        $_POST['firstname'],
+        $_POST['nom'],
+        $_POST['prenom'],
         $_POST['password'],
-        $_POST['mail'],
-        $_POST['phone'],
+        $_POST['email'],
+     
+    
+        $_POST['telephone'],
         $_POST['location'],
-        $_POST['role']    
+        0,
+        null
     );
 
-    UserController::validateEmail($user->getEmail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
@@ -30,10 +32,10 @@ if($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
-        $_SESSION['email'] = $user->getEmail();
+        $_SESSION['email'] = $user->getMail();
      
 
-        header('Location: /pages/register.php');
+        header('Location: /pages/authentification/register.php');
         exit();
 
     }
@@ -41,19 +43,20 @@ if($_GET['id'] == 'register') {
     else{
 
         UserController::register($user);
-        header('Location: /');
+        header('Location: /pages/authentification/login.php');
     
     }
 
    
    
-    header('Location: /');
+  
 }
 else if($_GET['id'] == 'login') {
-    $result = UserController::login($_POST['mail'], $_POST['password']);
+    $result = UserController::login($_POST['email'], $_POST['password']);
     if($result) {
     //   echo $_SESSION['user']->getName();
     $user= unserialize($_SESSION['user']);
+    var_dump($user);
     if($user->getRole() < 1)
     {
         header('Location: /pages/home.php');
@@ -64,7 +67,7 @@ else if($_GET['id'] == 'login') {
     }
     }
     else {
-        header('Location: /pages/auth/login.php');
+        header('Location: /pages/authentification/login.php');
     }
 }
 else if($_GET['id'] == 'logout') {
@@ -81,13 +84,14 @@ else if($_GET['id'] == 'update') {
     $user = new User(
         $_POST['name'],
         $_POST['firstname'],
+        null,
         $_POST['mail'],
         $_POST['phone'],
         $_POST['location'],
         $_POST['role'],
     );
 
-    UserController::validateEmail($user->getEmail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());

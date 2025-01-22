@@ -1,6 +1,6 @@
 <?php 
 
-require_once ('../config/init.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
 
 
 class UserController {
@@ -15,10 +15,10 @@ class UserController {
         try{
             $pdo = PDOUtils::getSharedInstance();
             $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-            if ($_POST['mail']) {
+           
                 if (password_verify($password, $result[0]['password'])){
                   
-                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
+                    $user = new User($result[0]['name'], $result[0]['firstname'], null, $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
 
                     $_SESSION['user'] = serialize($user);
                     $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
@@ -28,15 +28,23 @@ class UserController {
                     $_SESSION['loginErreur'][] = 0;
                     return false;
                 }
-            } else {
-                $_SESSION['loginErreur'][] = 0;
-                    return false;
-            }
+          
         }
         catch(PDOException $e){
             die($e->getMessage());
         }
        
+    }
+
+    public static function getUserById ($id)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $result = $pdo->requestSQL('SELECT * FROM users WHERE id = ?', [$id]);
+        if ($result) {
+            return new User($result[0]['name'], $result[0]['firstname'],null, $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
+        } else {
+            return null;
+        }
     }
 
     public static function update (User $user)
@@ -117,14 +125,14 @@ class UserController {
 
     public static function updateRole()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_user = $_POST['id_user'];
-            $role = $_POST['role'];
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //     $id_user = $_POST['id_user'];
+        //     $role = $_POST['role'];
 
-            $user = new User();
-            $user->updateRole($id_user, $role);
-            header("Location: /dashboard");
-            exit();
-        }
+        //     $user =UserController::getUserById($id_user);
+        //     $user->updateRole($id_user, $role);
+        //     header("Location: /dashboard");
+        //     exit();
+        // }
     }
 }

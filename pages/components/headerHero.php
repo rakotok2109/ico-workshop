@@ -11,27 +11,13 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
 <div class="container-main-header">
-    <div class="container-navbar">
-        <div class="container-logo">
-            <a href="#"><img src="../ressources/image/ICO_Logo.png" alt="logo-ico"></a>
-        </div>
-        <div class="container-navigation">
-            <ul>
-                <li><a href="dashboard">Dashboard</a></li>
-                <li><a href="avis.php">Avis</a></li>
-                <li><a href="faq.php">FAQ</a></li>
-                <li><a href="contact.php">contact</a></li>
-                <li><a href="acheter.php">Acheter</a></li>
-            </ul>
-            <div class="container-login-user">
-                <img src="../ressources/image/utilisateur.png" alt="logo-utilisateur">
-            </div>
-        </div>
-    </div>
+<?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
     <div class="logo-ico">
         <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
     </div>

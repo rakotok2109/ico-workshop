@@ -7,9 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-accent text-primary font-sans">
-    <!-- 
-    todo include nav bar
-   -->
+<div class="bg-[#3B60BC] sticky fixed">
+        <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+
+
+        </div>    
+<div class="container mx-auto p-8">
     
 
     <div class="container mx-auto p-8">
@@ -22,7 +25,7 @@
             foreach ($products as $product) { 
             ?>
 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <img src="../../ressources/images/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-48 object-cover">
+    <img src="../../ressources/image/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-48 object-cover">
     <div class="p-4">
         <h3 class="text-xl font-bold"><?= $product->nom; ?></h3>
         <p class="text-gray-600 text-wrap"><?= $product->description; ?>...</p>
