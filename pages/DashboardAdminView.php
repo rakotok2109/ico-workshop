@@ -24,6 +24,7 @@ else{
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
+$newsList = NewsController::getAllNews();
 ?>
 <table>
     <tr>
@@ -120,3 +121,37 @@ $feedbacks = FeedbackController::getAllFeedbacks();
         <?php endforeach; ?>
     </tbody>
 </table>
+
+
+<table>
+    <tr>
+        <th>Titre/th>
+        <th>Description</th>
+        <th>Date</th>
+    </tr>
+    <tbody>
+        <?php foreach($news as $newsItem): ?>
+            <tr>
+                <form method="POST" action="../routes/news.php?id=updateNews" style="display:inline;">
+                    <input type="hidden" name="id" value="<?= isset($newsItem['id']) ? $newsItem['id'] : '' ?>">
+                    <td><input type="text" name="title" value="<?= $newsItem['title'] ?>" required></td>
+                    <td><input type="text" name="wording" value="<?= $newsItem['wording'] ?>" required></td>
+                    <td><input type="date" name="date" value="<?= $newsItem['date'] ?>" required></td>
+                    <td><button type="submit">Modifier</button></td>
+                </form>
+                <td><form method="POST" action="../routes/news.php?id=deleteNews" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet actualité ?');">
+                    <input type="hidden" name="id" value="<?= $newsItem['id'] ?>">
+                    <button type="submit" style="background-color:red; color:white;">Supprimer l'actualité</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<form method="POST" action="../routes/news.php?id=addNews">
+    <input type="text" name="title" placeholder="Titre de l'actualité" required>
+    <textarea name="wording" placeholder="Description de l'article" required></textarea>
+    <input type="date" name="date" placeholder="Date" required>
+    <button type="submit">Ajouter l'actualité'</button>
+</form>
