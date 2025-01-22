@@ -11,15 +11,13 @@
 <body>
 <?php 
 require_once(dirname(dirname(__DIR__)) . '/config/init.php');
-/*if($_SESSION['user'] == null){
+if($_SESSION['user'] == null){
     header('Location: /pages/auth/login.php');
 }
 else{
     $user = unserialize($_SESSION['user']);
-    //if($user->getRole() != 1){
-    //    header('Location: /pages/home.php');
-    //}
-}*/
+    $superadmin = $user->getRole() == 2;
+}
 
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
@@ -44,19 +42,23 @@ $newsList = NewsController::getAllNews();
                 <td><?= $user['phone']?></td>
                 <td><?= $user['location']?></td>
                 <td>
-                    <form method="POST" action="../routes/user.php?id=updateRole">
-                        <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
-                        <select name="role">
-                            <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
-                            <option value="1" <?= $user['role'] == 1 ? 'selected' : '' ?>>Administrateur</option>
-                            <option value="2" <?= $user['role'] == 2 ? 'selected' : '' ?>>Super Administrateur</option>
-                        </select>
-                        <button type="submit">Changer le rôle</button>
-                    </form>
-                    <form method="POST" action="../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
-                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                        <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
-                    </form>
+                    <?php if ($superadmin): ?>
+                        <form method="POST" action="../routes/user.php?id=updateRole">
+                            <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
+                            <select name="role">
+                                <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
+                                <option value="1" <?= $user['role'] == 1 ? 'selected' : '' ?>>Administrateur</option>
+                                <option value="2" <?= $user['role'] == 2 ? 'selected' : '' ?>>Super Administrateur</option>
+                            </select>
+                            <button type="submit">Changer le rôle</button>
+                        </form>
+                        <form method="POST" action="../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                            <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                            <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
+                        </form>
+                    <?php else:?>
+                        <?= $user['role'] == 0 ? 'Utilisateur' : ($user['role'] == 1 ? 'Administrateur' : 'Super Administrateur') ?>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
