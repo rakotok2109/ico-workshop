@@ -32,8 +32,8 @@ require_once(dirname(dirname(__DIR__)) . '/config/init.php');
             <?php endif; ?>
 
             <form action="../../routes/user.php?id=login" method="POST" class="form">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" placeholder="Entrer l'Email" required>
+                <label for="mail">Email :</label>
+                <input type="mail" id="mail" name="mail" placeholder="Entrer l'Email" required>
 
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required>

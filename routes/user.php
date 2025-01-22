@@ -55,15 +55,15 @@ else if($_GET['id'] == 'login') {
     $user= unserialize($_SESSION['user']);
     if($user->getRole() < 1)
     {
-        header('Location: /pages/home.php');
+        header('Location: ../pages/home.php');
 
     }
-    else{
-        header('Location: /pages/admin/dashboard.php');
+    else if($user->getRole() > 1){
+        header('Location: ../pages/admin/dashboard.php');
     }
     }
     else {
-        header('Location: /pages/auth/login.php');
+        header('Location: ../pages/authentification/login.php');
     }
 }
 else if($_GET['id'] == 'logout') {
