@@ -17,13 +17,14 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 }
 
 $user = unserialize($_SESSION['user']);
+var_dump($user->getRole());
+exit();
 if (!$user || !method_exists($user, 'getRole')) {
     header('Location: /pages/auth/login.php');
     exit();
 }
 
 $superadmin = ($user->getRole() === 2);
-
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();

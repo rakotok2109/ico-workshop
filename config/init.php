@@ -17,8 +17,4 @@ require_once __DIR__ .'/model/Feedback.php';
 require_once __DIR__ .'/controller/NewsController.php';
 require_once __DIR__ .'/model/News.php';
 require_once __DIR__ .'/conf.inc.php';
-require_once __DIR__ . '/controller/OrderController.php';
-require_once __DIR__ . '/controller/DetailsOrderController.php';
-require_once __DIR__ . '/model/Order.php';
-require_once __DIR__ . '/model/DetailsOrder.php';
 ?>
