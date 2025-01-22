@@ -1,6 +1,7 @@
 <?php 
 
-require_once (__DIR__ . '/../init.php');  
+require_once (dirname(__DIR__).'/init.php');
+
 
 class UserController {
 
@@ -64,37 +65,19 @@ class UserController {
         }
     }
 
-    // Méthode de mise à jour d'un utilisateur
-    public static function update(User $user) {
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $pdo->execSQL(
-                'UPDATE users 
-                SET name = ?, firstname = ?, mail = ?, phone = ?, location = ? 
-                WHERE id = ?', 
-                [
-                    $user->getName(), 
-                    $user->getFirstname(), 
-                    $user->getMail(), 
-                    $user->getPhone(),
-                    $user->getLocation(), 
-                    $user->getId()
-                ]
-            );
-        } catch (PDOException $e) {
-            die("Erreur lors de la mise à jour : " . $e->getMessage());
-        }
+    public static function updateUser (User $user)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $pdo->execSQL('UPDATE users SET (name, firstname, mail, phone, location, id) VALUES (?, ?, ?, ?, ?, ?) WHERE id = ?', [$user->getName(),$user->getFirstname(), $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getId()]);
     }
 
-    // Vérifie si un mail existe
-    public static function mailExists($mail) {
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-            return count($result) > 0;
-        } catch (PDOException $e) {
-            die("Erreur lors de la vérification du mail : " . $e->getMessage());
-        }
+
+    
+    public static function mailExists($mail)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
+        return count($result) > 0;
     }
 
     // Validation d'un email
@@ -143,7 +126,73 @@ class UserController {
     // Validation du téléphone
     public static function validatePhone($phone) {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = "Numéro de téléphone invalide.";
+            $_SESSION['inscriptionErreur'][] = 10; // Veuillez entrer un numéro de téléphone valide
+        }
+    }
+
+    public static function getAllUsers() {
+        $pdo = PDOUtils::getSharedInstance();
+        $results = $pdo->requestSQL('SELECT id, name, firstname, mail, phone, location, role FROM users');
+        return $results;
+    }
+
+    public static function updateRole()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
+            $role = isset($_POST['role']) ? (int) $_POST['role'] : null;
+
+            if ($id_user === null || $role === null) {
+                $_SESSION['error'] = "Données invalides.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            }
+
+            if (!in_array($role, [0, 1, 2])) {
+                $_SESSION['error'] = "Rôle invalide.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "UPDATE users SET role = ? WHERE id = ?";
+                $pdo->execSQL($sql, [$role, $id_user]);
+                header("Location: ../pages/DashboardAdminView.php");
+                $_SESSION['success'] = "Le rôle de l'utilisateur a été mis à jour avec succès.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur SQL : " . $e->getMessage();
+                exit();
+            }
+        }
+    }
+
+    public static function deleteUser()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
+
+            if ($id_user === null) {
+                $_SESSION['error'] = "ID utilisateur invalide.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "DELETE FROM users WHERE id = ?";
+                $pdo->execSQL($sql, [$id_user]);
+
+                $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+                header("Location: ../../pages/DashboardAdminView.php");
+                exit();
+            }
         }
     }
 }

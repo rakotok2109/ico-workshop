@@ -22,6 +22,8 @@ else{
 }*/
 
 $users = UserController::getAllUsers();
+$products = ProductController::getAllProducts();
+$feedbacks = FeedbackController::getAllFeedbacks();
 ?>
 <table>
     <tr>
@@ -30,7 +32,7 @@ $users = UserController::getAllUsers();
         <th>Mail</th>
         <th>Phone</th>
         <th>Adresse</th>
-        <th>Rôle</th>
+        <th>Paramètres</th>
     </tr>
     <tbody>
         <?php foreach($users as $user): ?>
@@ -41,7 +43,7 @@ $users = UserController::getAllUsers();
                 <td><?= $user['phone']?></td>
                 <td><?= $user['location']?></td>
                 <td>
-                    <form method="POST" action="../../routes/user.php?id=updateRole">
+                    <form method="POST" action="../routes/user.php?id=updateRole">
                         <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
                         <select name="role">
                             <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
@@ -49,6 +51,69 @@ $users = UserController::getAllUsers();
                             <option value="2" <?= $user['role'] == 2 ? 'selected' : '' ?>>Super Administrateur</option>
                         </select>
                         <button type="submit">Changer le rôle</button>
+                    </form>
+                    <form method="POST" action="../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                        <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+    <tbody>
+        <?php foreach($products as $product): ?>
+            <tr>
+                <form method="POST" action="../routes/product.php?id=updateProduct" style="display:inline;">
+                    <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
+                    <td><input type="text" name="name" value="<?= $product['name'] ?>" required></td>
+                    <td><input type="number" name="price" value="<?= $product['price'] ?>" step="0.01" required></td>
+                    <td><textarea name="description"><?= $product['description'] ?></textarea></td>
+                    <td><input type="text" name="image" value="<?= $product['image'] ?>" required></td>
+                    <td><button type="submit">Modifier</button></td>
+                </form>
+                <td><form method="POST" action="../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                    <button type="submit" style="background-color:red; color:white;">Supprimer le produit</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<form method="POST" action="../routes/product.php?id=addProduct">
+    <input type="text" name="name" placeholder="Nom du produit" required>
+    <input type="number" name="price" placeholder="Prix en €" step="0.01" required>
+    <textarea name="description" placeholder="Description du produit" required></textarea>
+    <input type="text" name="image" placeholder="Lien de l'image" required>
+    <button type="submit">Ajouter le produit</button>
+</form>
+
+<table>
+    <tr>
+        <th>Prénom</th>
+        <th>Avis</th>
+        <th>Note</th>
+    </tr>
+    <tbody>
+        <?php foreach($feedbacks as $feedback): ?>
+            <tr>
+                <td><?= $feedback['firstname']?></td>
+                <td><?= $feedback['wording']?></td>
+                <td><?= $feedback['rate']?></td>
+                <td>
+                    <form method="POST" action="../routes/feedback.php?id=deleteFeedback" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+                        <input type="hidden" name="id" value="<?= $feedback['id'] ?>">
+                        <button type="submit" style="background-color:red; color:white;">Supprimer l'avis</button>
                     </form>
                 </td>
             </tr>

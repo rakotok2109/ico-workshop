@@ -1,22 +1,17 @@
-<?php
+<?php 
 
-require_once (__DIR__ . '/../init.php');  
+require_once (dirname(__DIR__).'/init.php');
 
 
-class ProductController
-{
+class ProductController {
     public static function  getAllProducts()
     {
         $pdo = PDOUtils::getSharedInstance();
-        $products = $pdo->requestSQL('SELECT * FROM products');
-        $productList = [];
-        foreach ($products as $product) {
-            $productList[] = new Product($product['id'], $product['name'], $product['price'], $product['description'], $product['image']);
-        }
-        return $productList;
+        $results = $pdo->requestSQL('SELECT id, name, price, description, image FROM products');
+        return $results;
     }
 
-    public static function getProduct($id)
+    public static function getProductbyId($id)
     {
         $pdo = PDOUtils::getSharedInstance();
         $product = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [intval($id)]);
@@ -26,11 +21,56 @@ class ProductController
             return null;
         }
     }
+    public static function updateProduct(Product $product)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $pdo->execSQL('UPDATE products SET name = ?, price = ?, description = ?, image = ? WHERE id = ?',
+        [
+            $product->getName(),
+            $product->getPrice(),
+            $product->getDescription(),
+            $product->getImage(),
+            $product->getId()
+        ]);
+
+        header("Location: ../pages/DashboardAdminView.php");
+        exit();
+
+    }
 
     public static function addProduct(Product $product)
-    {
-        
+    {   
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO products (name, price, description) VALUES (?, ?, ?)', [$product->getNom(), $product->getPrix(), $product->getDescription()]);
+        $pdo->execSQL('INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)', [$product->getName(), $product->getPrice(), $product->getDescription(), $product->getImage()]);
+
+        header("Location: ../pages/DashboardAdminView.php");
+        exit();
+    }
+
+    public static function deleteProduct()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_product = isset($_POST['id']) ? (int) $_POST['id'] : null;
+
+            if ($id_product === null) {
+                $_SESSION['error'] = "ID produit invalide.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "DELETE FROM products WHERE id = ?";
+                $pdo->execSQL($sql, [$id_product]);
+
+                $_SESSION['success'] = "Le produit a été supprimé avec succès.";
+                header("Location: ../pages/DashboardAdminView.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+                header("Location: ../../pages/DashboardAdminView.php");
+                exit();
+            }
+        }
     }
 }
