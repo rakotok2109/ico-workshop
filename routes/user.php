@@ -15,12 +15,11 @@ if($_GET['id'] == 'register') {
         $_POST['mail'],
         $_POST['phone'],
         $_POST['location'],
-        $_POST['role']    
+        0 
     );
 
-    UserController::validateEmail($user->getEmail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
@@ -30,7 +29,7 @@ if($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
-        $_SESSION['email'] = $user->getEmail();
+        $_SESSION['email'] = $user->getMail();
      
 
         header('Location: /pages/register.php');
@@ -87,9 +86,8 @@ else if($_GET['id'] == 'update') {
         $_POST['role'],
     );
 
-    UserController::validateEmail($user->getEmail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());

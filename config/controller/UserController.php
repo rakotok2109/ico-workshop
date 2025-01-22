@@ -84,13 +84,6 @@ class UserController {
         }
     }
 
-    public static function validateRole($role)
-    {
-        if (empty($role)) {
-            $_SESSION['inscriptionErreur'][] = 4; // Le rôle doit être renseigné
-        }
-    }
-
     public static function validatePassword($password)
     {
         if (strlen($password) < 8 || 
@@ -98,14 +91,14 @@ class UserController {
             !preg_match('/[a-z]/', $password) || 
             !preg_match('/[0-9]/', $password) || 
             !preg_match('/[\W]/', $password)) {
-            $_SESSION['inscriptionErreur'][] = 5; // Le mot de passe doit respecter les critères
+            $_SESSION['inscriptionErreur'][] = 4; // Le mot de passe doit respecter les critères
         }
     }
 
     public static function validatePhone($phone)
     {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = 10; // Veuillez entrer un numéro de téléphone valide
+            $_SESSION['inscriptionErreur'][] = 9; // Veuillez entrer un numéro de téléphone valide
         }
     }
 
