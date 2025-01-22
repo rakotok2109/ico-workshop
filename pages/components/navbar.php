@@ -25,7 +25,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                     ?>
                     <div class="sous-container-login">
                         <ul>
-                            <li><a  href="/pages/account">
+                            <li><a  href="../../ico-workshop/pages/Profile.php">
                             <!-- <i class="fas fa-user"></i> -->
                                 <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
                                 <!-- <span><?php echo $user->getId();?></span> -->

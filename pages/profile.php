@@ -16,7 +16,6 @@ $userId = $user->getId();
 $orders = OrderController::getOrdersForUser($userId);
 
 // Vérifie si le formulaire de modification a été soumis
-// Vérifie si le formulaire a été soumis pour la mise à jour
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupère les nouvelles informations du formulaire
     $name = $_POST['name'];
@@ -26,34 +25,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $location = $_POST['location'];
 
     // Valide les informations
-    
 
-    // Si aucune erreur n'est présente, on met à jour le profil
-        $user->setName($name);
-        $user->setFirstname($firstname);
-        $user->setMail($email);
-        $user->setPhone($phone);
-        $user->setLocation($location);
-        
-        // Appel à la méthode de mise à jour
-        UserController::update($user);
+    // Mise à jour du profil
+    $user->setName($name);
+    $user->setFirstname($firstname);
+    $user->setMail($email);
+    $user->setPhone($phone);
+    $user->setLocation($location);
 
-        
-        // Mise à jour de l'utilisateur dans la session après mise à jour dans la base
-        $_SESSION['user'] = serialize($user);
-        
-        // Message de confirmation
-        $message = "Profil mis à jour avec succès.";
-    } else {
-        $message = "Il y a des erreurs dans le formulaire.";
-        
+    // Appel à la méthode de mise à jour
+    UserController::updateUser($user);
 
-    }
-   
+    // Mise à jour de l'utilisateur dans la session
+    $_SESSION['user'] = serialize($user);
 
-
+    // Message de confirmation
+    $message = "Profil mis à jour avec succès.";
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -113,31 +102,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="w-2/3 bg-white shadow-lg rounded-lg p-6">
             <h1 class="text-3xl font-bold text-[#3B60BC] mb-6">Mes Commandes</h1>
             
-            <?php  if (empty($orders)): ?>
+            <?php if (empty($orders)): ?>
                 <p>Aucune commande trouvée.</p>
             <?php else: ?>
-                <?php foreach ($orders as $order): ?>
-                    <div class="mb-6 p-4 border-b">
-                        <h3 class="text-xl font-semibold">Commande ID: <?= $order->getId(); ?></h3>
-                        <p><strong>Date de commande:</strong> <?= $order->getDate(); ?></p>
-
-                        <?php
-                        $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
-                        if (!empty($orderDetails)): ?>
-                            <ul class="mt-4">
-                                <?php foreach ($orderDetails as $detail): ?>
-                                    <li class="text-sm">
-                                        <strong>Produit ID:</strong> <?= $detail->getidProduit(); ?>, 
-                                        <strong>Quantité:</strong> <?= $detail->getQuantite(); ?>, 
-                                        <strong>Prix:</strong> <?= $detail->getPrix(); ?>€
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php else: ?>
-                            <p>Aucun détail de commande trouvé.</p>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
+                <table class="w-full table-auto border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="px-4 py-2 border">Produit</th>
+                            <th class="px-4 py-2 border">Quantité</th>
+                            <th class="px-4 py-2 border">Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders as $order): ?>
+                            <?php
+                            $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
+                            if (!empty($orderDetails)): 
+                                foreach ($orderDetails as $detail):
+                                    $product = ProductController::getProductById($detail->getIdProduit()); // Assuming you have a method to fetch product by ID
+                            ?>
+                            <tr>
+                                <td class="px-4 py-2 border"><?= htmlspecialchars($product->getName()); ?></td> <!-- Display product name -->
+                                <td class="px-4 py-2 border"><?= $detail->getQuantite(); ?></td>
+                                <td class="px-4 py-2 border"><?= number_format($detail->getPrix(), 2); ?>€</td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             <?php endif; ?>
         </div>
     </div>

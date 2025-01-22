@@ -68,7 +68,7 @@ class UserController {
     public static function updateUser (User $user)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE users SET (name, firstname, mail, phone, location, id) VALUES (?, ?, ?, ?, ?, ?) WHERE id = ?', [$user->getName(),$user->getFirstname(), $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getId()]);
+        $pdo->execSQL('UPDATE users SET name, firstname, mail, phone, location, id VALUES (?, ?, ?, ?, ?, ?) WHERE id = ?', [$user->getName(),$user->getFirstname(), $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getId()]);
     }
 
 
@@ -138,61 +138,14 @@ class UserController {
 
     public static function updateRole()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
-            $role = isset($_POST['role']) ? (int) $_POST['role'] : null;
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //     $id_user = $_POST['id_user'];
+        //     $role = $_POST['role'];
 
-            if ($id_user === null || $role === null) {
-                $_SESSION['error'] = "Données invalides.";
-                header("Location: ../pages/DashboardAdminView.php");
-                exit();
-            }
-
-            if (!in_array($role, [0, 1, 2])) {
-                $_SESSION['error'] = "Rôle invalide.";
-                header("Location: ../pages/DashboardAdminView.php");
-                exit();
-            }
-
-            try {
-                $pdo = PDOUtils::getSharedInstance();
-                $sql = "UPDATE users SET role = ? WHERE id = ?";
-                $pdo->execSQL($sql, [$role, $id_user]);
-                header("Location: ../pages/DashboardAdminView.php");
-                $_SESSION['success'] = "Le rôle de l'utilisateur a été mis à jour avec succès.";
-                header("Location: ../pages/DashboardAdminView.php");
-                exit();
-            } catch (PDOException $e) {
-                $_SESSION['error'] = "Erreur SQL : " . $e->getMessage();
-                exit();
-            }
-        }
-    }
-
-    public static function deleteUser()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
-
-            if ($id_user === null) {
-                $_SESSION['error'] = "ID utilisateur invalide.";
-                header("Location: ../pages/DashboardAdminView.php");
-                exit();
-            }
-
-            try {
-                $pdo = PDOUtils::getSharedInstance();
-                $sql = "DELETE FROM users WHERE id = ?";
-                $pdo->execSQL($sql, [$id_user]);
-
-                $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
-                header("Location: ../pages/DashboardAdminView.php");
-                exit();
-            } catch (PDOException $e) {
-                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/DashboardAdminView.php");
-                exit();
-            }
-        }
+        //     $user =UserController::getUserById($id_user);
+        //     $user->updateRole($id_user, $role);
+        //     header("Location: /dashboard");
+        //     exit();
+        // }
     }
 }
