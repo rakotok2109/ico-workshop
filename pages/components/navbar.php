@@ -11,6 +11,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
             <ul>
                 <li><a href="../DashboardAdminView.php">Dashboard</a></li>
                 <li><a href="/">Accueil</a></li>
+                <li><a href="/pages/jeu/">Le jeu</a></li>
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="contact.php">contact</a></li>
