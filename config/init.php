@@ -15,4 +15,6 @@ require_once ('../config/controller/ProductController.php');
 require_once ('../config/model/Product.php');
 require_once ('../config/controller/FeedbackController.php');
 require_once ('../config/model/Feedback.php');
+require_once ('../config/controller/NewsController.php');
+require_once ('../config/model/News.php');
 ?>

@@ -125,12 +125,12 @@ $newsList = NewsController::getAllNews();
 
 <table>
     <tr>
-        <th>Titre/th>
+        <th>Titre</th>
         <th>Description</th>
         <th>Date</th>
     </tr>
     <tbody>
-        <?php foreach($news as $newsItem): ?>
+        <?php foreach($newsList as $newsItem): ?>
             <tr>
                 <form method="POST" action="../routes/news.php?id=updateNews" style="display:inline;">
                     <input type="hidden" name="id" value="<?= isset($newsItem['id']) ? $newsItem['id'] : '' ?>">
