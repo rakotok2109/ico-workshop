@@ -25,12 +25,12 @@
             foreach ($products as $product) { 
             ?>
 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <img src="../../ressources/image/produits/<?php echo $product->getImage() ?>" alt="Produit" class="w-full h-48 object-cover">
+    <img src="../../ressources/images/<?= $product['image'] ?>" alt="Produit" class="w-full h-48 object-cover">
     <div class="p-4">
-        <h3 class="text-xl font-bold"><?= $product->nom; ?></h3>
-        <p class="text-gray-600 text-wrap"><?= $product->description; ?>...</p>
-        <p class="text-secondary font-semibold text-lg"><?= $product->prix; ?> €</p>
-        <a href="oneProduct.php?id=<?= $product->id; ?>"
+        <h3 class="text-xl font-bold"><?= $product['name'] ?></h3>
+        <p class="text-gray-600 text-wrap"><?= $product['description'] ?>...</p>
+        <p class="text-secondary font-semibold text-lg"><?= $product['price'] ?> €</p>
+        <a href="oneProduct.php?id=<?= $product['id'] ?>"
    class="mt-4 bg-[#3B60BC] text-white py-2 px-4 rounded transition-all duration-300 ease-in-out hover:bg-[#2A4D8D] hover:shadow-lg inline-block">
     Voir le produit
 </a>

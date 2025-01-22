@@ -12,7 +12,7 @@
 <body class="bg-[#FCD3A1] text-[#00253e] font-sans">
     <div class="container mx-auto p-8">
         <div class="bg-[#3B60BC] sticky">
-        <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+        <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
 
 
         </div>
@@ -146,7 +146,7 @@
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             let totalAmount = cart.reduce((sum, item) => sum + item.prix * item.quantite, 0);
             console.log('fetching')
-            fetch('/routes/payment/process_payment.php', {
+            fetch('../../routes/payment/process_payment.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
@@ -166,7 +166,7 @@
     if (data.success) {
         alert('Paiement réussi !');
         localStorage.removeItem('cart');
-        window.location.href = '/pages/products/order_success.php';
+        window.location.href = 'order_success.php';
     } else {
         document.getElementById('payment-message').textContent = data.error;
     }
