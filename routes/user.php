@@ -59,7 +59,7 @@ else if($_GET['id'] == 'login') {
 
     }
     else{
-        header('Location: /pages/DashboardAdminView.php');
+        header('Location: /pages/admin/dashboard.php');
     }
     }
     else {
