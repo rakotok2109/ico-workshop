@@ -1,66 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Cards</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            overflow: hidden; /* Pas de barre de défilement */
-            height: 100vh;
-        }
-        .carousel-item {
-            display: flex;
-            align-items: center;
-            height: 100vh;
-        }
-        .card-container {
-            display: flex;
-            gap: 30px;
-            width: 100%;
-        }
-        .card {
-            width: 300px;
-            height: 400px;
-            perspective: 1000px;
-        }
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-        .card:hover img {
-            filter: blur(5px);
-        }
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-        }
-        .card-front {
-            background-color: lightblue;
-        }
-        .card-back {
-            background-color: lightcoral;
-            transform: rotateY(180deg);
-        }
-        .card-inner.flipped {
-            transform: rotateY(180deg);
-        }
-        .details {
-            flex: 1;
-        }
-    </style>
-</head>
-<body>
-    <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+<?php 
+require_once(dirname(__DIR__) . '/config/init.php'); 
+?>
+    
+<?php
+require_once __DIR__.'/components/header.php';
+?>
+<div class="container-presentation-carte">
+    <div class="carousel-container">
+        <div class="carousel-track">
             <!-- Card 1 -->
             <div class="carousel-item active">
                 <div class="card-container">
@@ -146,19 +93,25 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        <div class="controls">
+            <button id="prev" onclick="moveCarousel(-1)">&lt;</button>
+            <button id="next" onclick="moveCarousel(1)">&gt;</button>
+        </div>
+    </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript -->
     <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+
+        function moveCarousel(direction) {
+            const totalItems = items.length;
+            items[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + direction + totalItems) % totalItems;
+            items[currentIndex].classList.add('active');
+        }
+
         function toggleFlip(card) {
             const cardInner = card.querySelector('.card-inner');
             cardInner.classList.toggle('flipped');

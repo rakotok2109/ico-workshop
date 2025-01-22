@@ -1,8 +1,8 @@
 <?php 
 
 if (isset($_SESSION['user']) && time() > $_SESSION['user']['expiration']) {
-    session_unset(); // Supprime toutes les variables de session
-    session_destroy(); // Détruit la session
+    session_unset(); 
+    session_destroy(); 
 }
 
 if (session_status() === PHP_SESSION_NONE) {
