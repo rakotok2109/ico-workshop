@@ -19,4 +19,8 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/model/User.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/model/DetailsOrder.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/conf.inc.php');
 
+require_once ('../config/controller/ProductController.php');
+require_once ('../config/model/Product.php');
+require_once ('../config/controller/FeedbackController.php');
+require_once ('../config/model/Feedback.php');
 ?>
