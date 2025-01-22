@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__DIR__).'/init.php');
+require_once (dirname(__DIR__).'/config/init.php');
 
 if($_GET['id'] == 'addProduct') {
     $product = new Product(

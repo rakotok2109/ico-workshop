@@ -39,7 +39,7 @@ class FeedbackController {
             $feedback->getId()
         ]);
 
-        header("Location: ../pages/admin/dashboard.php");
+        header("Location: ../pages/admin/dashboard.php#feedbacks");
         exit();
 
     }
@@ -51,7 +51,7 @@ class FeedbackController {
 
             if ($id_feedback === null) {
                 $_SESSION['error'] = "ID feedback invalide.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#feedbacks");
                 exit();
             }
 
@@ -61,11 +61,11 @@ class FeedbackController {
                 $pdo->execSQL($sql, [$id_feedback]);
 
                 $_SESSION['success'] = "L'avis a été supprimé avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#feedbacks");
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#feedbacks");
                 exit();
             }
         }
