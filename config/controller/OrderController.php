@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . '/../init.php');  
+require_once (dirname(__DIR__).'/init.php');
 
 
 class OrderController {
@@ -33,7 +33,6 @@ class OrderController {
             $order = new Order($row['id'], $row['date'], $row['id_user'] );
             $orders[] = $order;
         }
-      
       
         return $orders;
     }

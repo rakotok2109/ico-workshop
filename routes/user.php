@@ -59,7 +59,7 @@ else if($_GET['id'] == 'login') {
     var_dump($user);
     if($user->getRole() < 1)
     {
-        header('Location: /pages/home.php');
+        header('Location: __DIR__  . /../../pages/home.php');
 
     }
     else{
@@ -102,6 +102,14 @@ else if($_GET['id'] == 'update') {
    
    
     header('Location: /');
+}
+
+else if($_GET['id'] == 'updateRole') {
+    UserController::updateRole();
+}
+
+else if($_GET['id'] == 'deleteUser') {
+    UserController::deleteUser();
 }
 
 else{

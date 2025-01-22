@@ -1,53 +1,57 @@
-<?php
+<?php 
 
-class Product{
-    public $id;
-    public $nom;
-    public $prix;
-    public $description;
-    public $image;
+class Product {
+    private $name_;
+    private $price_;
+    private $description_;
+    private $image_;
+    private $id_;
 
-
-    public function __construct($id, $nom, $prix, $description, $image) {
-        $this->id = $id;
-        $this->nom = $nom;
-        $this->prix = $prix;
-        $this->description = $description;
-        $this->image = $image;
-
+    public function __construct($name, $price, $description, $image, $id = null) {
+        $this->name_ = $name;
+        $this->price_ = $price; 
+        $this->description_ = $description;
+        $this->image_ = $image;
+        $this->id_ = (int)$id;
     }
 
-    public function setNom($nom) {
-        $this->nom = $nom;
+    public function getId() {
+        return $this->id_;
     }
 
-    public function getNom() {
-        return $this->nom;
+    public function setId($id) {
+        $this->id_ = $id;
     }
 
-    public function setPrix($prix) {
-        $this->prix = $prix;
+    public function getName() {
+        return $this->name_;
     }
-    
-    public function getPrix() {
-        return $this->prix;
+
+    public function setName($name) {
+        $this->name_ = $name;
+    }
+
+    public function getPrice() {
+        return $this->price_;
+    }
+
+    public function setPrice($price) {
+        $this->price_ = $price;
+    }
+
+    public function getDescription() {
+        return $this->description_;
     }
 
     public function setDescription($description) {
-        $this->description = $description;
+        $this->description_ = $description;
     }
-    
-    public function getDescription() {
-        return $this->description;
+
+    public function getImage() {
+        return $this->image_;
     }
 
     public function setImage($image) {
-        $this->image = $image;
+        $this->image_ = $image;
     }
-    
-    public function getImage() {
-        return $this->image;
-    }
-
-
 }

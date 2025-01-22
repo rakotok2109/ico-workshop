@@ -1,6 +1,7 @@
 <?php 
 
-require_once (__DIR__ . '/../init.php');  
+require_once (dirname(__DIR__).'/init.php');
+
 
 class UserController {
 
@@ -64,37 +65,27 @@ class UserController {
         }
     }
 
-    // Méthode de mise à jour d'un utilisateur
-    public static function update(User $user) {
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $pdo->execSQL(
-                'UPDATE users 
-                SET name = ?, firstname = ?, mail = ?, phone = ?, location = ? 
-                WHERE id = ?', 
-                [
-                    $user->getName(), 
-                    $user->getFirstname(), 
-                    $user->getMail(), 
-                    $user->getPhone(),
-                    $user->getLocation(), 
-                    $user->getId()
-                ]
-            );
-        } catch (PDOException $e) {
-            die("Erreur lors de la mise à jour : " . $e->getMessage());
-        }
+    public static function updateUser (User $user)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $pdo->execSQL('UPDATE users SET name = ?, firstname = ?, mail = ?, phone = ?, location = ?, WHERE id = ?',
+        [
+            $user->getName(),
+            $user->getFirstname(),
+            $user->getMail(),
+            $user->getPhone(),
+            $user->getLocation(),
+            $user->getId()
+        ]);
     }
 
-    // Vérifie si un mail existe
-    public static function mailExists($mail) {
-        try {
-            $pdo = PDOUtils::getSharedInstance();
-            $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-            return count($result) > 0;
-        } catch (PDOException $e) {
-            die("Erreur lors de la vérification du mail : " . $e->getMessage());
-        }
+
+    
+    public static function mailExists($mail)
+    {
+        $pdo = PDOUtils::getSharedInstance();
+        $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
+        return count($result) > 0;
     }
 
     // Validation d'un email
@@ -143,7 +134,26 @@ class UserController {
     // Validation du téléphone
     public static function validatePhone($phone) {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = "Numéro de téléphone invalide.";
+            $_SESSION['inscriptionErreur'][] = 10; // Veuillez entrer un numéro de téléphone valide
         }
+    }
+
+    public static function getAllUsers() {
+        $pdo = PDOUtils::getSharedInstance();
+        $results = $pdo->requestSQL('SELECT id, name, firstname, mail, phone, location, role FROM users');
+        return $results;
+    }
+
+    public static function updateRole()
+    {
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //     $id_user = $_POST['id_user'];
+        //     $role = $_POST['role'];
+
+        //     $user =UserController::getUserById($id_user);
+        //     $user->updateRole($id_user, $role);
+        //     header("Location: /dashboard");
+        //     exit();
+        // }
     }
 }
