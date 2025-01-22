@@ -1,6 +1,6 @@
 <?php 
 
-require_once ('../config/init.php');
+require_once (dirname(__DIR__).'/init.php');
 
 
 class UserController {
@@ -8,7 +8,7 @@ class UserController {
     {
         $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO users (name, firstname, password, mail, phone, location, role) VALUES (?, ?, ?, ?, ?, ?, ?)', [$user->getName(),$user->getFirstname(), $password, $user->getMail(), $user->getPhone() ,$user->getLocation() ,$user->getRole()]);
+        $pdo->execSQL('INSERT INTO users (name, firstname, password, mail, phone, location, role) VALUES (?, ?, ?, ?, ?, ?, ?)', [$user->getName(),$user->getFirstname(), $password, $user->getMail(), $user->getPhone() ,$user->getLocation() ,0]);
     }
 
     public static function login($mail, $password) {
@@ -18,7 +18,7 @@ class UserController {
             if ($_POST['mail']) {
                 if (password_verify($password, $result[0]['password'])){
                   
-                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
+                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['id']);
                   
                     $_SESSION['user'] = serialize($user);
                     $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour

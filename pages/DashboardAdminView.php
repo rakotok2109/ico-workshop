@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php 
-require_once '../config/init.php';
+require_once (dirname(__DIR__).'/config/init.php');
 /*if($_SESSION['user'] == null){
     header('Location: /pages/auth/login.php');
 }
