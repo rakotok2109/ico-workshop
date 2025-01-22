@@ -25,7 +25,7 @@ class FeedbackController {
     public static function addFeedback(Feedback $feedback)
     {   
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$product->getFirstname(), $product->getWording(), $product->getRate()]);
+        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$feedback->getFirstname(), $feedback->getWording(), $feedback->getRate()]);
     }
 
     public static function updateFeedback(Feedback $feedback)
@@ -58,7 +58,7 @@ class FeedbackController {
             try {
                 $pdo = PDOUtils::getSharedInstance();
                 $sql = "DELETE FROM feedbacks WHERE id = ?";
-                $pdo->execSQL($sql, [$id_feedbackt]);
+                $pdo->execSQL($sql, [$id_feedback]);
 
                 $_SESSION['success'] = "L'avis a été supprimé avec succès.";
                 header("Location: ../pages/DashboardAdminView.php");
