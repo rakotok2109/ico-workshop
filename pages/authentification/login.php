@@ -1,20 +1,6 @@
 <?php
 require_once (__DIR__ . '/../../config/init.php');
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['email'], $_POST['password'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
 
-        $user = UserController::login($email, $password);
-        
-        if ($user) {
-            header('Location: ../../pages/PROFILE.php'); 
-            exit();
-        } else {
-            $error = "Email ou mot de passe incorrect.";
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>

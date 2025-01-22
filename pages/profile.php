@@ -18,27 +18,27 @@ $orders = OrderController::getOrdersForUser($userId);
 var_dump($orders);
 
 // Affichage des commandes
-// echo "<h1>Mes Commandes</h1>";
+echo "<h1>Mes Commandes</h1>";
 
-// if (empty($orders)) {
-//     echo "<p>Aucune commande trouvée.</p>";
-// } else {
-//     foreach ($orders as $order) {
-//         echo "<h3>Commande ID : " . $order->getId() . "</h3>";
-//         echo "<p>Date de commande : " . $order->getDate() . "</p>";
+if (empty($orders)) {
+    echo "<p>Aucune commande trouvée.</p>";
+} else {
+    foreach ($orders as $order) {
+        echo "<h3>Commande ID : " . $order->getId() . "</h3>";
+        echo "<p>Date de commande : " . $order->getDate() . "</p>";
         
-//         // Récupérer les détails de la commande
-//         $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
+        // Récupérer les détails de la commande
+        $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
         
-//         if (!empty($orderDetails)) {
-//             echo "<ul>";
-//             foreach ($orderDetails as $detail) {
-//                 echo "<li>Produit ID : " . $detail->getidProduit() . ", Quantité : " . $detail->getQuantite() . ", Prix : " . $detail->getPrix() . "€</li>";
-//             }
-//             echo "</ul>";
-//         } else {
-//             echo "<p>Aucun détail de commande trouvé.</p>";
-//         }
-//     }
-// }
-// ?>
+        if (!empty($orderDetails)) {
+            echo "<ul>";
+            foreach ($orderDetails as $detail) {
+                echo "<li>Produit ID : " . $detail->getidProduit() . ", Quantité : " . $detail->getQuantite() . ", Prix : " . $detail->getPrix() . "€</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p>Aucun détail de commande trouvé.</p>";
+        }
+    }
+}
+ ?>

@@ -26,7 +26,7 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
                 <?php if (isset( $_SESSION['user'])) :
                         $user = unserialize($_SESSION['user']);
                         ?>
-                        <li><a  href="/pages/account">
+                        <li><a  href="/pages/profile.php">
                             <!-- <i class="fas fa-user"></i> -->
                              <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
                              <!-- <span><?php echo $user->getId();?></span> -->
