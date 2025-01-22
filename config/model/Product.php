@@ -55,3 +55,4 @@ class Product {
         $this->image_ = $image;
     }
 }
+

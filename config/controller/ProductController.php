@@ -11,15 +11,16 @@ class ProductController {
         return $results;
     }
 
-    public static function getProductbyId($id)
+    public static function getProductById($productId)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $product = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [intval($id)]);
-        if ($product) {
-            return new Product($product[0]['id'], $product[0]['name'], $product[0]['price'], $product[0]['description'], $product[0]['image']);
-        } else {
-            return null;
+        $result = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [$productId]);
+
+        if ($result) {
+            $product = $result[0]; // Prendre le premier élément du tableau (le produit)
+            return new Product($product['name'], $product['price'], $product['description'], $product['image'], $product['id']);
         }
+        return null; // Si aucun produit trouvé, retourne null
     }
     public static function updateProduct(Product $product)
     {
