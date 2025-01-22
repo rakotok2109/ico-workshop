@@ -65,7 +65,7 @@ class FeedbackController {
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/DashboardAdminView.php");
+                header("Location: ../pages/DashboardAdminView.php");
                 exit();
             }
         }

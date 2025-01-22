@@ -13,4 +13,6 @@ require_once ('../config/controller/UserController.php');
 require_once ('../config/model/User.php');
 require_once ('../config/controller/ProductController.php');
 require_once ('../config/model/Product.php');
+require_once ('../config/controller/FeedbackController.php');
+require_once ('../config/model/Feedback.php');
 ?>

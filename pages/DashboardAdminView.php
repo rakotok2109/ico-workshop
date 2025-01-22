@@ -23,6 +23,7 @@ else{
 
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
+$feedbacks = FeedbackController::getAllFeedbacks();
 ?>
 <table>
     <tr>
@@ -96,3 +97,26 @@ $products = ProductController::getAllProducts();
     <input type="text" name="image" placeholder="Lien de l'image" required>
     <button type="submit">Ajouter le produit</button>
 </form>
+
+<table>
+    <tr>
+        <th>Prénom</th>
+        <th>Avis</th>
+        <th>Note</th>
+    </tr>
+    <tbody>
+        <?php foreach($feedbacks as $feedback): ?>
+            <tr>
+                <td><?= $feedback['firstname']?></td>
+                <td><?= $feedback['wording']?></td>
+                <td><?= $feedback['rate']?></td>
+                <td>
+                    <form method="POST" action="../routes/feedback.php?id=deleteFeedback" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+                        <input type="hidden" name="id" value="<?= $feedback['id'] ?>">
+                        <button type="submit" style="background-color:red; color:white;">Supprimer l'avis</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
