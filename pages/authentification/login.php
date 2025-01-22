@@ -26,21 +26,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../ressources/css/login.css">
 </head>
 <body>
+
     <header>
-        <h1 class="logo">ICO</h1>
+        <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+
     </header>
     <div class="container">
         <div class="image-container">
-            <img src="../../ressources/img/img1.png" alt="ICO Image">
+            <img src="/ressources/image/img1.png" alt="ICO Image">
         </div>
         <div class="form-container">
+            <h1 class="form-title">Bienvenue sur</h1>
+            <h1 class="form-title logo">ICO</h1>
+                   
+
             <h2 class="form-title">Connexion</h2>
             
             <?php if (isset($error)) : ?>
                 <p style="color: red; text-align: center;"><?php echo $error; ?></p>
             <?php endif; ?>
 
-            <form action="login.php" method="POST" class="form">
+            <form action="../../routes/user.php?id=login" method="POST" class="form">
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" placeholder="Entrer l'Email" required>
 

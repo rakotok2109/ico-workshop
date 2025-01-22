@@ -1,17 +1,5 @@
 <?php
-require_once (__DIR__ . '/../../config/init.php');
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['password'], $_POST['location'])) {
-        $role = 0; 
-
-        $user = new User($_POST['nom'], $_POST['prenom'], $_POST['password'], $_POST['email'], $_POST['telephone'], $_POST['location'], $role);
-        
-        UserController::register($user);
-        
-        header('Location: register.php');
-        exit(); 
-    }
-}
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +12,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <header>
-        <h1 class="logo">ICO</h1>
+    <?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+
     </header>
     <div class="container">
         <div class="image-container">
-            <img src="../../ressources/img/img1.png" alt="ICO Image">
+            <img src="/ressources/image/img1.png" alt="ICO Image">
         </div>
         <div class="form-container">
+        <!-- <h1 class="form-title">Bienvenue sur</h1> -->
+        <h1 class="form-title logo">ICO</h1>
             <h2 class="form-title">Créer un compte</h2>
+            <?php if(isset($_SESSION['inscriptionErreur']))
+        {
+    echo'<div class="errorDiv">';
             
-            <form action="register.php" method="POST" class="form">
+            echo '<ul>';
+
+            foreach($_SESSION['inscriptionErreur'] as $error)
+            {
+                echo '<li>'.$listOfSubscribeErrors[$error].'</li>';
+            }
+    echo '</ul>';
+    echo '</div>';
+        }
+           
+            
+        ?>
+        
+            
+            <form action="../../routes/user.php?id=register" method="POST" class="form">
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" placeholder="Entrer le nom" required>
 
