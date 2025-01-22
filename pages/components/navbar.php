@@ -19,6 +19,7 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
         <div class="container-navigation">
             <ul>
                 <li><a href="/">Accueil</a></li>
+                <li><a href="/pages/jeu/">Le jeu</a></li>
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="contact.php">contact</a></li>

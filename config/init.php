@@ -12,10 +12,13 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once (__DIR__ . '/../config/conf.inc.php');
 require_once (__DIR__ . '/../config/controller/PDOUtils.php');
 require_once (__DIR__ . '/../config/controller/UserController.php');
+require_once (__DIR__ . '/../config/controller/ProductController.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/controller/ProductController.php');
 require_once (__DIR__ . '/../config/model/User.php');
 require_once (__DIR__ . '/../config/model/Order.php');
 require_once (__DIR__ . '/../config/controller/DetailsOrderController.php');
 require_once (__DIR__ . '/../config/controller/OrderController.php');
 require_once (__DIR__ . '/../config/model/DetailsOrder.php');
+require_once (__DIR__ . '/../config/model/Product.php');
 
 ?>
