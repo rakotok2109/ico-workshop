@@ -1,48 +1,39 @@
 <?php
 require_once (dirname(dirname(__DIR__)).'/config/init.php');
-
+if(isset($_SESSION['user'])){
+$user = unserialize($_SESSION['user']);
+}
 ?>
 
-<head>
-<script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/ressources/css/navbar.css">
-    <link rel="stylesheet" href="/ressources/css/home.css">
-</head>
 <div class="container-navbar">
-        <div class="container-logo">
-            <a href="#"><img src="../ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
-        </div>
-        <div class="container-navigation">
-            <ul>
-                <li><a href="DashboardAdminView.php">Dashboard</a></li>
-                <li><a href="/">Accueil</a></li>
-                <li><a href="avis.php">Avis</a></li>
-                <li><a href="faq.php">FAQ</a></li>
-                <li><a href="contact.php">contact</a></li>
-                <li><a href="products/">Acheter</a></li>
-                <li>
-                    <div class="container-login-user">
-                        <img src="../ressources/image/utilisateur.png" alt="logo-utilisateur">
-                    </div>
-                </li>   
-                    <?php if (isset( $_SESSION['user'])) :
-                            $user = unserialize($_SESSION['user']);
-                    ?>
-                    <div class="sous-container-login">
-                        <ul>
-                            <li><a  href="../../pages/Profile.php">
-                           
-                                <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
-                            
-                            <i class="fas fa-user white"></i>
-
-                                </a></li>
-                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=logout">Déconnexion</a></li>
-                        <?php else : ?>
-                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
-                        </ul>
-                        <?php endif; ?>
-                    </div>
+    <div class="container-logo">
+        <a href="home.php"><img src="../ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
+    </div>
+    <div class="container-navigation">
+        <ul>
+            <?php 
+                if(isset($_SESSION['user']) && $user->getRole() > 0){
+                ?>
+            <li><a href="../pages/admin/dashboard.php">Dashboard</a></li>
+            <?php }?>
+            <li><a href="../pages/avis.php">Avis</a></li>
+            <li><a href="../pages/faq.php">FAQ</a></li>
+            <li><a href="../pages/contact.php">contact</a></li>
+            <li><a href="../pages/products/index.php">Acheter</a></li>  
+            <?php if (isset( $_SESSION['user'])) :
+                    $user = unserialize($_SESSION['user']);
+            ?>
+            <li><a href="../../pages/Profile.php"><span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span></a></li>
+        </ul>
+        <div class="sous-container-login">
+            <ul> 
+                <li><a style="color: #FCD3A1;" href="../routes/user.php?id=logout">Déconnexion</a></li>
+                <?php else : ?>
+                <li><a style="color: #FCD3A1;" href="../pages/authentification/login.php">Se connecter</a></li>
+            
+                <?php endif; ?>
+                
             </ul>
         </div>
     </div>
+</div>

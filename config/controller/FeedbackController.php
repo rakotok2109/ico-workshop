@@ -54,7 +54,7 @@ class FeedbackController {
                 header("Location: ../pages/admin/dashboard.php");
                 exit();
             }
-
+            
             try {
                 $pdo = PDOUtils::getSharedInstance();
                 $sql = "DELETE FROM feedbacks WHERE id = ?";

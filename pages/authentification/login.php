@@ -31,7 +31,7 @@ require_once(dirname(dirname(__DIR__)) . '/config/init.php');
                 <p style="color: red; text-align: center;"><?php echo $error; ?></p>
             <?php endif; ?>
 
-            <form action="../../routes/user.php?id=login" method="POST" class="form">
+            <form class="form" action="../../routes/user.php?id=login" method="POST" >
                 <label for="mail">Email :</label>
                 <input type="mail" id="mail" name="mail" placeholder="Entrer l'Email" required>
 
@@ -43,7 +43,6 @@ require_once(dirname(dirname(__DIR__)) . '/config/init.php');
             <div class="form-footer">
                 <a href="register.php"><button>Créer un compte</button></a>
                 <a href="register.php"><button>Mot de passe oublié ? </button></a>
-
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ class UserController {
         try{
             $pdo = PDOUtils::getSharedInstance();
             $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-            if ($_POST['mail']) {
+            if ($result) {
                 if (password_verify($password, $result[0]['password'])){
                     $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['password'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
                   
@@ -71,9 +71,6 @@ class UserController {
         //Vérifier si l'email existe déjà
         if (UserController::mailExists($mail)) {
             $_SESSION['inscriptionErreur'][] = 2;
-          
-
-           
         }
     }
 
@@ -168,6 +165,18 @@ class UserController {
             $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
             header("Location: ../pages/admin/dashboard.php");
             exit();
+        }
+    }
+
+    public static function findRoleUser($id_user){
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "SELECT role FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
+
+            $_SESSION['user'];
+        }catch(PDOException $e){
+
         }
     }
 }
