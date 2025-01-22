@@ -14,34 +14,52 @@ $userId = $user->getId();
 // Récupérer les commandes de l'utilisateur
 $orders = OrderController::getOrdersForUser($userId);
 
+// Message de confirmation
+$message = '';
+
 // Vérifie si le formulaire de modification a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupère les nouvelles informations du formulaire
-    $name = $_POST['name'];
-    $firstname = $_POST['firstname'];
-    $email = $_POST['mail'];
-    $phone = $_POST['phone'];
-    $location = $_POST['location'];
+    $name = trim($_POST['name']);
+    $firstname = trim($_POST['firstname']);
+    $email = trim($_POST['mail']);
+    $phone = trim($_POST['phone']);
+    $location = trim($_POST['location']);
 
-    // Valide les informations
+    // Validation des champs
+    if (empty($name) || empty($firstname) || empty($email) || empty($phone) || empty($location)) {
+        $errorMessage = "Tous les champs sont obligatoires.";
+    } else {
+        // Validation de l'email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errorMessage = "L'email n'est pas valide.";
+        } 
+        // Validation du téléphone (format international)
+        elseif (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
+            $errorMessage = "Le numéro de téléphone n'est pas valide.";
+        } 
+        // Si pas d'erreur, mettre à jour le profil
+        else {
+            // Mise à jour du profil
+            $user->setName($name);
+            $user->setFirstname($firstname);
+            $user->setMail($email);
+            $user->setPhone($phone);
+            $user->setLocation($location);
 
-    // Mise à jour du profil
-    $user->setName($name);
-    $user->setFirstname($firstname);
-    $user->setMail($email);
-    $user->setPhone($phone);
-    $user->setLocation($location);
+            // Appel à la méthode de mise à jour
+            UserController::updateUser($user);
 
-    // Appel à la méthode de mise à jour
-    UserController::updateUser($user);
+            // Mise à jour de l'utilisateur dans la session
+            $_SESSION['user'] = serialize($user);
 
-    // Mise à jour de l'utilisateur dans la session
-    $_SESSION['user'] = serialize($user);
-
-    // Message de confirmation
-    $message = "Profil mis à jour avec succès.";
+            // Message de confirmation
+            $message = "Profil mis à jour avec succès.";
+        }
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,8 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="w-1/3 bg-white shadow-lg rounded-lg p-6 mr-8">
             <h2 class="text-2xl font-bold text-[#3B60BC] mb-4">Mon Profil</h2>
 
+            <!-- Affiche un message d'erreur s'il y en a -->
+            <?php if (isset($errorMessage)): ?>
+                <div class="bg-red-500 text-white p-4 rounded mb-4">
+                    <?= htmlspecialchars($errorMessage); ?>
+                </div>
+            <?php endif; ?>
+
             <!-- Affiche un message de confirmation si la mise à jour est réussie -->
-            <?php if (isset($message)): ?>
+            <?php if ($message): ?>
                 <div class="bg-green-500 text-white p-4 rounded mb-4">
                     <?= htmlspecialchars($message); ?>
                 </div>
