@@ -1,4 +1,18 @@
+<?php
+require_once(__DIR__ . '/../../config/init.php');
 
+
+if (isset($_SESSION['user'])) {
+    $user = unserialize($_SESSION['user']);
+    $firstName = $user->getFirstname();
+    $lastName = $user->getName();
+    $address = $user->getLocation(); // Assurez-vous que cette méthode existe
+} else {
+    $firstName = '';
+    $lastName = '';
+    $address = '';
+}
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,15 +55,15 @@
         <form id="payment-form">
     <div class="mb-4">
         <label for="first-name" class="block text-sm font-medium">Prénom</label>
-        <input id="first-name" name="first_name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" required>
+        <input id="first-name" name="first_name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" value="<?php echo htmlspecialchars($firstName); ?>" required>
     </div>
     <div class="mb-4">
         <label for="last-name" class="block text-sm font-medium">Nom</label>
-        <input id="last-name" name="last_name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" required>
+        <input id="last-name" name="last_name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" value="<?php echo htmlspecialchars($lastName); ?>" required>
     </div>
     <div class="mb-4">
         <label for="address" class="block text-sm font-medium">Adresse</label>
-        <input id="address" name="address" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" required>
+        <input id="address" name="address" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded" value="<?php echo htmlspecialchars($address); ?>" required>
     </div>
     <div id="card-element" class="mb-4 p-4 border border-gray-300 rounded"></div>
     <button id="submit" class="bg-[#00253e] text-white px-6 py-2 rounded hover:bg-[#af2127]">Payer</button>

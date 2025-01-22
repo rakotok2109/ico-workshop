@@ -5,7 +5,8 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
 
 <head>
 <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/ressources/css/navbar.css">
+<script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../ressources/css/navbar.css">
     <link rel="stylesheet" href="/ressources/css/home.css">
 </head>
 <div class="container-navbar">
@@ -14,32 +15,41 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
         </div>
         <div class="container-navigation">
             <ul>
+            <?php if (isset( $_SESSION['user'])) :
+                            $user = unserialize($_SESSION['user']);
+                            if($user->getRole() >= 1) :
+
+                    ?>
+                    <li><a href="/pages/admin/dashboard.php">Dashboard</a></li>
+                       
+                        <?php
+                    endif;
+                    endif; ?>
                 <!-- <li><a href="DashboardAdminView.php">Dashboard</a></li> -->
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/pages/jeu/">Le Jeu</a></li>
 
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
-                <li><a href="contact.php">contact</a></li>
+                <!-- <li><a href="contact.php">contact</a></li> -->
                 <li><a href="products/">Acheter</a></li>
                     <?php if (isset( $_SESSION['user'])) :
                             $user = unserialize($_SESSION['user']);
                     ?>
-                    <div class="sous-container-login">
-                        <ul>
-                            <li><a  href="../../pages/Profile.php">
-                           
-                                <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
-                            
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">
                             <i class="fas fa-user white"></i>
-
-                                </a></li>
-                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=logout">Déconnexion</a></li>
-                        <?php else : ?>
-                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
-                        </ul>
-                        <?php endif; ?>
-                    </div>
+                            <span><?php echo $user->getName();?> <?php echo $user->getFirstname();?></span>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="../../pages/Profile.php">Profil</a>
+                            <a href="../../pages/products/checkout.php">Panier</a>
+                            <a style="color: #FCD3A1;" href="../../routes/user.php?id=logout">Déconnexion</a>
+                        </div>
+                    </li>
+                    <?php else : ?>
+                        <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
+                    <?php endif; ?>
             </ul>
         </div>
     </div>
