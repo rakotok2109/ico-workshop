@@ -148,30 +148,26 @@ class UserController {
         }
     }
 
-    public static function deleteUser()
+    public static function deleteUser($id_user)
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
+        if ($id_user === null) {
+            $_SESSION['error'] = "ID utilisateur invalide.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        }
 
-            if ($id_user === null) {
-                $_SESSION['error'] = "ID utilisateur invalide.";
-                header("Location: ../pages/admin/dashboard.php");
-                exit();
-            }
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "DELETE FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
 
-            try {
-                $pdo = PDOUtils::getSharedInstance();
-                $sql = "DELETE FROM users WHERE id = ?";
-                $pdo->execSQL($sql, [$id_user]);
-
-                $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
-                exit();
-            } catch (PDOException $e) {
-                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/admin/dashboard.php");
-                exit();
-            }
+            $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
         }
     }
 }

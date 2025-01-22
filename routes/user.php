@@ -103,7 +103,8 @@ else if($_GET['id'] == 'updateRole') {
 }
 
 else if($_GET['id'] == 'deleteUser') {
-    UserController::deleteUser();
+    $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
+    UserController::deleteUser($id_user);
 }
 
 else{

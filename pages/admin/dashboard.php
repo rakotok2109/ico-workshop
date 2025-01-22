@@ -23,7 +23,6 @@ if (!$user || !method_exists($user, 'getRole')) {
 }
 
 $superadmin = ($user->getRole() === 2);
-var_dump($user->getRole());
 
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
@@ -58,7 +57,7 @@ $newsList = NewsController::getAllNews();
                             </select>
                             <button type="submit">Changer le rôle</button>
                         </form>
-                        <form method="POST" action="../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                        <form method="POST" action="../../routes/user.php?id=deleteUser" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                             <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
                         </form>
@@ -81,7 +80,7 @@ $newsList = NewsController::getAllNews();
     <tbody>
         <?php foreach($products as $product): ?>
             <tr>
-                <form method="POST" action="../routes/product.php?id=updateProduct" style="display:inline;">
+                <form method="POST" action="../../routes/product.php?id=updateProduct" style="display:inline;">
                     <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
                     <td><input type="text" name="name" value="<?= $product['name'] ?>" required></td>
                     <td><input type="number" name="price" value="<?= $product['price'] ?>" step="0.01" required></td>
@@ -89,7 +88,7 @@ $newsList = NewsController::getAllNews();
                     <td><input type="text" name="image" value="<?= $product['image'] ?>" required></td>
                     <td><button type="submit">Modifier</button></td>
                 </form>
-                <td><form method="POST" action="../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                <td><form method="POST" action="../../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
                     <input type="hidden" name="id" value="<?= $product['id'] ?>">
                     <button type="submit" style="background-color:red; color:white;">Supprimer le produit</button>
                     </form>
@@ -99,7 +98,7 @@ $newsList = NewsController::getAllNews();
     </tbody>
 </table>
 
-<form method="POST" action="../routes/product.php?id=addProduct">
+<form method="POST" action="../../routes/product.php?id=addProduct">
     <input type="text" name="name" placeholder="Nom du produit" required>
     <input type="number" name="price" placeholder="Prix en €" step="0.01" required>
     <textarea name="description" placeholder="Description du produit" required></textarea>
@@ -120,7 +119,7 @@ $newsList = NewsController::getAllNews();
                 <td><?= $feedback['wording']?></td>
                 <td><?= $feedback['rate']?></td>
                 <td>
-                    <form method="POST" action="../routes/feedback.php?id=deleteFeedback" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+                    <form method="POST" action="../../routes/feedback.php?id=deleteFeedback" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
                         <input type="hidden" name="id" value="<?= $feedback['id'] ?>">
                         <button type="submit" style="background-color:red; color:white;">Supprimer l'avis</button>
                     </form>
@@ -140,14 +139,14 @@ $newsList = NewsController::getAllNews();
     <tbody>
         <?php foreach($newsList as $newsItem): ?>
             <tr>
-                <form method="POST" action="../routes/news.php?id=updateNews" style="display:inline;">
+                <form method="POST" action="../../routes/news.php?id=updateNews" style="display:inline;">
                     <input type="hidden" name="id" value="<?= isset($newsItem['id']) ? $newsItem['id'] : '' ?>">
                     <td><input type="text" name="title" value="<?= $newsItem['title'] ?>" required></td>
                     <td><input type="text" name="wording" value="<?= $newsItem['wording'] ?>" required></td>
                     <td><input type="date" name="date" value="<?= $newsItem['date'] ?>" required></td>
                     <td><button type="submit">Modifier</button></td>
                 </form>
-                <td><form method="POST" action="../routes/news.php?id=deleteNews" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet actualité ?');">
+                <td><form method="POST" action="../../routes/news.php?id=deleteNews" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet actualité ?');">
                     <input type="hidden" name="id" value="<?= $newsItem['id'] ?>">
                     <button type="submit" style="background-color:red; color:white;">Supprimer l'actualité</button>
                     </form>
@@ -157,17 +156,9 @@ $newsList = NewsController::getAllNews();
     </tbody>
 </table>
 
-<form method="POST" action="../routes/news.php?id=addNews">
+<form method="POST" action="../../routes/news.php?id=addNews">
     <input type="text" name="title" placeholder="Titre de l'actualité" required>
     <textarea name="wording" placeholder="Description de l'article" required></textarea>
     <input type="date" name="date" placeholder="Date" required>
     <button type="submit">Ajouter l'actualité'</button>
 </form>
-
-<?php
-    if ($superadmin) {
-        echo 'True';
-    } else {
-        echo 'False';
-    }
-?>
