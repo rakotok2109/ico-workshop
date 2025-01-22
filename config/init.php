@@ -17,5 +17,7 @@ require_once (__DIR__ . '/../config/model/Order.php');
 require_once (__DIR__ . '/../config/controller/DetailsOrderController.php');
 require_once (__DIR__ . '/../config/controller/OrderController.php');
 require_once (__DIR__ . '/../config/model/DetailsOrder.php');
+require_once (__DIR__ . '/../config/model/Product.php');
+require_once (__DIR__ . '/../config/controller/ProductController.php');
 
 ?>

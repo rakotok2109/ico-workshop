@@ -59,7 +59,7 @@ else if($_GET['id'] == 'login') {
     var_dump($user);
     if($user->getRole() < 1)
     {
-        header('Location: /pages/home.php');
+        header('Location: __DIR__  . /../../pages/home.php');
 
     }
     else{

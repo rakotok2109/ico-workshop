@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT']. '/pages/components/headerHero.php');
+require_once (__DIR__ . '/components/headerHero.php');
 ?> 
 <div class="element-titre">
     <h2>Les dernières nouveautés :</h2>

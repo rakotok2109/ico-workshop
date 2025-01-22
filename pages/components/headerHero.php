@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="container-main-header">
-<?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
+<?php include (__DIR__ . '/navbar.php'); ?>
     <div class="logo-ico">
         <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
     </div>
