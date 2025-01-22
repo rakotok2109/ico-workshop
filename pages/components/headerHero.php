@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICO</title>
     <link rel="icon" href="../ressources/image/ICO_Logo.png" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="../ressources/css/navbar.css">
-    <link rel="stylesheet" href="../ressources/css/all.css"> -->
     <link rel="stylesheet" href="../ressources/css/home.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -18,21 +16,20 @@
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
     </style>
-    
-
-
     <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
 
 
 </head>
 <body>
 <div class="container-main-header">
-<?php include ($_SERVER['DOCUMENT_ROOT'] . '/pages/components/navbar.php'); ?>
-    <div class="logo-ico">
-        <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
-    </div>
-    <div class="navigation-regle-du-jeu">
-        <a href="regleDuRegle.php">Règle du Jeu</a>
+<?php include (__DIR__ . '/navbar.php'); ?>
+    <div class="container-logo-regle">
+        <div class="logo-ico">
+            <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
+        </div>
+        <div class="navigation-regle-du-jeu">
+            <a href="regleDuRegle.php">Règle du Jeu</a>
+        </div>
     </div>
 </div>
 </body>
