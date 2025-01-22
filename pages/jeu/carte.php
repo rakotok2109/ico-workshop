@@ -1,11 +1,41 @@
 <?php 
-require_once(dirname(__DIR__) . '/config/init.php'); 
+require_once(dirname(__DIR__) . '/../config/init.php'); 
 ?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les cartes</title>
+    <style>
+          .active-tab {
+            background-color: #f5deb3 !important; /* Couleur beige */
+         
+        }
+    </style>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
     
-<?php
-require_once __DIR__.'/components/header.php';
-?>
+<?php include(__DIR__ . '/../components/header.php') ?>
+
+
+
 <div class="container-presentation-carte">
+          <!-- Tabs -->
+      <div class="flex justify-center mb-6">
+     <a href="../jeu/rules.php">
+     <button id="tab-rules"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Règles du jeu</button>
+     </a>
+      <a href="#">
+            <button id="tab-cards"  class="active-tab tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Cartes</button>
+    </a>
+    <a href="">
+        <button id="tab-qr" class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">QR Code</button>
+    </a>
+        </div>
+
     <div class="carousel-container">
         <div class="carousel-track">
             <!-- Card 1 -->
@@ -117,5 +147,7 @@ require_once __DIR__.'/components/header.php';
             cardInner.classList.toggle('flipped');
         }
     </script>
+
+
 </body>
 </html>

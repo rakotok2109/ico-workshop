@@ -10,21 +10,18 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
 </head>
 <div class="container-navbar">
         <div class="container-logo">
-            <a href="#"><img src="../ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
+            <a href="#"><img src="/ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
         </div>
         <div class="container-navigation">
             <ul>
-                <li><a href="DashboardAdminView.php">Dashboard</a></li>
+                <!-- <li><a href="DashboardAdminView.php">Dashboard</a></li> -->
                 <li><a href="/">Accueil</a></li>
+                <li><a href="/pages/jeu/">Le Jeu</a></li>
+
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <li><a href="contact.php">contact</a></li>
                 <li><a href="products/">Acheter</a></li>
-                <li>
-                    <div class="container-login-user">
-                        <img src="../ressources/image/utilisateur.png" alt="logo-utilisateur">
-                    </div>
-                </li>   
                     <?php if (isset( $_SESSION['user'])) :
                             $user = unserialize($_SESSION['user']);
                     ?>

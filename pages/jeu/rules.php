@@ -33,10 +33,29 @@
         .rotate-y-180 {
             transform: rotateY(180deg);
         }
+        .active-tab {
+            background-color: #f5deb3 !important; /* Couleur beige */
+         
+        }
     </style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 font-sans">
+<?php include(__DIR__ . '/../components/navbar.php') ?>
+
+
+      <!-- Tabs -->
+      <div class="flex justify-center mb-6">
+            <button id="tab-rules"  class="active-tab tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Règles du jeu</button>
+      <a href="../jeu/carte.php">
+            <button id="tab-cards"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Cartes</button>
+    </a>
+    <a href="">
+        <button id="tab-qr" class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">QR Code</button>
+    </a>
+        </div>
+
+
 
     <div class="max-w-6xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
         <h1 class="text-4xl font-bold text-center text-[#af2127] mb-6">Règles du Jeu</h1>
@@ -132,7 +151,7 @@
                         <div class="card w-32 h-32">
                             <!-- Face avant -->
                             <div class="absolute w-full h-full backface-hidden">
-                                <img src="/ressources/image/Cartes/CartesRoles/Carte-Pirate.png" alt="Carte Pirate" class="object-cover rounded-md">
+                                <img src=" <?php $_SERVER['DOCUMENT_ROOT']  ?> /ressources/image/Cartes/CartesRoles/Carte-Pirate.png" alt="Carte Pirate" class="object-cover rounded-md">
                             </div>
                             <!-- Face arrière -->
                             <div class="absolute w-full h-full backface-hidden rotate-y-180">
@@ -199,7 +218,7 @@
                         <div class="card w-32 h-32">
                             <!-- Face avant -->
                             <div class="absolute w-full h-full backface-hidden">
-                                <img src="/ressources/image/Cartes/CartesAction/Carte-île.png" alt="Carte île" class="object-cover rounded-md">
+                                <img src="../../ressources/image/Cartes/CartesAction/Carte-île.png" alt="Carte île" class="object-cover rounded-md">
                             </div>
                             <!-- Face arrière -->
                             <div class="absolute w-full h-full backface-hidden rotate-y-180">
@@ -316,7 +335,7 @@
                     <div class="relative perspective">
                         <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                             <div class="absolute w-full h-full backface-hidden">
-                                <img src="/ressources/image/Cartes/CartesBonus/Carte-observateur.png" alt="Carte Observateur" class="object-cover rounded-md">
+                                <img src="../../ressources/image/Cartes/CartesBonus/Carte-observateur.png" alt="Carte Observateur" class="object-cover rounded-md">
                             </div>
                             <div class="absolute w-full h-full backface-hidden rotate-y-180">
                                 <img src="/ressources/image/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Observateur - arrière" class="object-cover rounded-md">
@@ -547,6 +566,8 @@
         <div>19</div><div>9</div><div>9</div><div>1</div>
         <div>20</div><div>9</div><div>10</div><div>1</div>
     </div>
+
+
 </div>
 
 <!-- Déroulement d'une partie -->
@@ -666,9 +687,7 @@
 
    
 
-    <div class="text-center mt-8">
-        <a href="/" class="px-6 py-2 bg-[#00253e] text-white rounded hover:bg-[#af2127] transition duration-300">Retour à l'accueil</a>
-    </div>
+   
     </div>
 
 </body>
