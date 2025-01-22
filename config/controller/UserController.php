@@ -2,114 +2,147 @@
 
 require_once (__DIR__ . '/../init.php');  
 
-
 class UserController {
-    public static function register (User $user)
-    {
-        $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
-        $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO users (name, firstname, password, mail, phone, location, role) VALUES (?, ?, ?, ?, ?, ?, ?)', [$user->getName(),$user->getFirstname(), $password, $user->getMail(), $user->getPhone() ,$user->getLocation() ,$user->getRole()]);
+
+    // Méthode d'enregistrement d'un utilisateur
+    public static function register(User $user) {
+        try {
+            $password = password_hash($user->getPassword(), PASSWORD_DEFAULT); // Hashage du mot de passe
+            $pdo = PDOUtils::getSharedInstance();
+            $pdo->execSQL(
+                'INSERT INTO users (name, firstname, password, mail, phone, location, role) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                [
+                    $user->getName(), 
+                    $user->getFirstname(), 
+                    $password, 
+                    $user->getMail(), 
+                    $user->getPhone(),
+                    $user->getLocation(), 
+                    $user->getRole()
+                ]
+            );
+        } catch (PDOException $e) {
+            die("Erreur lors de l'enregistrement : " . $e->getMessage());
+        }
     }
 
+    // Méthode de connexion d'un utilisateur
     public static function login($mail, $password) {
-        try{
+        try {
             $pdo = PDOUtils::getSharedInstance();
             $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-            if ($_POST['mail']) {
-                if (password_verify($password, $result[0]['password'])){
-                  
-                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
+            
+            // Vérifie si un utilisateur est trouvé
+            if (!empty($result)) {
+                if (password_verify($password, $result[0]['password'])) {
+                    $user = new User(
+                        $result[0]['name'], 
+                        $result[0]['firstname'], 
+                        $result[0]['mail'], 
+                        $result[0]['phone'], 
+                        $result[0]['location'], 
+                        $result[0]['role'], 
+                        $result[0]['id']
+                    );
 
+                    // Stockage dans la session
                     $_SESSION['user'] = serialize($user);
-                    $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
+                    $_SESSION['user_expiration'] = time() + 86400; // 1 jour de session
                     return true;
-                   
                 } else {
-                    $_SESSION['loginErreur'][] = 0;
+                    $_SESSION['loginErreur'][] = "Mot de passe incorrect.";
                     return false;
                 }
             } else {
-                $_SESSION['loginErreur'][] = 0;
-                    return false;
+                $_SESSION['loginErreur'][] = "Adresse e-mail introuvable.";
+                return false;
             }
+        } catch (PDOException $e) {
+            die("Erreur lors de la connexion : " . $e->getMessage());
         }
-        catch(PDOException $e){
-            die($e->getMessage());
+    }
+
+    // Méthode de mise à jour d'un utilisateur
+    public static function update(User $user) {
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $pdo->execSQL(
+                'UPDATE users 
+                SET name = ?, firstname = ?, mail = ?, phone = ?, location = ? 
+                WHERE id = ?', 
+                [
+                    $user->getName(), 
+                    $user->getFirstname(), 
+                    $user->getMail(), 
+                    $user->getPhone(),
+                    $user->getLocation(), 
+                    $user->getId()
+                ]
+            );
+        } catch (PDOException $e) {
+            die("Erreur lors de la mise à jour : " . $e->getMessage());
         }
-       
     }
 
-    public static function update (User $user)
-    {
-        $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE users SET (name, firstname, mail, phone, location, id) VALUES (?, ?, ?, ?, ?, ?) WHERE id = ?', [$user->getName(),$user->getFirstname(), $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getId()]);
+    // Vérifie si un mail existe
+    public static function mailExists($mail) {
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
+            return count($result) > 0;
+        } catch (PDOException $e) {
+            die("Erreur lors de la vérification du mail : " . $e->getMessage());
+        }
     }
 
-
-    
-    public static function mailExists($mail)
-    {
-        $pdo = PDOUtils::getSharedInstance();
-        $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
-        return count($result) > 0;
-    }
-
-
-
-    public static function validateMail ($mail)
-    {
+    // Validation d'un email
+    public static function validateMail($mail) {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['inscriptionErreur'][] = 3;
+            $_SESSION['inscriptionErreur'][] = "Format de l'email invalide.";
         }
-        //Vérifier si l'email existe déjà
-        if (UserController::mailExists($mail)) {
-            $_SESSION['inscriptionErreur'][] = 2;
-          
 
-           
+        if (self::mailExists($mail)) {
+            $_SESSION['inscriptionErreur'][] = "L'adresse email est déjà utilisée.";
         }
     }
 
-    public static function validateName($name)
-    {
+    // Validation du nom
+    public static function validateName($name) {
         if (strlen($name) < 3) {
-            $_SESSION['inscriptionErreur'][] = 0; // Le nom doit faire plus de 2 caractères
+            $_SESSION['inscriptionErreur'][] = "Le nom doit contenir au moins 3 caractères.";
         }
     }
 
-    public static function validateFirstname($firstname)
-    {
+    // Validation du prénom
+    public static function validateFirstname($firstname) {
         if (strlen($firstname) < 3) {
-            $_SESSION['inscriptionErreur'][] = 1; // Le prénom doit faire plus de 2 caractères
+            $_SESSION['inscriptionErreur'][] = "Le prénom doit contenir au moins 3 caractères.";
         }
     }
 
-    public static function validateRole($role)
-    {
+    // Validation du rôle
+    public static function validateRole($role) {
         if (empty($role)) {
-            $_SESSION['inscriptionErreur'][] = 4; // Le rôle doit être renseigné
+            $_SESSION['inscriptionErreur'][] = "Le rôle est obligatoire.";
         }
     }
 
-    public static function validatePassword($password)
-    {
+    // Validation du mot de passe
+    public static function validatePassword($password) {
         if (strlen($password) < 8 || 
             !preg_match('/[A-Z]/', $password) || 
             !preg_match('/[a-z]/', $password) || 
             !preg_match('/[0-9]/', $password) || 
             !preg_match('/[\W]/', $password)) {
-            $_SESSION['inscriptionErreur'][] = 5; // Le mot de passe doit respecter les critères
+            $_SESSION['inscriptionErreur'][] = "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
         }
     }
 
-    public static function validatePhone($phone)
-    {
+    // Validation du téléphone
+    public static function validatePhone($phone) {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = 10; // Veuillez entrer un numéro de téléphone valide
+            $_SESSION['inscriptionErreur'][] = "Numéro de téléphone invalide.";
         }
     }
-
-
-
-
 }

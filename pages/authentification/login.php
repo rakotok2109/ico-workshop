@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = UserController::login($email, $password);
         
         if ($user) {
-            header('Location: dashboard.php'); 
+            header('Location: ../../pages/PROFILE.php'); 
             exit();
         } else {
             $error = "Email ou mot de passe incorrect.";
