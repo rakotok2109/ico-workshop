@@ -1,5 +1,5 @@
 <?php 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
+require_once (__DIR__ . '/../config/init.php');
 
 
 if($_GET['id'] == 'register') {
@@ -63,7 +63,7 @@ else if($_GET['id'] == 'login') {
 
     }
     else{
-        header('Location: /pages/DashboardAdminView.php');
+        header('Location: __DIR__ . /../../pages/profile.php');
     }
     }
     else {

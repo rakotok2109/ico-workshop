@@ -39,6 +39,7 @@ class UserController {
                     $user = new User(
                         $result[0]['name'], 
                         $result[0]['firstname'], 
+                        null,
                         $result[0]['mail'], 
                         $result[0]['phone'], 
                         $result[0]['location'], 
