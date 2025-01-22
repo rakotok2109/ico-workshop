@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Règles du Jeu</title>
     <script src="https://cdn.tailwindcss.com"></script>
+  
+    <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
+
     <style>
         .hidden {
             display: none;
@@ -18,6 +21,7 @@
 </head>
 
 <body class="bg-gray-100 text-gray-900 font-sans">
+    <?php include(__DIR__ . '/../components/navbar.php') ?>
 
     <div class="max-w-6xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
         <h1 class="text-4xl font-bold text-center text-[#af2127] mb-6">ICO</h1>

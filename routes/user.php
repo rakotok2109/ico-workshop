@@ -98,18 +98,25 @@ else if($_GET['id'] == 'update') {
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
 
-    UserController::update($user);
+    UserController::updateUser($user);
    
    
     header('Location: /');
 }
 
 else if($_GET['id'] == 'updateRole') {
-    UserController::updateRole();
+    // UserController::updateRole();
 }
 
 else if($_GET['id'] == 'deleteUser') {
-    UserController::deleteUser();
+    $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
+    UserController::deleteUser($id_user);
+
+
+
+
+
+
 }
 
 else{

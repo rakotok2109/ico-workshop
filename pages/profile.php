@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
+<?php include(__DIR__ . '/components/navbar.php') ?>
+
     <div class="container mx-auto p-8 flex">
         <!-- Informations utilisateur à gauche -->
         <div class="w-1/3 bg-white shadow-lg rounded-lg p-6 mr-8">
