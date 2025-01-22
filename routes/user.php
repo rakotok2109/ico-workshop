@@ -22,6 +22,7 @@ if($_GET['id'] == 'register') {
     );
 
     UserController::validateMail($user->getMail());
+    UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
@@ -32,6 +33,7 @@ if($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
+        $_SESSION['email'] = $user->getMail();
         $_SESSION['email'] = $user->getMail();
      
 
@@ -62,12 +64,12 @@ else if($_GET['id'] == 'login') {
         header('Location: __DIR__  . /../../pages/home.php');
 
     }
-    else{
-        header('Location: __DIR__ . /../../pages/profile.php');
+    else if($user->getRole() >= 1){
+        header('Location: ../pages/admin/dashboard.php');
     }
     }
     else {
-        header('Location: /pages/authentification/login.php');
+        header('Location: ../pages/authentification/login.php');
     }
 }
 else if($_GET['id'] == 'logout') {
@@ -93,7 +95,6 @@ else if($_GET['id'] == 'update') {
 
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());

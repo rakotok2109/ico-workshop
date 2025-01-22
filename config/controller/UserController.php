@@ -160,13 +160,76 @@ class UserController {
             !preg_match('/[0-9]/', $password) || 
             !preg_match('/[\W]/', $password)) {
             $_SESSION['inscriptionErreur'][] = "Le mot de passe doit comporter au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
+            $_SESSION['inscriptionErreur'][] = 4; // Le mot de passe doit respecter les critères
         }
     }
 
     // Validation du téléphone
     public static function validatePhone($phone) {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = "Numéro de téléphone invalide.";
+            $_SESSION['inscriptionErreur'][] = 9; // Veuillez entrer un numéro de téléphone valide
+        }
+    }
+
+    public static function getAllUsers() {
+        $pdo = PDOUtils::getSharedInstance();
+        $results = $pdo->requestSQL('SELECT id, name, firstname, mail, phone, location, role FROM users');
+        return $results;
+    }
+
+    public static function updateRole()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
+            $role = isset($_POST['role']) ? (int) $_POST['role'] : null;
+
+            if ($id_user === null || $role === null) {
+                $_SESSION['error'] = "Données invalides.";
+                header("Location: ../pages/admin/dashboard.php");
+                exit();
+            }
+
+            if (!in_array($role, [0, 1, 2])) {
+                $_SESSION['error'] = "Rôle invalide.";
+                header("Location: ../pages/admin/dashboard.php");
+                exit();
+            }
+
+            try {
+                $pdo = PDOUtils::getSharedInstance();
+                $sql = "UPDATE users SET role = ? WHERE id = ?";
+                $pdo->execSQL($sql, [$role, $id_user]);
+                header("Location: ../pages/admin/dashboard.php");
+                $_SESSION['success'] = "Le rôle de l'utilisateur a été mis à jour avec succès.";
+                header("Location: ../pages/admin/dashboard.php");
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = "Erreur SQL : " . $e->getMessage();
+                exit();
+            }
+        }
+    }
+
+    public static function deleteUser($id_user)
+    {
+        if ($id_user === null) {
+            $_SESSION['error'] = "ID utilisateur invalide.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        }
+
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "DELETE FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
+
+            $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
         }
     }
 }
