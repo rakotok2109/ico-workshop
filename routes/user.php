@@ -13,8 +13,6 @@ if($_GET['id'] == 'register') {
         $_POST['prenom'],
         $_POST['password'],
         $_POST['email'],
-     
-    
         $_POST['telephone'],
         $_POST['location'],
         0 
@@ -76,7 +74,7 @@ else if($_GET['id'] == 'logout') {
     header('Location: ../pages/home.php');
 }
 
-else if($_GET['id'] == 'update') {
+else if($_GET['id'] == 'updateUser') {
 
     if(isset( $_SESSION['modificationErreur']))
     {
@@ -90,23 +88,22 @@ else if($_GET['id'] == 'update') {
         $_POST['phone'],
         $_POST['location'],
         $_POST['role'],
+        $_POST['id'],
     );
 
-    UserController::validateMail($user->getMail());
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
-    UserController::validatePassword($user->getPassword());
 
     UserController::updateUser($user);
    
    
-    header('Location: /');
+    header('Location: ../pages/profile.php');
 }
 
 else if($_GET['id'] == 'updateRole') {
-    // UserController::updateRole();
+    UserController::updateRole();
 }
 
 else if($_GET['id'] == 'deleteUser') {

@@ -13,34 +13,6 @@ $userId = $user->getId();
 
 // Récupérer les commandes de l'utilisateur
 $orders = OrderController::getOrdersForUser($userId);
-
-// Vérifie si le formulaire de modification a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupère les nouvelles informations du formulaire
-    $name = $_POST['name'];
-    $firstname = $_POST['firstname'];
-    $email = $_POST['mail'];
-    $phone = $_POST['phone'];
-    $location = $_POST['location'];
-
-    // Valide les informations
-
-    // Mise à jour du profil
-    $user->setName($name);
-    $user->setFirstname($firstname);
-    $user->setMail($email);
-    $user->setPhone($phone);
-    $user->setLocation($location);
-
-    // Appel à la méthode de mise à jour
-    UserController::updateUser($user);
-
-    // Mise à jour de l'utilisateur dans la session
-    $_SESSION['user'] = serialize($user);
-
-    // Message de confirmation
-    $message = "Profil mis à jour avec succès.";
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -67,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <!-- Formulaire de modification du profil -->
-            <form method="POST">
+            <form method="POST" action="../routes/user.php?id=updateUser">>
+            <input type="hidden" id = "id" name="id" value="<?= $user->getId() ?>">
+            <input type="hidden" id = "role" name="role" value="<?= $user->getRole() ?>">
                 <div class="mb-4">
                     <label for="name" class="block font-medium">Nom:</label>
                     <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded-md" value="<?= htmlspecialchars($user->getName()); ?>" required>

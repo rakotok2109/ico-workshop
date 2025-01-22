@@ -9,6 +9,6 @@
 <body class="bg-[#FCD3A1] text-[#00253e] font-sans text-center p-20">
     <h1 class="text-3xl font-bold">Merci pour votre commande !</h1>
     <p class="mt-4">Votre paiement a été traité avec succès.</p>
-    <a href="/pages/" class="mt-6 inline-block bg-[#00253e] text-white px-6 py-2 rounded">Retour à l'accueil</a>
+    <a href="../home.php" class="mt-6 inline-block bg-[#00253e] text-white px-6 py-2 rounded">Retour à l'accueil</a>
 </body>
 </html>
