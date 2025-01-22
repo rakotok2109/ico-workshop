@@ -1,3 +1,4 @@
+
 .container-navbar{
     position :relative;
     display: flex;
@@ -39,8 +40,3 @@
     padding-right: 30px;
 
 } 
-#carouselExampleIndicators {
-    position: absolute;
-    z-index: 5; 
-    margin-top: 120px;
-}
