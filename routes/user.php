@@ -97,9 +97,11 @@ else if($_GET['id'] == 'updateUser') {
     UserController::validatePhone($user->getPhone());
 
     UserController::updateUser($user);
+    $_SESSION['user'] = serialize($user);
    
    
     header('Location: ../pages/profile.php');
+    exit();
 }
 
 else if($_GET['id'] == 'updateRole') {
