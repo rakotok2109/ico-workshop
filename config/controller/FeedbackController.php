@@ -15,28 +15,28 @@ class FeedbackController {
     {
         $pdo = PDOUtils::getSharedInstance();
         $feedback = $pdo->requestSQL('SELECT * FROM feedbacks WHERE id = ?', [intval($id)]);
-        if ($feeback) {
-            return new Product($feeback[0]['id'], $feeback[0]['firstname'], $feeback[0]['wording'], $feeback[0]['rate']);
+        if ($feedback) {
+            return new Product($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
         } else {
             return null;
         }
     }
 
-    public static function addFeedback(Feedback $feeback)
+    public static function addFeedback(Feedback $feedback)
     {   
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$product->getFirstname(), $product->getWording(), $product->getRate()]);
     }
 
-    public static function updateFeedback(Feedback $feeback)
+    public static function updateFeedback(Feedback $feedback)
     {
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('UPDATE feedbacks SET fisrtname = ?, wording = ?, rate = ? WHERE id = ?',
         [
-            $feeback->getFirstname(),
-            $feeback->getWording(),
-            $feeback->getRate(),
-            $feeback->getId()
+            $feedback->getFirstname(),
+            $feedback->getWording(),
+            $feedback->getRate(),
+            $feedback->getId()
         ]);
 
         header("Location: ../pages/DashboardAdminView.php");
@@ -47,9 +47,9 @@ class FeedbackController {
     public static function deleteFeedback()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_feeback = isset($_POST['id']) ? (int) $_POST['id'] : null;
+            $id_feedback = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
-            if ($id_feeback === null) {
+            if ($id_feedback === null) {
                 $_SESSION['error'] = "ID feedback invalide.";
                 header("Location: ../pages/DashboardAdminView.php");
                 exit();
@@ -57,8 +57,8 @@ class FeedbackController {
 
             try {
                 $pdo = PDOUtils::getSharedInstance();
-                $sql = "DELETE FROM feebacks WHERE id = ?";
-                $pdo->execSQL($sql, [$id_feebackt]);
+                $sql = "DELETE FROM feedbacks WHERE id = ?";
+                $pdo->execSQL($sql, [$id_feedbackt]);
 
                 $_SESSION['success'] = "L'avis a été supprimé avec succès.";
                 header("Location: ../pages/DashboardAdminView.php");
