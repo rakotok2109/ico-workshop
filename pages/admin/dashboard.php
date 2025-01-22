@@ -9,15 +9,21 @@
     <title>Dashboard Administrateur</title>
 </head>
 <body>
-<?php 
+<?php
 require_once(dirname(dirname(__DIR__)) . '/config/init.php');
-if($_SESSION['user'] == null){
+if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
     header('Location: /pages/auth/login.php');
+    exit();
 }
-else{
-    $user = unserialize($_SESSION['user']);
-    $superadmin = $user->getRole() == 2;
+
+$user = unserialize($_SESSION['user']);
+if (!$user || !method_exists($user, 'getRole')) {
+    header('Location: /pages/auth/login.php');
+    exit();
 }
+
+$superadmin = ($user->getRole() === 2);
+var_dump($user->getRole());
 
 $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
@@ -31,7 +37,7 @@ $newsList = NewsController::getAllNews();
         <th>Mail</th>
         <th>Phone</th>
         <th>Adresse</th>
-        <th>Paramètres</th>
+        <th>Rôle</th>
     </tr>
     <tbody>
         <?php foreach($users as $user): ?>
@@ -42,8 +48,8 @@ $newsList = NewsController::getAllNews();
                 <td><?= $user['phone']?></td>
                 <td><?= $user['location']?></td>
                 <td>
-                    <?php if ($superadmin): ?>
-                        <form method="POST" action="../routes/user.php?id=updateRole">
+                    <?php if ($superadmin):?>
+                        <form method="POST" action="../../routes/user.php?id=updateRole">
                             <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
                             <select name="role">
                                 <option value="0" <?= $user['role'] == 0 ? 'selected' : '' ?>>Utilisateur</option>
@@ -56,7 +62,7 @@ $newsList = NewsController::getAllNews();
                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                             <button type="submit" style="background-color:red; color:white;">Supprimer l'utilisateur</button>
                         </form>
-                    <?php else:?>
+                    <?php else: ?>
                         <?= $user['role'] == 0 ? 'Utilisateur' : ($user['role'] == 1 ? 'Administrateur' : 'Super Administrateur') ?>
                     <?php endif; ?>
                 </td>
@@ -157,3 +163,11 @@ $newsList = NewsController::getAllNews();
     <input type="date" name="date" placeholder="Date" required>
     <button type="submit">Ajouter l'actualité'</button>
 </form>
+
+<?php
+    if ($superadmin) {
+        echo 'True';
+    } else {
+        echo 'False';
+    }
+?>

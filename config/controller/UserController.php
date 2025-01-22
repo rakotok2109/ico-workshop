@@ -8,7 +8,7 @@ class UserController {
     {
         $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO users (name, firstname, password, mail, phone, location, role) VALUES (?, ?, ?, ?, ?, ?, ?)', [$user->getName(),$user->getFirstname(), $password, $user->getMail(), $user->getPhone() ,$user->getLocation() ,0]);
+        $pdo->execSQL('INSERT INTO users (name, firstname, password, mail, phone, location, role) VALUES (?, ?, ?, ?, ?, ?, ?)', [$user->getName(),$user->getFirstname(), $password, $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getRole()]);
     }
 
     public static function login($mail, $password) {
@@ -17,7 +17,7 @@ class UserController {
             $result = $pdo->requestSQL('SELECT * FROM users WHERE mail = ?', [$mail]);
             if ($_POST['mail']) {
                 if (password_verify($password, $result[0]['password'])){
-                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
+                    $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['password'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
                   
                     $_SESSION['user'] = serialize($user);
                     $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
@@ -41,7 +41,15 @@ class UserController {
     public static function updateUser (User $user)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE users SET (name, firstname, mail, phone, location, id) VALUES (?, ?, ?, ?, ?, ?) WHERE id = ?', [$user->getName(),$user->getFirstname(), $user->getMail(), $user->getPhone() ,$user->getLocation(), $user->getId()]);
+        $pdo->execSQL('UPDATE users SET name = ?, firstname = ?, mail = ?, phone = ?, location = ?, WHERE id = ?',
+        [
+            $user->getName(),
+            $user->getFirstname(),
+            $user->getMail(),
+            $user->getPhone(),
+            $user->getLocation(),
+            $user->getId()
+        ]);
     }
 
 

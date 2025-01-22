@@ -58,7 +58,7 @@ else if($_GET['id'] == 'login') {
         header('Location: ../pages/home.php');
 
     }
-    else if($user->getRole() > 1){
+    else if($user->getRole() >= 1){
         header('Location: ../pages/admin/dashboard.php');
     }
     }
