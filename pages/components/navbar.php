@@ -48,7 +48,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                         </div>
                     </li>
                     <?php else : ?>
-                        <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
+                        <li><a style="color: #FCD3A1;" href="../../pages/authentification/login.php">Se connecter</a></li>
                     <?php endif; ?>
             </ul>
         </div>
