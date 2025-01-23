@@ -2,46 +2,27 @@
 require_once(__DIR__ . '/../config/init.php');
 
 if (!isset($_SESSION['user'])) {
-    header('Location: authentification/login.php');
+    header('Location: /pages/authentification/login.php');
     exit;
+ 
 }
+
+if (isset($_SESSION['successMessage'])) {
+    echo "<div class='success-message'>" . $_SESSION['successMessage'] . "</div>";
+    unset($_SESSION['successMessage']);
+}
+
+if (isset($_SESSION['errorMessage'])) {
+    echo "<div class='error-message'>" . $_SESSION['errorMessage'] . "</div>";
+    unset($_SESSION['errorMessage']);
+}
+
 $user = unserialize($_SESSION['user']);
 $userId = $user->getId();
-
 $orders = OrderController::getOrdersForUser($userId);
 
 $message = '';
 $errorMessage = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name']);
-    $firstname = trim($_POST['firstname']);
-    $email = trim($_POST['mail']);
-    $phone = trim($_POST['phone']);
-    $location = trim($_POST['location']);
-
-    if (empty($name) || empty($firstname) || empty($email) || empty($phone) || empty($location)) {
-        $errorMessage = "Tous les champs sont obligatoires.";
-    } elseif (strlen($name) < 3) {
-        $errorMessage = "Le nom doit comporter au moins 3 caractères.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errorMessage = "L'email n'est pas valide.";
-    } elseif (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-        $errorMessage = "Le numéro de téléphone n'est pas valide.";
-    } else {
-        $user->setName($name);
-        $user->setFirstname($firstname);
-        $user->setMail($email);
-        $user->setPhone($phone);
-        $user->setLocation($location);
-
-        UserController::updateUser($user);
-
-        $_SESSION['user'] = serialize($user);
-
-        $message = "Profil mis à jour avec succès.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .active-tab {
-            background-color: #f5deb3 !important; 
+            background-color: #f5deb3 !important;
         }
+        .success-message {
+    color: green;
+    background-color: #d4edda;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    margin: 10px 0;
+}
+
+.error-message {
+    color: red;
+    background-color: #f8d7da;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    margin: 10px 0;
+}
+
     </style>
 </head>
 
@@ -87,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <form method="POST" class="space-y-4">
+            <form action="/routes/user.php?id=update" method="POST" class="space-y-4">
                 <div>
                     <label for="name" class="block font-medium">Nom :</label>
                     <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded-md" value="<?= htmlspecialchars($user->getName()); ?>" required>
@@ -135,22 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </tr>
                             <?php
                               $details = DetailsOrderController::getDetailsByOrderId($order->getId());
-                                 foreach ($details as $detail): 
-    
-                                   $product = ProductController::getProductById($detail->getidProduit()); 
+                              foreach ($details as $detail): 
+                                $product = ProductController::getProductById($detail->getidProduit()); 
                               ?>
-                           <tr>
-                                <td class="px-4 py-2 border">
-                                   <?= $product ? htmlspecialchars($product->getName()) : 'Produit introuvable'; ?>
-                                </td>
-                       <td class="px-4 py-2 border"><?= htmlspecialchars($detail->getQuantite()); ?></td>
-                 <td class="px-4 py-2 border">
-            <?= number_format($detail->getPrix(), 2); ?> €
-        </td>
-    </tr>
-<?php endforeach; ?>
-
-    
+                            <tr>
+                                <td class="px-4 py-2 border"><?= $product ? htmlspecialchars($product->getName()) : 'Produit introuvable'; ?></td>
+                                <td class="px-4 py-2 border"><?= htmlspecialchars($detail->getQuantite()); ?></td>
+                                <td class="px-4 py-2 border"><?= number_format($detail->getPrix(), 2); ?> €</td>
+                            </tr>
+                            <?php endforeach; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

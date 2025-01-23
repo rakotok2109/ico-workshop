@@ -25,7 +25,9 @@ class FeedbackController {
     public static function addFeedback(Feedback $feedback)
     {   
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$product->getFirstname(), $product->getWording(), $product->getRate()]);
+        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$feedback->getFirstname(),
+        $feedback->getWording(), $feedback->getRate()]);
+        
     }
 
     public static function updateFeedback(Feedback $feedback)

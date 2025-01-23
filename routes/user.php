@@ -1,20 +1,15 @@
 <?php
 require_once (__DIR__ . '/../config/init.php');
 
-
-if($_GET['id'] == 'register') {
-
-    if(isset( $_SESSION['inscriptionErreur']))
-    {
-        unset( $_SESSION['inscriptionErreur']);
+if ($_GET['id'] == 'register') {
+    if (isset($_SESSION['inscriptionErreur'])) {
+        unset($_SESSION['inscriptionErreur']);
     }
     $user = new User(
         $_POST['nom'],
         $_POST['prenom'],
         $_POST['password'],
         $_POST['email'],
-     
-    
         $_POST['telephone'],
         $_POST['location'],
         0,
@@ -27,98 +22,94 @@ if($_GET['id'] == 'register') {
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
 
-
-    if(isset( $_SESSION['inscriptionErreur'])) {
+    if (isset($_SESSION['inscriptionErreur'])) {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
         $_SESSION['email'] = $user->getMail();
-     
 
         header('Location: /pages/authentification/register.php');
         exit();
-
-    }
-
-    else{
-
+    } else {
         UserController::register($user);
+        $_SESSION['successMessage'] = "Votre inscription a été réussie. Vous pouvez maintenant vous connecter.";
         header('Location: /pages/authentification/login.php');
-    
+        exit();
     }
-
-   
-   
-  
-}
-else if($_GET['id'] == 'login') {
+} else if ($_GET['id'] == 'login') {
     $result = UserController::login($_POST['email'], $_POST['password']);
-    if($result) {
-    //   echo $_SESSION['user']->getName();
-    $user= unserialize($_SESSION['user']);
-    var_dump($user);
-    if($user->getRole() < 1)
-    {
-        header('Location: __DIR__  . /../../pages/home.php');
-
-    }
-    else{
-        header('Location: __DIR__ . /../../pages/profile.php');
-    }
-    }
-    else {
+    if ($result) {
+        $user = unserialize($_SESSION['user']);
+        if ($user->getRole() < 1) {
+            header('Location: /pages/home.php');
+        } else {
+            header('Location: /pages/profile.php');
+        }
+        exit();
+    } else {
+        $_SESSION['errorMessage'] = "Email ou mot de passe incorrect.";
         header('Location: /pages/authentification/login.php');
+        exit();
     }
-}
-else if($_GET['id'] == 'logout') {
+} else if ($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
     header('Location: /pages/home.php');
-}
-
-else if($_GET['id'] == 'update') {
-
-    if(isset( $_SESSION['modificationErreur']))
-    {
-        unset( $_SESSION['modificationErreur']);
+    exit();
+} else if ($_GET['id'] == 'update') {
+    if (!isset($_SESSION['user'])) {
+        header('Location: /pages/authentification/login.php');
+        exit();
     }
-    $user = new User(
-        $_POST['name'],
-        $_POST['firstname'],
-        null,
-        $_POST['mail'],
-        $_POST['phone'],
-        $_POST['location'],
-        $_POST['role'],
-    );
+    
+    $user = unserialize($_SESSION['user']);
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = trim($_POST['name']);
+        $firstname = trim($_POST['firstname']);
+        $email = trim($_POST['mail']);
+        $phone = trim($_POST['phone']);
+        $location = trim($_POST['location']);
 
-    UserController::validateMail($user->getMail());
-    UserController::validateFirstname($user->getFirstname());
-    UserController::validateRole($user->getRole());
-    UserController::validateName($user->getName());
-    UserController::validatePhone($user->getPhone());
-    UserController::validatePassword($user->getPassword());
+        // Validation des champs
+        if (empty($name) || empty($firstname) || empty($email) || empty($phone) || empty($location)) {
+            $errorMessage = "Tous les champs sont obligatoires.";
+        } elseif (strlen($name) < 3) {
+            $errorMessage = "Le nom doit comporter au moins 3 caractères.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errorMessage = "L'email n'est pas valide.";
+        } elseif (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
+            $errorMessage = "Le numéro de téléphone n'est pas valide.";
+        } else {
+            // Si tout est valide
+            $user->setName($name);
+            $user->setFirstname($firstname);
+            $user->setMail($email);
+            $user->setPhone($phone);
+            $user->setLocation($location);
 
-    UserController::updateUser($user);
-   
-   
-    header('Location: /');
-}
+            UserController::updateUser($user);
+            $_SESSION['user'] = serialize($user);
+            $_SESSION['successMessage'] = "Profil mis à jour avec succès.";
+        }
+    }
 
-else if($_GET['id'] == 'updateRole') {
-    // UserController::updateRole();
-}
+    // Afficher le message d'erreur ou de succès
+    if (isset($errorMessage)) {
+        $_SESSION['errorMessage'] = $errorMessage;
+    }
 
-else if($_GET['id'] == 'deleteUser') {
+    header('Location: /pages/profile.php');
+    exit();
+} else if ($_GET['id'] == 'deleteUser') {
     $id_user = isset($_POST['id_user']) ? (int) $_POST['id_user'] : null;
-    UserController::deleteUser($id_user);
-
-
-
-
-
-
-}
-
-else{
+    if ($id_user) {
+        UserController::deleteUser($id_user);
+        $_SESSION['successMessage'] = "L'utilisateur a été supprimé avec succès.";
+        header('Location: /pages/users.php');
+        exit();
+    }
+} else {
     header('Location: /pages/home.php');
+    exit();
 }
+?>
