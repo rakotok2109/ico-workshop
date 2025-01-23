@@ -22,7 +22,7 @@ class UserController {
                     $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['password'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
                   
                     $_SESSION['user'] = serialize($user);
-                    $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
+                    $_SESSION['user_expiration'] = time() + 86400; 
                     return true;
                    
                 } else {

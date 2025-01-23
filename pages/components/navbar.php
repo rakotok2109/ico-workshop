@@ -2,6 +2,7 @@
 require_once (dirname(dirname(__DIR__)).'/config/init.php');
 if(isset($_SESSION['user'])){
 $user = unserialize($_SESSION['user']);
+
 }
 ?>
 

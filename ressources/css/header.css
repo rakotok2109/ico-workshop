@@ -7,7 +7,9 @@
     align-items: center;
     padding-left: 80px;
     z-index: 10;
+    
 }
+
 .container-logo a img{
     height: 100px;
     width: 100px;

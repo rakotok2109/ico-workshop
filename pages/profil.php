@@ -7,14 +7,8 @@ if (!isset($_SESSION['user'])) {
     exit;
 }else{
     $user = unserialize($_SESSION['user']); 
-    var_dump($user); // Pour vérifier que les données sont à jour
+
 }
-// $user = UserController::getAllInfoUser($user->getId());
-// var_dump($user);
-?>
-<br>
-<?php
-// var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -114,4 +108,4 @@ if (!isset($_SESSION['user'])) {
     </div>
 
 </body>
-</html>
+</html>  
