@@ -5,12 +5,26 @@ class PDOUtils {
     private static $sharedInstance_;
 
     private function __construct() {
-        $config = require(dirname(__DIR__) . '/config/config');
+       
         
         // Définir l'environnement ici (par exemple, 'development' ou 'production')
+        $environments = [
+            'development' => [
+                'host' => 'localhost',
+                'dbname' => 'workshop-ico',
+                'username' => 'root',
+                'password' => '',
+            ],
+            'production' => [
+                'host' => 'localhost',
+                'dbname' => 'u611341706_ico_workshop',
+                'username' => 'u611341706_ico',
+                'password' => 'Asking@1234',
+            ],
+        ]; 
         $environment = 'production'; 
         // $environment = 'development'; 
-        $dbConfig = $config[$environment];
+        $dbConfig = $environments[$environment];
 
         $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset=utf8";
         $this->pdo_ = new PDO($dsn, $dbConfig['username'], $dbConfig['password'], [
