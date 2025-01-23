@@ -89,6 +89,30 @@ class UserController {
         }
     }
 
+ // Méthode de mise à jour d'un utilisateur
+ public static function updateUser(User $user) {
+    try {
+        $pdo = PDOUtils::getSharedInstance();
+        $pdo->execSQL(
+            'UPDATE users
+            SET name = ?, firstname = ?, mail = ?, phone = ?, location = ?
+            WHERE id = ?',
+            [
+                $user->getName(),
+                $user->getFirstname(),
+                $user->getMail(),
+                $user->getPhone(),
+                $user->getLocation(),
+                $user->getId()
+            ]
+        );
+        return true;
+    } catch (PDOException $e) {
+        die("Erreur lors de la mise à jour : " . $e->getMessage());
+        return false;
+    }
+}
+
     // Vérifie si un mail existe
     public static function mailExists($mail) {
         try {

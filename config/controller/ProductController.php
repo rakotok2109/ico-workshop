@@ -18,7 +18,7 @@ class ProductController {
     public static function getProductById($productId)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $result = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [$productId]);
+        $result = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [intval($productId)]);
 
         if ($result) {
             $product = $result[0]; // Prendre le premier élément du tableau (le produit)

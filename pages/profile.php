@@ -35,11 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->setPhone($phone);
         $user->setLocation($location);
 
-        UserController::updateUser($user);
+       $result= UserController::updateUser($user);
 
+       if($result===true){
         $_SESSION['user'] = serialize($user);
 
         $message = "Profil mis à jour avec succès.";
+       }
+       else{
+        $errorMessage = "Une erreur s'est produite lors de la mise à jour du profil.";
+       }
+
+     
     }
 }
 ?>
