@@ -42,6 +42,7 @@ $newsList = NewsController::getAllNews();
                 <li><a href="#feedbacks" onclick="showSection('feedbacks')">Avis</a></li>
                 <li><a href="#news" onclick="showSection('news')">Actualités</a></li>
                 <li><a href="../profil.php">Mon profil</a></li>
+                <li><a href="../../routes/user.php?id=logout">Se déconnecter</a></li>
             </ul>
         </nav>
     </aside>
