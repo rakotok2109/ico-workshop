@@ -170,9 +170,9 @@ background-position: 50% 0%;  background-image: url('data:image/svg+xml;charset=
     height: 500px;
 }
 .photo-fondateur1 {
-    position: absolute;
-    top: 260px;
-    left: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .photo-fondateur1 img{
     
@@ -183,9 +183,9 @@ background-position: 50% 0%;  background-image: url('data:image/svg+xml;charset=
     padding: 0px;
 }
 .photo-fondateur {
-    position: absolute;
-    top: 260px;
-    right: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .photo-fondateur img{
     height: 212px;

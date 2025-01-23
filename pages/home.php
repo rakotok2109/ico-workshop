@@ -15,33 +15,53 @@ $news = NewsController::getAllNews();
 </style>
 
 <div class="page-du-site">      
-        <div class="container mx-auto py-16 px-8">
-            <h2 class="text-4xl font-[Chaloops] text-center text-[#3B60BC]">Les dernières nouveautés</h2>
-            <div id="carouselExampleIndicators" class="carousel slide mt-8" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <?php foreach ($news as $index => $item): ?>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="<?= $index ?>" class="<?= $index == 0 ? 'active' : '' ?>"></li>
-                    <?php endforeach; ?>
-                </ol>
-                <div class="carousel-inner">
-                    <?php foreach ($news as $index => $item): ?>
-                        <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
-                            <img class="d-block w-100" src="../ressources/image/ICO_Logo-remove.png" alt="<?= htmlspecialchars($item['title']) ?>">
-                            <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-4 rounded">
-                                <h5><?= htmlspecialchars($item['title']) ?></h5>
-                                <p><?= htmlspecialchars($item['wording'] ?? 'Description non disponible') ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+<div class="container py-5">
+    <h2 class="text-center text-primary display-4 mb-5">Les dernières nouveautés</h2>
+    
+    <!-- Carousel -->
+    <div id="newsCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <?php foreach ($news as $index => $item): ?>
+                <li 
+                    data-target="#newsCarousel" 
+                    data-slide-to="<?= $index ?>" 
+                    class="<?= $index === 0 ? 'active' : '' ?>">
+                </li>
+            <?php endforeach; ?>
+        </ol>
+
+        <!-- Inner carousel items -->
+        <div class="carousel-inner">
+            <?php foreach ($news as $index => $item): ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                    <!-- Image avec hauteur limitée -->
+                    <img class="d-block w-100" 
+                         style="max-height: 200px; object-fit: cover;" 
+                         src="../ressources/image/ICO_Logo-remove.png" 
+                         alt="<?= htmlspecialchars($item['title']) ?>">
+
+                    <!-- Caption -->
+                    <div class="carousel-caption bg-dark bg-opacity-75 rounded p-3">
+                        <h5><?= htmlspecialchars($item['title']) ?></h5>
+                        <p><?= htmlspecialchars($item['wording'] ?? 'Description non disponible') ?></p>
+                    </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
-            </div>
+            <?php endforeach; ?>
         </div>
+
+        <!-- Navigation controls -->
+        <a class="carousel-control-prev" href="#newsCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Précédent</span>
+        </a>
+        <a class="carousel-control-next" href="#newsCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Suivant</span>
+        </a>
+    </div>
+</div>
+
 
     <div class="histoire-du-jeu">
         <h2>Synopsie</h2>
@@ -70,7 +90,7 @@ $news = NewsController::getAllNews();
                 <h2>NOM PRENOM</h2>
             </div>
             <div class="container-gouvernail ">
-                <img src="../ressources/image/gouvernail.png" alt="gouvernail">
+                <!-- <img src="../ressources/image/gouvernail.png" alt="gouvernail"> -->
                 <div class="photo-fondateur1">
                     <img src="../ressources/image/chinoise.jpg"alt="photo du fondateur 1">
                 </div>
@@ -85,7 +105,7 @@ $news = NewsController::getAllNews();
                 <h2>NOM PRENOM</h2>
             </div>
             <div class="container-gouvernail">
-                <img src="../ressources/image/gouvernail.png" alt="gouvernail">
+                <!-- <img src="../ressources/image/gouvernail.png" alt="gouvernail"> -->
                 <div class="photo-fondateur">
                     <img src="../ressources/image/chinoise.jpg" alt="photo du foncateur 2">
                 </div>

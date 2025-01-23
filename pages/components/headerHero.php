@@ -17,7 +17,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
     </style>
     <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
  
 </head>
 <body>
