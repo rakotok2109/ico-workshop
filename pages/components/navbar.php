@@ -27,7 +27,6 @@ $user = unserialize($_SESSION['user']);
                         <?php
                     endif;
                     endif; ?>
-                <!-- <li><a href="DashboardAdminView.php">Dashboard</a></li> -->
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/pages/jeu/">Le Jeu</a></li>
 

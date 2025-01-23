@@ -35,6 +35,10 @@
    class="mt-4 bg-[#3B60BC] text-white py-2 px-4 rounded transition-all duration-300 ease-in-out hover:bg-[#2A4D8D] hover:shadow-lg inline-block">
     Voir le produit
 </a>
+        <a target="_blank" href="https://amzn.eu/d/27G4wgr"
+   class="mt-4 bg-[#3B60BC] text-white py-2 px-4 rounded transition-all duration-300 ease-in-out hover:bg-[#2A4D8D] hover:shadow-lg inline-block">
+    Acheter sur Amazon
+</a>
   
     </div>
 </div>
