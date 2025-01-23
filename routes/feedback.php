@@ -9,7 +9,7 @@ if($_GET['id'] == 'addFeedback') {
     );
 
     FeedbackController::addFeedback($feedback);
-    header('Location: ../../pages/components/feed-back.php');
+    header('Location: ../../pages/rules.php');
     exit();
 }
 

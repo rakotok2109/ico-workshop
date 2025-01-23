@@ -1,120 +1,205 @@
 <?php
-
-require_once (dirname(dirname(__DIR__)).'/config/init.php');
+require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 $feedbacks = FeedbackController::getAllFeedbacks();
-$recentFeedbacks = array_slice($feedbacks, -5);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avis</title>
+    <title>Avis et Formulaire</title>
     <style>
-        h1, h2 {
-            color: #333;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input, textarea, button {
-            width: 100%;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        .star-rating {
-            display: flex;
-            gap: 5px;
-            cursor: pointer;
-        }
-        .star-rating input[type="radio"] {
-            display: none;
-        }
-        .star {
-            font-size: 20px;
-            color: #ccc;
-        }
-        .star:hover, .star:hover ~ .star, .star-rating input[type="radio"]:checked ~ .star {
-            color: #ffcc00;
-        }
-        .feedback-item {
-            background: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 10px;
-        }
-        .feedback-item strong {
-            display: block;
-            font-size: 14px;
-            color: #555;
-        }
-        .feedback-item p {
-            margin: 5px 0;
-        }
-        .see-more {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .see-more:hover {
-            background: #0056b3;
-        }
-    </style>
-</head>
-    <h1>Laissez votre évaluation</h1>
-    <form action="../../routes/feedback.php?id=addFeedback" method="POST">
-        <label for="firstname">Votre prénom :</label>
-        <input type="text" id="firstname" name="firstname" required>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0; 
+        padding: 0; 
+        background-color: #3B60BC;
+      }
+    h1 {
+        text-align: center;
+        color: #333;
+        margin: 20px 0;
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        background-color: #3B60BC;
+        width: 100%;
+        padding: 20px 0;
+        box-sizing: border-box; 
+    }
+    .form-section, .feedback-section {
+        width: 35%; 
+        background: #fff;
+        padding: 15px; 
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    input, textarea, button {
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        padding: 6px; 
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 11px;
+    }
+    textarea {
+        height: 70px;
+    }
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 8px; /* Réduction de la hauteur */
+        font-size: 14px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .star-rating {
+        display: flex;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+    .star-rating label {
+        font-size: 20px; /* Taille inchangée pour les étoiles */
+        color: #ccc;
+        cursor: pointer;
+    }
+    .star-rating input[type="radio"]:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #ffcc00;
+    }
+    .carousel {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+    .feedback-items {
+        display: flex;
+        flex-direction: column;
+        transform: translateY(0);
+        transition: transform 0.5s ease;
+    }
+    .feedback-item {
+        padding: 20px;
+        text-align: center;
+        min-height: 200px;
+        box-sizing: border-box;
+    }
+    .feedback-item strong {
+        font-size: 14px;
+        color: #555;
+    }
+    .feedback-item p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+    .feedback-stars {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin: 10px 0;
+    }
+    .feedback-stars .star {
+        font-size: 20px;
+    }
+    .feedback-stars .star.filled {
+        color: #ffcc00;
+    }
+    .ss {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 10px; 
+}
 
-        <label for="rate">Note (1 à 5) :</label>
-        <div class="star-rating">
-            <?php for ($i = 5; $i >= 1; $i--): ?>
-                <input type="radio" id="star-<?= $i ?>" name="rate" value="<?= $i ?>" required>
-                <label class="star" for="star-<?= $i ?>">★</label>
-            <?php endfor; ?>
+.star-rating {
+    display: flex;
+    gap: 5px;
+}
+
+</style>
+
+
+</head>
+<body  >
+    
+    <h1 style="color: #3B60BC;">Partagez et Consultez les Avis</h1>
+    <div style="background-color: #3B60BC;" >
+    <div class="container" style="background-color: #3B60BC;">
+        <div class="form-section">
+            <form action="../../routes/feedback.php?id=addFeedback" method="POST">
+                <div class="ss">
+                <label for="firstname">Votre prénom </label>
+                <input type="text" id="firstname" name="firstname" required>
+
+                <label for="rate">Note </label>
+                <div class="star-rating">
+                    <?php for ($i = 5; $i >= 1; $i--): ?>
+                        <input type="radio" id="star-<?= $i ?>" name="rate" value="<?= $i ?>" required>
+                        <label for="star-<?= $i ?>">★</label>
+                    <?php endfor; ?>
+                </div>
+                </div>
+
+                <label for="wording">Votre avis :</label>
+                <textarea id="wording" name="wording" rows="3" required></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
 
-        <label for="wording">Votre avis :</label>
-        <textarea id="wording" name="wording" rows="4" required></textarea>
-
-        <button type="submit">Envoyer</button>
-    </form>
-
-    <h2>Derniers avis</h2>
-    <?php if (!empty($recentFeedbacks)): ?>
-        <?php foreach (array_reverse($recentFeedbacks) as $feedback): ?>
-            <div class="feedback-item">
-                <strong>Prénom :</strong> <?= htmlspecialchars($feedback['firstname']) ?>
-                <p><strong>Note :</strong> <?= htmlspecialchars($feedback['rate']) ?> / 5</p>
-                <p><strong>Avis :</strong> <?= htmlspecialchars($feedback['wording']) ?></p>
+        <div class="feedback-section">
+            <div class="carousel">
+                <div class="feedback-items">
+                    <?php if (!empty($feedbacks)): ?>
+                        <?php foreach ($feedbacks as $feedback): ?>
+                            <div class="feedback-item">
+                                <strong>Prénom :</strong> <?= htmlspecialchars($feedback['firstname']) ?><br>
+                                <div class="feedback-stars">
+                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                        <span class="star <?= $i <= $feedback['rate'] ? 'filled' : '' ?>">★</span>
+                                    <?php endfor; ?>
+                                </div>
+                                <p><strong>Avis :</strong> <?= htmlspecialchars($feedback['wording']) ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="feedback-item">
+                            <p>Aucun avis pour le moment.</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>Aucun avis pour le moment.</p>
-    <?php endif; ?>
-    <a href="all_feedbacks.php" class="see-more">Voir tous les avis</a>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const items = document.querySelector('.feedback-items');
+        const feedbackCount = <?= count($feedbacks) ?>;
+        let currentIndex = 0;
+
+        function slideNext() {
+            currentIndex = (currentIndex + 1) % feedbackCount; 
+            items.style.transform = `translateY(-${currentIndex * 200}px)`;
+        }
+
+        if (feedbackCount > 1) {
+            setInterval(slideNext, 3000); 
+        }
+    </script>
+</body>
 </html>
