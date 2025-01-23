@@ -30,12 +30,10 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
         </div>
         <div class="container-navigation">
             <ul>
-                <li><a href="../home.php">Accueil</a></li>
-                <li><a href="../jeu.php">Le jeu</a></li>    
-                <li><a href="../avis.php">Avis</a></li>
-                <li><a href="../faq.php">FAQ</a></li>
-                <li><a href="../contact.php">Contact</a></li>
-                <li><a href="../products/index.php">Acheter</a></li>
+                <li><a href="../pages/home.php">Accueil</a></li>
+                <li><a href="../pages/jeu/index.php">Le jeu</a></li>    
+                <li><a href="../pages/avis.php">Avis</a></li>
+                <li><a href="../pages/products/index.php">Acheter</a></li>
                
                     <?php if (isset( $_SESSION['user'])) :
                             $user = unserialize($_SESSION['user']);

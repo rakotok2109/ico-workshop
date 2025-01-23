@@ -46,12 +46,12 @@ if (!empty($orders)) {
         <h2>Dashboard Administrateur</h2>
         <nav>
             <ul>
-                <li><a href="#users" onclick="showSection('users')">Utilisateurs</a></li>
-                <li><a href="#products" onclick="showSection('products')">Produits</a></li>
-                <li><a href="#orders" onclick="showSection('orders')">Commandes</a></li>
-                <li><a href="#feedbacks" onclick="showSection('feedbacks')">Avis</a></li>
-                <li><a href="#news" onclick="showSection('news')">Actualités</a></li>
-                <li><a href="#cards" onclick="showSection('cards')">Cartes du jeu</a></li>
+                <li><a href="#users" onclick="showSectionDashboard('users')">Utilisateurs</a></li>
+                <li><a href="#products" onclick="showSectionDashboard('products')">Produits</a></li>
+                <li><a href="#orders" onclick="showSectionDashboard('orders')">Commandes</a></li>
+                <li><a href="#feedbacks" onclick="showSectionDashboard('feedbacks')">Avis</a></li>
+                <li><a href="#news" onclick="showSectionDashboard('news')">Actualités</a></li>
+                <li><a href="#cards" onclick="showSectionDashboard('cards')">Cartes du jeu</a></li>
                 <li><a href="../profil.php">Mon profil</a></li>
                 <li><a href="../../routes/user.php?id=logout">Se déconnecter</a></li>
             </ul>

@@ -49,7 +49,7 @@ une seule règle compte :
 ramenez l'or... ou coulez avec votre
 
 honneur !</p>
-            <a href="../pages/jeu/" class="mt-6 px-6 py-3 bg-[#EF4B4B] text-white rounded-lg font-bold hover:bg-red-700 transition">Découvrir les règles</a>
+            <a href="../pages/jeu/index.php" class="mt-6 px-6 py-3 bg-[#EF4B4B] text-white rounded-lg font-bold hover:bg-red-700 transition">Découvrir les règles</a>
         </div>
     </div>
 </div>

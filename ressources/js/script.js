@@ -1,6 +1,17 @@
-function showSection(sectionId) {
+function showSectionDashboard(sectionId) {
     // Cacher toutes les sections
     document.querySelectorAll('.dashboard-section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Afficher la section demandée
+    document.getElementById(sectionId).style.display = 'block';
+}
+
+
+function showSectionRules(sectionId) {
+    // Cacher toutes les sections
+    document.querySelectorAll('.rules-section').forEach(section => {
         section.style.display = 'none';
     });
 
