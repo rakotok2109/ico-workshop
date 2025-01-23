@@ -12,7 +12,6 @@ if (!isset($_SESSION['user'])) {
 // $user = UserController::getAllInfoUser($user->getId());
 // var_dump($user);
 ?>
-<br>
 <?php
 // var_dump($_SESSION['user']);
 ?>
@@ -27,7 +26,7 @@ if (!isset($_SESSION['user'])) {
 
 <body class="bg-[#ecba75] text-gray-800 font-sans">
 <header>
-    <?php include(__DIR__ . '/components/navbar.php') ?>
+    <?php require_once (__DIR__ . '/components/navbar.php'); ?>
 </header>
     <div class="container mx-auto p-8 flex">
         

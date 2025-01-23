@@ -50,20 +50,13 @@ if($orderId == null ){
 }
 else
 {
-
     foreach($cart as $item){
         $details = new DetailsOrder(null, $orderId, $item['id'], $item['quantite'], $item['prix'] * $item['quantite']);
-        DetailsOrderController::addOrderDetails($details);
+        DetailOrderController::addOrderDetails($details);
         echo json_encode(['success' => true]);
-
     }
-
 }
-     
-       
-
-     
-        exit;
+    exit;
     } else {
         echo json_encode(['error' => 'Le paiement a échoué.']);
     }

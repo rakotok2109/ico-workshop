@@ -89,8 +89,6 @@
         </section>
     </div>
 
-    <footer>
-        <?php require_once (__DIR__. '/components/footer.php');?>
-    </footer>
+    <?php include(__DIR__ . '/components/footer.php') ?>
 </body>
 </html>
