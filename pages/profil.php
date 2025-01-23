@@ -1,46 +1,20 @@
 <?php
 require_once(__DIR__ . '/../config/init.php');
 
-// Vérifie si l'utilisateur est connecté
+
 if (!isset($_SESSION['user'])) {
     header('Location: authentification/login.php');
     exit;
+}else{
+    $user = unserialize($_SESSION['user']); 
+    var_dump($user); // Pour vérifier que les données sont à jour
 }
-
-// Récupération des informations de l'utilisateur connecté
-$user = unserialize($_SESSION['user']);
-$userId = $user->getId();
-
-// Récupérer les commandes de l'utilisateur
-$orders = OrderController::getOrdersForUser($userId);
-
-// Vérifie si le formulaire de modification a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupère les nouvelles informations du formulaire
-    $name = $_POST['name'];
-    $firstname = $_POST['firstname'];
-    $email = $_POST['mail'];
-    $phone = $_POST['phone'];
-    $location = $_POST['location'];
-
-    // Valide les informations
-
-    // Mise à jour du profil
-    $user->setName($name);
-    $user->setFirstname($firstname);
-    $user->setMail($email);
-    $user->setPhone($phone);
-    $user->setLocation($location);
-
-    // Appel à la méthode de mise à jour
-    UserController::updateUser($user);
-
-    // Mise à jour de l'utilisateur dans la session
-    $_SESSION['user'] = serialize($user);
-
-    // Message de confirmation
-    $message = "Profil mis à jour avec succès.";
-}
+// $user = UserController::getAllInfoUser($user->getId());
+// var_dump($user);
+?>
+<br>
+<?php
+// var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,19 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include(__DIR__ . '/components/navbar.php') ?>
 
     <div class="container mx-auto p-8 flex">
-        <!-- Informations utilisateur à gauche -->
+        
         <div class="w-1/3 bg-white shadow-lg rounded-lg p-6 mr-8">
             <h2 class="text-2xl font-bold text-[#3B60BC] mb-4">Mon Profil</h2>
 
-            <!-- Affiche un message de confirmation si la mise à jour est réussie -->
+            
             <?php if (isset($message)): ?>
                 <div class="bg-green-500 text-white p-4 rounded mb-4">
                     <?= htmlspecialchars($message); ?>
                 </div>
             <?php endif; ?>
 
-            <!-- Formulaire de modification du profil -->
-            <form method="POST">
+            
+            <form action="../routes/profil.php?id=update" method="POST">
+                <input type="hidden" name="id" value="<?= $user->getId() ?>">
+                <input type="hidden" name="password" value="<?= $user->getPassword() ?>">
+                <input type="hidden" name="role" value="<?= $user->getRole() ?>">
                 <div class="mb-4">
                     <label for="name" class="block font-medium">Nom:</label>
                     <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded-md" value="<?= htmlspecialchars($user->getName()); ?>" required>
@@ -99,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
         
-        <!-- Liste des commandes à droite -->
+      
         <div class="w-2/3 bg-white shadow-lg rounded-lg p-6">
             <h1 class="text-3xl font-bold text-[#3B60BC] mb-6">Mes Commandes</h1>
             

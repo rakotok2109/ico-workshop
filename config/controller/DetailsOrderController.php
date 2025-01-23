@@ -27,7 +27,7 @@ class DetailsOrderController
 
         return $result;
     }
-    
+
     public static function getAdminAllOrder(){
 
         $pdo = PDOUtils::getSharedInstance();
@@ -56,8 +56,6 @@ class DetailsOrderController
 
         return $result;
     }
-
-    
 }
 
 

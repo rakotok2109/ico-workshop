@@ -4,6 +4,8 @@ require_once (dirname(__DIR__).'/init.php');
 
 
 class UserController {
+
+    
     public static function register (User $user)
     {
         $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
@@ -38,10 +40,11 @@ class UserController {
        
     }
 
-    public static function updateUser (User $user)
-    {
-        $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE users SET name = ?, firstname = ?, mail = ?, phone = ?, location = ?, WHERE id = ?',
+    public static function updateUser(User $user)
+{
+    $pdo = PDOUtils::getSharedInstance();
+    $pdo->execSQL(
+        'UPDATE users SET name = ?, firstname = ?, mail = ?, phone = ?, location = ? WHERE id = ?',
         [
             $user->getName(),
             $user->getFirstname(),
@@ -49,10 +52,12 @@ class UserController {
             $user->getPhone(),
             $user->getLocation(),
             $user->getId()
-        ]);
-    }
+        ]
+    );
 
-
+  
+    self::getAllInfoUser($user->getId());
+}
     
     public static function mailExists($mail)
     {
@@ -177,4 +182,42 @@ class UserController {
 
         }
     }
+
+    public static function getAllInfoUser($userId)
+    {
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+    
+            // Requête SQL avec la méthode générique requestSQL
+            $result = $pdo->requestSQL("SELECT * FROM users WHERE id = ?", [$userId]);
+    
+            if ($result && count($result) > 0) {
+                $row = $result[0]; // Récupère la première ligne
+    
+                // Création d'un nouvel objet User
+                $user = new User(
+                    $row['name'],
+                    $row['firstname'],
+                    $row['password'],
+                    $row['mail'],
+                    $row['phone'],
+                    $row['location'],
+                    $row['role'],
+                    $row['id']
+                );
+    
+                // Met à jour la session avec l'objet utilisateur
+                $_SESSION['user'] = serialize($user);
+    
+                return $user; // Retourne l'objet utilisateur
+            } else {
+                throw new Exception("Utilisateur non trouvé.");
+            }
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+            return null;
+        }
+    }
+    
+
 }
