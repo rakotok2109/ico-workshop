@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__DIR__).'/init.php');
+require_once (dirname(__DIR__).'/config/init.php');
 
 if($_GET['id'] == 'addProduct') {
     $product = new Product(
@@ -10,6 +10,8 @@ if($_GET['id'] == 'addProduct') {
     );
 
     ProductController::addProduct($product);
+    header("Location: ../pages/dashboard.php");
+    exit();
 }
 
 else if($_GET['id'] == 'deleteProduct') {
@@ -27,8 +29,6 @@ else if($_GET['id'] == 'updateProduct') {
     );
 
     ProductController::updateProduct($product);
-}
-
-else{
-    header('Location: /pages/home.php');
+    header("Location: ../pages/dashboard.php");
+    exit();
 }

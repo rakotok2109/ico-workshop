@@ -21,4 +21,7 @@ require_once __DIR__ . '/controller/OrderController.php';
 require_once __DIR__ . '/controller/DetailsOrderController.php';
 require_once __DIR__ . '/model/Order.php';
 require_once __DIR__ . '/model/DetailsOrder.php';
+require_once __DIR__ . '/model/Carte.php';
+require_once __DIR__ . '/controller/CardController.php';
+
 ?>

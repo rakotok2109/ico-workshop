@@ -1,6 +1,6 @@
 <?php
 
-class Carte{
+class Card{
     private $_id;
     private $_type;
     private $_nom;
@@ -9,14 +9,14 @@ class Carte{
     private $_role_de_carte;
     private $_path;
 
-    public function __construct($_id = NULL, $_type, $_nom, $_couleur, $_dos = 0, $_role_de_carte, $_path){
-        $this->_id = $_id;
+    public function __construct($_type, $_nom, $_couleur, $_dos = 0, $_role_de_carte, $_path,$_id = NULL){
         $this->_type = $_type;
         $this->_nom = $_nom;
         $this->_couleur = $_couleur; 
         $this->_dos = $_dos;
         $this->_role_de_carte = $_role_de_carte;
         $this->_path = $_path; 
+        $this->_id = $_id;
     }
 
     // Getters

@@ -14,7 +14,7 @@ $user = unserialize($_SESSION['user']);
             <?php 
                 if(isset($_SESSION['user']) && $user->getRole() > 0){
                 ?>
-            <li><a href="../pages/admin/dashboard.php">Dashboard</a></li>
+            <li><a href="../pages/dashboard.php">Dashboard</a></li>
             <?php }?>
             <li><a href="../pages/avis.php">Avis</a></li>
             <li><a href="../pages/faq.php">FAQ</a></li>

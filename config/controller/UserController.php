@@ -120,13 +120,13 @@ class UserController {
 
             if ($id_user === null || $role === null) {
                 $_SESSION['error'] = "Données invalides.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/dashboard.php");
                 exit();
             }
 
             if (!in_array($role, [0, 1, 2])) {
                 $_SESSION['error'] = "Rôle invalide.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/dashboard.php");
                 exit();
             }
 
@@ -134,10 +134,8 @@ class UserController {
                 $pdo = PDOUtils::getSharedInstance();
                 $sql = "UPDATE users SET role = ? WHERE id = ?";
                 $pdo->execSQL($sql, [$role, $id_user]);
-                header("Location: ../pages/admin/dashboard.php");
                 $_SESSION['success'] = "Le rôle de l'utilisateur a été mis à jour avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
-                exit();
+                
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur SQL : " . $e->getMessage();
                 exit();
@@ -149,7 +147,7 @@ class UserController {
     {
         if ($id_user === null) {
             $_SESSION['error'] = "ID utilisateur invalide.";
-            header("Location: ../pages/admin/dashboard.php");
+            header("Location: ../pages/dashboard.php");
             exit();
         }
 
@@ -159,11 +157,11 @@ class UserController {
             $pdo->execSQL($sql, [$id_user]);
 
             $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
-            header("Location: ../pages/admin/dashboard.php");
+            header("Location: ../pages/dashboard.php");
             exit();
         } catch (PDOException $e) {
             $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-            header("Location: ../pages/admin/dashboard.php");
+            header("Location: ../pages/dashboard.php");
             exit();
         }
     }
