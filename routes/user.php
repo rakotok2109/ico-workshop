@@ -1,6 +1,15 @@
 <?php
 require_once (__DIR__ . '/../config/init.php');
 
+if (isset($_SESSION['successMessage'])) {
+    unset($_SESSION['successMessage']);
+}
+
+if (isset($_SESSION['errorMessage'])) {
+    unset($_SESSION['errorMessage']);
+}
+
+
 if ($_GET['id'] == 'register') {
     if (isset($_SESSION['inscriptionErreur'])) {
         unset($_SESSION['inscriptionErreur']);
@@ -105,7 +114,7 @@ if ($_GET['id'] == 'register') {
     if ($id_user) {
         UserController::deleteUser($id_user);
         $_SESSION['successMessage'] = "L'utilisateur a été supprimé avec succès.";
-        header('Location: /pages/users.php');
+        header('Location: /pages/admin/dashboard.php');
         exit();
     }
 } else {
