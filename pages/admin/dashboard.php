@@ -12,13 +12,13 @@
 <?php
 require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
-    header('Location: /pages/auth/login.php');
+    header('Location: ../authentification/login.php');
     exit();
 }
 
 $user = unserialize($_SESSION['user']);
 if (!$user || !method_exists($user, 'getRole')) {
-    header('Location: /pages/auth/login.php');
+    header('Location: ../authentification/login.php');
     exit();
 }
 
@@ -28,7 +28,6 @@ $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
 ?>
-
 <div class="dashboard-container">
     <aside class="sidebar">
         <div class="logo">
@@ -130,7 +129,7 @@ $newsList = NewsController::getAllNews();
                 </tbody>
             </table>
 
-            <form method="POST" action="../../routes/product.php?id=addProduct" class="form-add">
+            <form method="POST" action="../../routes/product.php?id=addProduct" class="form-add" enctype="multipart/form-data">
                 <label for="name" class="form-label">Nom du produit</label>
                 <input type="text" name="name" placeholder="Nom du produit" class="form-input" required>
 
@@ -141,7 +140,7 @@ $newsList = NewsController::getAllNews();
                 <textarea name="description" placeholder="Description du produit" class="form-textarea" required></textarea>
 
                 <label for="image" class="form-label">Lien de l'image</label>
-                <input type="text" name="image" placeholder="Lien de l'image" class="form-input" required>
+                <input required type="file" name="image"><br><br>
 
                 <button type="submit" class="form-button">Ajouter le produit</button>
             </form>
