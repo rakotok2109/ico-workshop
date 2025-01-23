@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Règles du Jeu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../../ressources/js/script.js"></script>
+    <script src="../ressources/js/script.js"></script>
     <style>
         body {
             background-color: #ecba75;
@@ -45,11 +45,11 @@
 </head>
 
 <body class="bg-[#ecba75] text-gray-900 font-sans">
-<?php include(__DIR__ . '/../components/navbar.php') ?>
+<?php include(__DIR__ . '/components/navbar.php') ?>
 
 
 <!-- Tabs -->
-<div class="flex justify-center mb-6">
+<div class="flex justify-center mt-12">
     <a href="#rules" onclick="showSectionRules('rules')"><button id="tab-rules"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Règles du jeu</button></a>
     <a href="#cards" onclick="showSectionRules('cards')"><button id="tab-cards"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Cartes</button></a>
 </div>
@@ -271,7 +271,7 @@
 </section>
 
 
-<section id="cards" class="rules-section">
+<section id="cards" class="rules-section" style="display: none;">
     <!-- Cartes -->
     <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
         <h1 class="text-4xl font-bold text-center text-[#af2127] mb-6">Cartes du Jeu</h1>
@@ -283,11 +283,11 @@
                     <div class="card w-32 h-32">
                         <!-- Face avant -->
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src=" <?php $_SERVER['DOCUMENT_ROOT']  ?> /ressources/images/Cartes/CartesRoles/Carte-Pirate.png" alt="Carte Pirate" class="object-cover rounded-md">
+                            <img src=" ../ressources/images/Cartes/CartesRoles/Carte-Pirate.png" alt="Carte Pirate" class="object-cover rounded-md">
                         </div>
                         <!-- Face arrière -->
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Pirate - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Pirate - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -301,10 +301,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-marin.png" alt="Carte Marin" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-marin.png" alt="Carte Marin" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Marin - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Marin - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -319,10 +319,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-sirene.png" alt="Carte Sirène" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-sirene.png" alt="Carte Sirène" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Sirène - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Sirène - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -350,11 +350,11 @@
                     <div class="card w-32 h-32">
                         <!-- Face avant -->
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="../../ressources/images/Cartes/CartesAction/Carte-île.png" alt="Carte île" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesAction/Carte-île.png" alt="Carte île" class="object-cover rounded-md">
                         </div>
                         <!-- Face arrière -->
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesAction/Carte-dos-action.png" alt="Carte île - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesAction/Carte-dos-action.png" alt="Carte île - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -371,10 +371,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesAction/Carte-poison.png" alt="Carte Poison" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesAction/Carte-poison.png" alt="Carte Poison" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesAction/Carte-dos-action.png" alt="Carte Poison - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesAction/Carte-dos-action.png" alt="Carte Poison - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -396,10 +396,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-sirene.png" alt="Carte Sirène" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-sirene.png" alt="Carte Sirène" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Sirène - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Sirène - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -443,10 +443,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Antidote.png" alt="Carte Antidote" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Antidote.png" alt="Carte Antidote" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Antidote - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Antidote - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -467,10 +467,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="../../ressources/images/Cartes/CartesBonus/Carte-observateur.png" alt="Carte Observateur" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-observateur.png" alt="Carte Observateur" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Observateur - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Observateur - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -487,10 +487,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Perroquet.png" alt="Carte Perroquet" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Perroquet.png" alt="Carte Perroquet" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Perroquet - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Perroquet - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -524,10 +524,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Voyage_express.png" alt="Carte Voyage Express" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Voyage_express.png" alt="Carte Voyage Express" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Voyage Express - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Voyage Express - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -548,10 +548,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Mal_de_mer.png" alt="Carte Voyage Express" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Mal_de_mer.png" alt="Carte Voyage Express" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Mal de mer - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Mal de mer - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -570,10 +570,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-troc.png" alt="Carte Troc" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-troc.png" alt="Carte Troc" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte roc - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte roc - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -591,10 +591,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-mer_agitée.png" alt="Carte Mer agitée" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-mer_agitée.png" alt="Carte Mer agitée" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Mer Agitée - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Mer Agitée - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -610,10 +610,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Medusa.png" alt="Carte Medusa" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Medusa.png" alt="Carte Medusa" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Medusa - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Medusa - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -628,10 +628,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Malandrin.png" alt="Carte Malandrin" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Malandrin.png" alt="Carte Malandrin" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Malandrin - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Malandrin - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>
@@ -648,10 +648,10 @@
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                         <div class="absolute w-full h-full backface-hidden">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-Charlatan.png" alt="Carte Charlantan" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-Charlatan.png" alt="Carte Charlantan" class="object-cover rounded-md">
                         </div>
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
-                            <img src="/ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Charlatan - arrière" class="object-cover rounded-md">
+                            <img src="../ressources/images/Cartes/CartesBonus/Carte-dos-bonus.png" alt="Carte Charlatan - arrière" class="object-cover rounded-md">
                         </div>
                     </div>
                 </div>

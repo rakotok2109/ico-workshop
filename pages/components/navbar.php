@@ -26,12 +26,11 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
 </head>
 <div class="container-navbar" style="background-color: #3B60BC;">
         <div class="container-logo">
-            <a href="#"><img src="../ressources/images/logo.png" alt="logo-ico"></a>
+            <a href="../pages/home.php"><img src="../ressources/images/logo.png" alt="logo-ico"></a>
         </div>
         <div class="container-navigation">
             <ul>
-                <li><a href="../pages/home.php">Accueil</a></li>
-                <li><a href="../pages/jeu/index.php">Le jeu</a></li>    
+                <li><a href="../pages/rules.php">Le jeu</a></li>    
                 <li><a href="../pages/avis.php">Avis</a></li>
                 <li><a href="../pages/products/index.php">Acheter</a></li>
                
