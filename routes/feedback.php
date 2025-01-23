@@ -9,6 +9,8 @@ if($_GET['id'] == 'addFeedback') {
     );
 
     FeedbackController::addFeedback($feedback);
+    header('Location: ../../pages/components/feed-back.php');
+    exit();
 }
 
 else if($_GET['id'] == 'deleteFeedback') {

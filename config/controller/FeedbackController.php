@@ -16,7 +16,7 @@ class FeedbackController {
         $pdo = PDOUtils::getSharedInstance();
         $feedback = $pdo->requestSQL('SELECT * FROM feedbacks WHERE id = ?', [intval($id)]);
         if ($feedback) {
-            return new Feedback($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
+            return new Product($feedback[0]['id'], $feedback[0]['firstname'], $feedback[0]['wording'], $feedback[0]['rate']);
         } else {
             return null;
         }
@@ -25,7 +25,9 @@ class FeedbackController {
     public static function addFeedback(Feedback $feedback)
     {   
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$feedback->getFirstname(), $feedback->getWording(), $feedback->getRate()]);
+        $pdo->execSQL('INSERT INTO feedbacks (firstname, wording, rate) VALUES (?, ?, ?)', [$feedback->getFirstname(),
+        $feedback->getWording(), $feedback->getRate()]);
+        
     }
 
     public static function updateFeedback(Feedback $feedback)
@@ -39,7 +41,7 @@ class FeedbackController {
             $feedback->getId()
         ]);
 
-        header("Location: ../pages/admin/dashboard.php");
+        header("Location: ../pages/DashboardAdminView.php");
         exit();
 
     }
@@ -51,23 +53,26 @@ class FeedbackController {
 
             if ($id_feedback === null) {
                 $_SESSION['error'] = "ID feedback invalide.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/DashboardAdminView.php");
                 exit();
-            }
-            
-            try {
-                $pdo = PDOUtils::getSharedInstance();
-                $sql = "DELETE FROM feedbacks WHERE id = ?";
-                $pdo->execSQL($sql, [$id_feedback]);
+            } else{
+                try {
+                    $pdo = PDOUtils::getSharedInstance();
+                    $sql = "DELETE FROM feedbacks WHERE id = ?";
+                    $pdo->execSQL($sql, [$id_feedback]);
+    
+                    $_SESSION['success'] = "L'avis a été supprimé avec succès.";
+                    header("Location: ../pages/DashboardAdminView.php");
+                    exit();
+                } catch (PDOException $e) {
+                    $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+                    header("Location: ../pages/DashboardAdminView.php");
+                    exit();
+                }
 
-                $_SESSION['success'] = "L'avis a été supprimé avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
-                exit();
-            } catch (PDOException $e) {
-                $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../pages/admin/dashboard.php");
-                exit();
             }
+
+           
         }
     }
 }

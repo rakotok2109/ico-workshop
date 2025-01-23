@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 23 jan. 2025 à 10:03
+-- Généré le : jeu. 23 jan. 2025 à 12:10
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `carte` (
   `type` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `couleur` varchar(255) NOT NULL,
-  `dos` tinyint(1) NOT NULL,
+  `dos` varchar(255) NOT NULL,
   `role_de_carte` text NOT NULL,
   `path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -42,11 +42,12 @@ CREATE TABLE `carte` (
 --
 
 INSERT INTO `carte` (`id`, `type`, `nom`, `couleur`, `dos`, `role_de_carte`, `path`) VALUES
-(1, 'Attaque', 'Éclair Foudroyant', 'Bleu', 0, 'Inflige des dégâts', '/images/cartes/eclair.png'),
-(2, 'Défense', 'Bouclier Magique', 'Rouge', 0, 'Protège contre les attaques', '/images/cartes/bouclier.png'),
-(3, 'Support', 'Potion de Soins', 'Vert', 0, 'Restaure des points de vie', '/images/cartes/potion.png'),
-(4, 'Attaque', 'Lame Spectrale', 'Noir', 0, 'Inflige des dégâts critiques', '/images/cartes/lame.png'),
-(5, 'Défense', 'Mur de Feu', 'Orange', 0, 'Empêche l’ennemi d’avancer', '/images/cartes/mur.png');
+(1, 'Attaque', 'Éclair Foudroyant', 'Bleu', 'dos de carte', 'Inflige des dégâts', '/images/cartes/eclair.png'),
+(2, 'Défense', 'Bouclier Magique', 'Rouge', '0', 'Protège contre les attaques', '/images/cartes/bouclier.png'),
+(3, 'Support', 'Potion de Soins', 'Vert', '0', 'Restaure des points de vie', '/images/cartes/potion.png'),
+(4, 'Attaque', 'Lame Spectrale', 'Noir', '0', 'Inflige des dégâts critiques', '/images/cartes/lame.png'),
+(5, 'Défense', 'Mur de Feu', 'Orange', '0', 'Empêche l’ennemi d’avancer', '/images/cartes/mur.png'),
+(10, 'DZDZDZD', 'Alvyn', 'vert', 'dos de carte', 'dzzdada', 'édazda');
 
 -- --------------------------------------------------------
 
@@ -245,7 +246,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `carte`
 --
 ALTER TABLE `carte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `detail_orders`
