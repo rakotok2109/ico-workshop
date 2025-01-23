@@ -64,7 +64,7 @@ $news = array_slice($news, 0, 3);
         <p class="mt-4 text-lg leading-relaxed text-center md:text-left">
             Disponible dès aujourd’hui sur les principales plateformes d'achat en ligne.
         </p>
-        <div class="mt-6 flex flex-col md:flex-row justify-center md:justify-start gap-4">
+        <div class="mt-6 flex flex-col md:flex-row justify-center md:justify-center gap-4">
             <a href="https://www.amazon.fr/dp/B0CF9VJYK4" target="_blank" 
                class="px-6 py-3 bg-yellow-500 text-gray-900 rounded-lg font-bold shadow-md hover:bg-yellow-600 transition-all">
                 Acheter sur Amazon
