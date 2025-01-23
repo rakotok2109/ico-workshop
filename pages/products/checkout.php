@@ -158,17 +158,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                 address: address
             })
         })
-            .then(response => {
-                return response.json();  // Ajoute return ici pour résoudre la promesse correctement
-            })
+            .then(response => response.text())
             .then(data => {
                 console.log('Réponse brute:', data);
-                if (data.success) {
-                    alert('Paiement réussi !');
-                    localStorage.removeItem('cart');
-                    window.location.href = 'order_success.php';
-                } else {
-                    document.getElementById('payment-message').textContent = data.error;
+                try {
+                    const jsonData = JSON.parse(data);
+                    if (jsonData.success) {
+                        alert('Paiement réussi !');
+                        localStorage.removeItem('cart');
+                        window.location.href = 'order_success.php';
+                    } else {
+                        document.getElementById('payment-message').textContent = jsonData.error;
+                    }
+                } catch (e) {
+                    console.log('Erreur de parsing JSON:', e);
+                    document.getElementById('payment-message').textContent = 'Erreur inattendue. Veuillez réessayer.';
                 }
             })
             .catch(error => {

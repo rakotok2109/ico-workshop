@@ -39,7 +39,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                     ?>
                     <div class="sous-container-login">
                         <ul>
-                            <li><a  href="../pages/authentification/profile.php">
+                            <li><a  href="../pages/profile.php">
                            
                                 <span><?php echo $user->getName();?>  <?php echo $user->getFirstname();?></span>
                             

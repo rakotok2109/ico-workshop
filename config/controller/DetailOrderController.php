@@ -6,7 +6,8 @@ class DetailOrderController
 {
     public static function addOrderDetails(DetailsOrder $details){
         $pdo= PDOUtils::getSharedInstance();
-        $pdo->execSQL('INSERT INTO detail_orders (id, quantity, amount, id_product, id_order) VALUES (?, ?, ?, ?, ?)', [$details->getId(), $details->getQuantity(), $details->getAmount(), $details->getidProduct(), $details->getidOrder()]);
+     $result=   $pdo->execSQL('INSERT INTO detail_orders (id, quantity, amount, id_product, id_order) VALUES (?, ?, ?, ?, ?)', [$details->getId(), $details->getQuantity(), $details->getAmount(), $details->getidProduct(), $details->getidOrder()]);
+     return $result;
     }
 
     public static function getDetailsByOrderId($orderId){
@@ -15,7 +16,7 @@ class DetailOrderController
         $details = [];
         foreach ($result as $detail)
         {
-            $details[] = new DetailsOrder($detail['id'], $detail['quantity'], $detail['amount'], $detail['id_order'], $detail['id_product']);
+            $details[] = new DetailsOrder( $detail['quantity'], $detail['amount'], $detail['id_order'], $detail['id_product'],$detail['id']);
         }
         return $details;
     }
