@@ -17,18 +17,41 @@
     @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
     </style>
     <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
 
 </head>
 <body>
-<div class="container-main-header">
+<!-- <div class="container-main-header"> -->
+
+    <!-- <div class="container-logo-regle"> -->
+        <!-- <div class="logo-ico"> -->
+            <!-- <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO"> -->
+        <!-- </div> -->
+        <!-- <div class="navigation-regle-du-jeu"> -->
+            <!-- <a href="regleDuRegle.php">Règle du Jeu</a> -->
+        <!-- </div> -->
+    <!-- </div> -->
+<!-- </div> -->
+
+
+<div class="">
 <?php include (__DIR__ . '/navbar.php'); ?>
-    <div class="container-logo-regle">
-        <div class="logo-ico">
-            <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO">
-        </div>
-        <div class="navigation-regle-du-jeu">
-            <a href="regleDuRegle.php">Règle du Jeu</a>
+      <!-- Section Héros -->
+      <div class="relative w-full h-[500px] bg-cover bg-center" style="background-image: url('../ressources/image/ICO-template-logo.png');">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white">
+            <h1 class="text-6xl font-[Chaloops]">Le Code Pirate : L'or ou rien !</h1>
+            <p class="mt-4 text-xl">Prêt à démasquer les traîtres et remporter le trésor ?</p>
+            <p class="mt-4 text-xl">Que vous soyez un capitaine intrépide ou
+un pirate perfide,
+
+une seule règle compte :
+
+ramenez l'or... ou coulez avec votre
+
+honneur !</p>
+            <a href="../pages/jeu/" class="mt-6 px-6 py-3 bg-[#EF4B4B] text-white rounded-lg font-bold hover:bg-red-700 transition">Découvrir les règles</a>
         </div>
     </div>
 </div>
