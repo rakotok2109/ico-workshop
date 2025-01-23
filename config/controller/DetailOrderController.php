@@ -28,31 +28,31 @@ class DetailOrderController
         return $result;
     }
     
-    public static function getAdminAllOrders(){
+    public static function getAdminAllOrder(){
 
         $pdo = PDOUtils::getSharedInstance();
         $result = $pdo->requestSQL('SELECT 
-            users.id AS id_user, 
-            users.name AS name,
-            users.firstname AS firstname,
-            users.mail AS email,
-            orders.id AS id_order,
-            orders.date AS date_order,  
-            products.id AS id_product,
-            products.name AS product_name,
-            products.price AS price,
-            detail_orders.quantity AS quantity,
-            (products.price * detail_orders.quantity) AS total_amount  
+                u.id AS user_id, 
+                u.name AS user_name,
+                u.firstname AS user_firstname,
+                u.mail AS user_email,
+                o.id AS order_id,
+                o.date AS order_date,
+                p.id AS product_id,
+                p.name AS product_name,
+                p.price AS product_price,
+                d.quantity AS product_quantity,
+                d.amount AS total_amount
             FROM 
-                users
-            INNER JOIN 
-                orders ON users.id = orders.id_user
-            INNER JOIN 
-                detail_orders ON orders.id = detail_orders.id_order
-            INNER JOIN 
-                products ON detail_orders.id_product = products.id
+                users u
+            JOIN 
+                orders o ON u.id = o.id_user
+            JOIN 
+                detail_orders d ON o.id = d.id_order
+            JOIN 
+                products p ON d.id_product = p.id
             ORDER BY 
-                orders.date DESC');
+                o.date DESC');
 
         return $result;
     }

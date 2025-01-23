@@ -46,7 +46,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                             <i class="fas fa-user white"></i>
 
                                 </a></li>
-                            <li><a style="color: #FCD3A1;" href="../../routes/user.php?id=logout">Déconnexion</a></li>
+                            <li><a style="color: #FCD3A1;" href="../routes/user.php?id=logout">Déconnexion</a></li>
                         <?php else : ?>
                             <li><a style="color: #FCD3A1;" href="../routes/user.php?id=login">Se connecter</a></li>
                         </ul>

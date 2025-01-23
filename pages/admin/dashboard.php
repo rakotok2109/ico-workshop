@@ -28,7 +28,7 @@ $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
 $cards = CardController::getAllCards();
-$orders = DetailOrderController::getAdminAllOrders();
+$orders = DetailOrderController::getAdminAllOrder();
 
 if (!empty($orders)) {
     foreach ($orders as $order) {
