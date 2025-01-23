@@ -94,7 +94,6 @@ else if($_GET['id'] == 'update') {
     UserController::validateName($user->getName());
     UserController::validatePhone($user->getPhone());
     UserController::validatePassword($user->getPassword());
-
     UserController::updateUser($user);
    
    
@@ -102,7 +101,9 @@ else if($_GET['id'] == 'update') {
 }
 
 else if($_GET['id'] == 'updateRole') {
-    // UserController::updateRole();
+    UserController::updateRole();
+    header("Location: ../pages/dashboard.php");
+    exit();
 }
 
 else if($_GET['id'] == 'deleteUser') {

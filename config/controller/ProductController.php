@@ -38,9 +38,6 @@ class ProductController {
             $product->getId()
         ]);
 
-        header("Location: ../pages/admin/dashboard.php");
-        exit();
-
     }
 
     public static function addProduct(Product $product)
@@ -48,8 +45,6 @@ class ProductController {
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)', [$product->getName(), $product->getPrice(), $product->getDescription(), $product->getImage()]);
 
-        header("Location: ../pages/admin/dashboard.php");
-        exit();
     }
 
     public static function deleteProduct()
@@ -59,7 +54,7 @@ class ProductController {
 
             if ($id_product === null) {
                 $_SESSION['error'] = "ID produit invalide.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/dashboard.php");
                 exit();
             }
 
@@ -69,11 +64,11 @@ class ProductController {
                 $pdo->execSQL($sql, [$id_product]);
 
                 $_SESSION['success'] = "Le produit a été supprimé avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/dashboard.php");
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/admin/dashboard.php");
+                header("Location: ../../pages/dashboard.php");
                 exit();
             }
         }

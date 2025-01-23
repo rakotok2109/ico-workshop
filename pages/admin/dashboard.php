@@ -156,3 +156,112 @@ $newsList = NewsController::getAllNews();
     <input type="date" name="date" placeholder="Date" required>
     <button type="submit">Ajouter l'actualité'</button>
 </form>
+
+<style>
+        
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .tab.active {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+       
+
+    </style>
+
+    <div class="tab-container">
+        <div id="add-tab" class="tab active" onclick="switchTab('add')">Ajouter une carte</div>
+        <div id="edit-tab" class="tab" onclick="switchTab('edit')">Modifier une carte</div>
+    </div>
+
+    
+    <div id="add-content" class="tab-content active">
+        <h2>Ajouter une nouvelle carte</h2>
+        <form method="POST" action="../routes/card.php?id=addCard">
+            <label for="type">Type :</label>
+            <input type="text" name="type" required><br><br>
+            
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" required><br><br>
+            
+            <label for="couleur">Couleur :</label>
+            <input type="text" name="couleur" required><br><br>
+            
+            <label for="dos">Dos :</label>
+            <input type="text" name="dos" required><br><br>
+            
+            <label for="role_de_carte">Rôle de la carte :</label>
+            <textarea name="role_de_carte" required></textarea><br><br>
+            
+            <label for="path">Image (URL) :</label>
+            <input type="text" name="path" required><br><br>
+            
+            <button type="submit">Ajouter la carte</button>
+        </form>
+    </div>
+
+ 
+    <div id="edit-content" class="tab-content">
+        <h2>Modifier une carte existante</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Type</th>
+                    <th>Nom</th>
+                    <th>Couleur</th>
+                    <th>Dos</th>
+                    <th>Rôle</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($cartes as $carte): ?>
+                <tr>
+                    <form method="POST" action="../routes/card.php?id=updateCard">
+                        <input type="hidden" name="id" value="<?= $carte['id'] ?>">
+                        <td><?= $carte['id'] ?></td>
+                        <td><input type="text" name="type" value="<?= $carte['type'] ?>" required></td>
+                        <td><input type="text" name="nom" value="<?= $carte['nom'] ?>" required></td>
+                        <td><input type="text" name="couleur" value="<?= $carte['couleur'] ?>" required></td>
+                        <td><input type="text" name="dos" value="<?= $carte['dos'] ?>" required></td>
+                        <td><textarea name="role_de_carte" required><?= $carte['role_de_carte'] ?></textarea></td>
+                        <td><input type="text" name="path" value="<?= $carte['path'] ?>" required></td>
+                        <td>
+                            <button type="submit">Modifier</button>
+                        </td>
+                    </form>
+                        <td>
+                            <form method="POST" action="../routes/card.php?id=deleteCard" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet actualité ?');">
+                                <input type="hidden" name="id" value="<?= $carte['id'] ?>">
+                                <button type="submit" style="background-color:red; color:white;">Supprimer l'actualité</button>
+                            </form>
+                        </td>
+                    </form>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
