@@ -28,6 +28,15 @@ $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
 $cards = CardController::getAllCards();
+$orders = DetailOrderController::getAdminAllOrders();
+
+if (!empty($orders)) {
+    foreach ($orders as $order) {
+        echo "<p>Commande ID: " . $order['order_id'] . " - Utilisateur: " . $order['user_name'] . " " . $order['user_firstname'] . "</p>";
+    }
+} else {
+    echo "<p style='color:red;'>Aucune commande à afficher.</p>";
+}
 ?>
 <div class="dashboard-container">
     <aside class="sidebar">
@@ -39,6 +48,7 @@ $cards = CardController::getAllCards();
             <ul>
                 <li><a href="#users" onclick="showSection('users')">Utilisateurs</a></li>
                 <li><a href="#products" onclick="showSection('products')">Produits</a></li>
+                <li><a href="#orders" onclick="showSection('orders')">Commandes</a></li>
                 <li><a href="#feedbacks" onclick="showSection('feedbacks')">Avis</a></li>
                 <li><a href="#news" onclick="showSection('news')">Actualités</a></li>
                 <li><a href="#cards" onclick="showSection('cards')">Cartes du jeu</a></li>
@@ -146,6 +156,45 @@ $cards = CardController::getAllCards();
 
                 <button type="submit" class="form-button">Ajouter le produit</button>
             </form>
+        </section>
+
+        <section id="orders" class="dashboard-section" style="display: none;">
+            <h2>Détail des Commandes</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Email</th>
+                        <th>ID de commande</th>
+                        <th>Date</th>
+                        <th>Id Produit</td>
+                        <th>Nom du Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($orders as $order): ?>
+                        <tr>
+                            <td><?= $order['user_id'] ?></td>
+                            <td><?= $order['user_name'] ?></td>
+                            <td><?= $order['user_firstname'] ?></td>
+                            <td><?= $order['user_email'] ?></td>
+                            <td><?= $order['order_id'] ?></td>
+                            <td><?= $order['order_date'] ?></td>
+                            <td><?= $order['product_id'] ?></td>
+                            <td><?= $order['product_name'] ?></td>
+                            <td><?= $order['product_price'] ?></td>
+                            <td><?= $order['product_quantity'] ?></td>
+                            <td><?= $order['total_amount'] ?></td>
+                        </tr>
+                    <?php var_dump($orders);?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </section>
 
         <section id="feedbacks" class="dashboard-section" style="display: none;">
