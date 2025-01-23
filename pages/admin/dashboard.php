@@ -19,6 +19,9 @@ $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
+
+$cartes = CardController::getAllCard();
+$orders = DetailsOrderController::getAdminAllOrder();
 ?>
 <table>
     <tr>
@@ -265,3 +268,37 @@ $newsList = NewsController::getAllNews();
             </tbody>
         </table>
     </div>
+
+    <h3>Commandes</h3>
+    <table>
+    <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>ID de commande</th>
+        <th>Date</th>
+        <th>Ref Produit</th>
+        <th>Nom du Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+    </tr>
+    <tbody>
+        <?php foreach($orders as $order): ?>
+            <tr>
+                <td><?= $order['user_id'] ?></td>
+                <td><?= $order['user_name'] ?></td>
+                <td><?= $order['user_firstname'] ?></td>
+                <td><?= $order['user_email'] ?></td>
+                <td><?= $order['order_id'] ?></td>
+                <td><?= $order['order_date'] ?></td>
+                <td><?= $order['product_id'] ?></td>
+                <td><?= $order['product_name'] ?></td>
+                <td><?= $order['product_price'] ?></td>
+                <td><?= $order['product_quantity'] ?></td>
+                <td><?= $order['total_amount'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
