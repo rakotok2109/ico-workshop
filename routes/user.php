@@ -68,7 +68,7 @@ else if($_GET['id'] == 'login') {
 }
 else if($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
-    header('Location: /pages/home.php');
+    header('Location: ../pages/home.php');
 }
 
 else if($_GET['id'] == 'update') {

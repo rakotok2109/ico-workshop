@@ -41,6 +41,7 @@ $newsList = NewsController::getAllNews();
                 <li><a href="#products" onclick="showSection('products')">Produits</a></li>
                 <li><a href="#feedbacks" onclick="showSection('feedbacks')">Avis</a></li>
                 <li><a href="#news" onclick="showSection('news')">Actualités</a></li>
+                <li><a href="../profil.php">Mon profil</a></li>
             </ul>
         </nav>
     </aside>
