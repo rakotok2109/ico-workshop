@@ -10,10 +10,10 @@
 require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 $products = ProductController::getAllProducts();
 ?>
-<body class="bg-[#FCD3A1] text-primary font-sans">
+<body class="bg-[#ecba75] text-primary font-sans">
 <div class="bg-[#3B60BC] sticky fixed">
-        <?php include (__DIR__ . '/../../pages/components/navbar.php'); ?>
-</div>    
+    <?php include (dirname(__DIR__) . '/components/navbar_authentif.php'); ?>
+</div>
 
 <div class="container mx-auto p-8">
     <div class="container mx-auto p-8">

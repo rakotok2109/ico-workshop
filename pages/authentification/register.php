@@ -13,7 +13,7 @@ require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 </head>
 <body>
     <header>
-        <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
+        <?php include (dirname(__DIR__) . '/components/navbar_authentif.php'); ?>
     </header>
     
     <div class="register-container">

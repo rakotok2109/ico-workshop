@@ -17,8 +17,8 @@ if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
 $user = unserialize($_SESSION['user']);
 ?>
 <body>
-    <header class="navbar">
-        <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
+    <header>
+        <?php include (dirname(__DIR__) . '/components/navbar_authentif.php'); ?>
     </header>
 
     <main class="checkout-container">

@@ -12,9 +12,9 @@ require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 $id = $_GET['id'] ?? 0;
 $product = ProductController::getProductbyId($id);
 ?>
-<body class="bg-[#FCD3A1] text-primary font-sans">
+<body class="bg-[#ecba75] text-primary font-sans">
 <div class="bg-[#3B60BC] sticky">
-    <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
+    <?php include (dirname(__DIR__) . '/components/navbar_authentif.php'); ?>
 </div>
 
 <div class="container mx-auto p-8">

@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #3c60bc;
+    background-color: #3c60bc !important;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -23,7 +23,6 @@ a {
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #3c60bc;
     margin-top: 60px;
 }
 
