@@ -9,10 +9,13 @@ if($_GET['id'] == 'addFeedback') {
     );
 
     FeedbackController::addFeedback($feedback);
+    header('Location: /pages/feedbacks.php');
 }
 
 else if($_GET['id'] == 'deleteFeedback') {
     FeedbackController::deleteFeedback();
+    header('Location: /pages/feedbacks.php');
+
 }
 
 
@@ -25,6 +28,8 @@ else if($_GET['id'] == 'updateFeedback') {
     );
 
     FeedbackController::updateFeedback($feedback);
+    header('Location: /pages/feedbacks.php');
+
 }
 
 else{

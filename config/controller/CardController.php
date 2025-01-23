@@ -29,7 +29,7 @@ class CardController {
             $id_card = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
             if ($id_card === null) {
-                $_SESSION['error'] = "ID produit invalide.";
+                $_SESSION['error'] = "ID carte invalide.";
                 header("Location: ../pages/admin/dashboard.php#cards");
                 exit();
             }

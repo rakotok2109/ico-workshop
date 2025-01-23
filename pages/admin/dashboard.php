@@ -32,7 +32,7 @@ $orders = DetailOrderController::getAdminAllOrders();
 
 if (!empty($orders)) {
     foreach ($orders as $order) {
-        echo "<p>Commande ID: " . $order['order_id'] . " - Utilisateur: " . $order['user_name'] . " " . $order['user_firstname'] . "</p>";
+        // echo "<p>Commande ID: " . $order['id_order'] . " - Utilisateur: " . $order['name'] . " " . $order['firstname'] . "</p>";
     }
 } else {
     echo "<p style='color:red;'>Aucune commande à afficher.</p>";
@@ -179,19 +179,19 @@ if (!empty($orders)) {
                 <tbody>
                     <?php foreach($orders as $order): ?>
                         <tr>
-                            <td><?= $order['user_id'] ?></td>
-                            <td><?= $order['user_name'] ?></td>
-                            <td><?= $order['user_firstname'] ?></td>
-                            <td><?= $order['user_email'] ?></td>
-                            <td><?= $order['order_id'] ?></td>
-                            <td><?= $order['order_date'] ?></td>
-                            <td><?= $order['product_id'] ?></td>
+                            <td><?= $order['id_user'] ?></td>
+                            <td><?= $order['name'] ?></td>
+                            <td><?= $order['firstname'] ?></td>
+                            <td><?= $order['email'] ?></td>
+                            <td><?= $order['id_order'] ?></td>
+                            <td><?= $order['date_order'] ?></td>
+                            <td><?= $order['id_product'] ?></td>
                             <td><?= $order['product_name'] ?></td>
-                            <td><?= $order['product_price'] ?></td>
-                            <td><?= $order['product_quantity'] ?></td>
+                            <td><?= $order['price'] ?></td>
+                            <td><?= $order['quantity'] ?></td>
                             <td><?= $order['total_amount'] ?></td>
                         </tr>
-                    <?php var_dump($orders);?>
+
                     <?php endforeach; ?>
                 </tbody>
             </table>

@@ -15,6 +15,14 @@ class DetailsOrder {
         $this->_id = $_id;
     }
 
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id){
+        $this->_id = $id;
+    }
+
     public function getidOrder(){
         return $this->_id_order;
     }
@@ -39,7 +47,7 @@ class DetailsOrder {
         $this->_amount = $amount;
     }
 
-    public function setIdOrder($idorder){
+    public function setIdOrder($id_order){
         $this->_id_order = $id_order;
     }
 
