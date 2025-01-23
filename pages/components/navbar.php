@@ -13,7 +13,7 @@ $user = unserialize($_SESSION['user']);
 </head>
 <div class="container-navbar fixed sticky top-0 bg-[#3B60BC] z-50 shadow-md">
     <div class="container-logo">
-        <a href="#"><img src="/ressources/image/ICO_Logo-remove.png" alt="logo-ico"></a>
+        <a href="#"><img src="/ressources/images/ICO_Logo-remove.png" alt="logo-ico"></a>
     </div>
     <div class="container-navigation">
         <ul>

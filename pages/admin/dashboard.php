@@ -80,7 +80,7 @@ $orders = DetailsOrderController::getAdminAllOrder();
                      ?>" required></td>
                     <td><input type="number" name="price" value="<?= $product->getPrice() ?>" step="0.01" required></td>
                     <td><textarea name="description"><?= $product->getDescription() ?></textarea></td>
-                    <td><input type="text" name="image" value="../../ressources/image/produits/<?= $product->getImage() ?>" required></td>
+                    <td><input type="text" name="image" value="../../ressources/images/produits/<?= $product->getImage() ?>" required></td>
                     <td><button type="submit">Modifier</button></td>
                 </form>
                 <td><form method="POST" action="../../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
