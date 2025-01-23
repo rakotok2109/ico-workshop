@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/5563162149.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/styles.css">
 
-    <title>Dashboard Administrateur</title>
-</head>
-<body>
 <?php
-require_once(dirname(dirname(__DIR__)) . '/config/init.php');
+require_once(dirname(__DIR__) . '/config/init.php');
+require_once(dirname(__DIR__).'/pages/components/header.php');
 if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
-    header('Location: /pages/auth/login.php');
+    header('Location: ../authentification/login.php');
     exit();
 }
 
 $user = unserialize($_SESSION['user']);
 if (!$user || !method_exists($user, 'getRole')) {
-    header('Location: /pages/auth/login.php');
+    header('Location: ../authentification/login.php');
     exit();
 }
 

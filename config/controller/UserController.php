@@ -216,5 +216,39 @@ class UserController {
         }
     }
 
-   
+    public static function deleteUser($id_user)
+    {
+        if ($id_user === null) {
+            $_SESSION['error'] = "ID utilisateur invalide.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        }
+
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "DELETE FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
+
+            $_SESSION['success'] = "L'utilisateur a été supprimé avec succès.";
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        } catch (PDOException $e) {
+            $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+            header("Location: ../pages/admin/dashboard.php");
+            exit();
+        }
+    }
+
+    public static function findRoleUser($id_user){
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "SELECT role FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
+
+            $_SESSION['user'];
+        }catch(PDOException $e){
+
+        }
+    }
+
 }
