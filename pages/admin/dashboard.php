@@ -29,14 +29,6 @@ $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
 $cards = CardController::getAllCards();
 $orders = DetailOrderController::getAdminAllOrder();
-
-if (!empty($orders)) {
-    foreach ($orders as $order) {
-        echo "<p>Commande ID: " . $order['order_id'] . " - Utilisateur: " . $order['user_name'] . " " . $order['user_firstname'] . "</p>";
-    }
-} else {
-    echo "<p style='color:red;'>Aucune commande à afficher.</p>";
-}
 ?>
 <div class="dashboard-container">
     <aside class="sidebar">

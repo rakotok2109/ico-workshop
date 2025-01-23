@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) {
     exit;
 }else{
     $user = unserialize($_SESSION['user']); 
-    var_dump($user); // Pour vérifier que les données sont à jour
+    // var_dump($user); Pour vérifier que les données sont à jour
 }
 // $user = UserController::getAllInfoUser($user->getId());
 // var_dump($user);
@@ -24,10 +24,11 @@ if (!isset($_SESSION['user'])) {
     <title>Mes Commandes</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
 
-<?php include(__DIR__ . '/components/navbar.php') ?>
-
+<body class="bg-[#ecba75] text-gray-800 font-sans">
+<header>
+    <?php include(__DIR__ . '/components/navbar.php') ?>
+</header>
     <div class="container mx-auto p-8 flex">
         
         <div class="w-1/3 bg-white shadow-lg rounded-lg p-6 mr-8">
