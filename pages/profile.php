@@ -12,7 +12,7 @@ $orders = OrderController::getOrdersForUser($userId);
 
 $message = '';
 $errorMessage = '';
-
+ 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
     $firstname = trim($_POST['firstname']);
