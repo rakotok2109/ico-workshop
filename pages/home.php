@@ -52,28 +52,31 @@ $news = array_slice($news, 0, 3);
         </p>
     </div>
 
-        <!-- Section Achat du jeu -->
-        <div class="mt-5 container mx-auto py-16 px-8 flex flex-col md:flex-row items-center bg-[#EF4B4B] text-white rounded-lg shadow-lg">
-        <!-- Image du jeu -->
-        <div class="md:w-1/2 w-full flex justify-center">
-            <img src="../ressources/image/jeu_de_carte.png" alt="Boîte du jeu ICO" class="max-w-xs md:max-w-md rounded-lg shadow-lg">
-        </div>
-        <!-- Boutons d'achat -->
-        <div class="md:w-1/2 w-full text-center md:text-left mt-8 md:mt-0">
-            <h2 class="text-4xl font-[Chaloops] text-[#FBC434]">Procurez-vous ICO dès maintenant !</h2>
-            <p class="mt-4 text-lg leading-relaxed">
-                Disponible dès aujourd’hui sur les principales plateformes d'achat en ligne.
-            </p>
-            <div class="mt-6 flex flex-col md:flex-row justify-center md:justify-start gap-4">
-                <a href="https://www.amazon.fr/dp/B0CF9VJYK4" target="_blank" class="px-6 py-3 bg-yellow-500 text-gray-900 rounded-lg font-bold hover:bg-yellow-600 transition">
-                    Acheter sur Amazon
-                </a>
-                <a href="/pages/products/" class="px-6 py-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition">
-                    Acheter sur notre site
-                </a>
-            </div>
+       <!-- Section Achat du jeu -->
+<div class="mt-10 container mx-auto py-16 px-8 flex flex-col md:flex-row items-center bg-[#FCD3A1] text-gray-900 rounded-lg shadow-lg">
+    <!-- Image du jeu -->
+    <div class="md:w-1/2 w-full flex justify-center">
+        <img src="../ressources/image/jeu_de_carte.png" alt="Boîte du jeu ICO" class="max-w-xs md:max-w-md rounded-lg shadow-lg">
+    </div>
+    <!-- Boutons d'achat -->
+    <div class="md:w-1/2 w-full text-center md:text-left mt-8 md:mt-0">
+        <h2 class="text-4xl font-[Chaloops] text-[#3B60BC] text-center md:text-left">Procurez-vous ICO dès maintenant !</h2>
+        <p class="mt-4 text-lg leading-relaxed text-center md:text-left">
+            Disponible dès aujourd’hui sur les principales plateformes d'achat en ligne.
+        </p>
+        <div class="mt-6 flex flex-col md:flex-row justify-center md:justify-start gap-4">
+            <a href="https://www.amazon.fr/dp/B0CF9VJYK4" target="_blank" 
+               class="px-6 py-3 bg-yellow-500 text-gray-900 rounded-lg font-bold shadow-md hover:bg-yellow-600 transition-all">
+                Acheter sur Amazon
+            </a>
+            <a href="/pages/products/" 
+               class="px-6 py-3 bg-green-500 text-white rounded-lg font-bold shadow-md hover:bg-green-600 transition-all">
+                Acheter sur notre site
+            </a>
         </div>
     </div>
+</div>
+
 
 
     <!-- Section Présentation des fondateurs -->
