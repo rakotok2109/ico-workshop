@@ -1,19 +1,20 @@
-<?php
-require_once (__DIR__ . '/../config/init.php');
+<?php 
+require_once (dirname(__DIR__).'/config/init.php');
 
 if ($_GET['id'] == 'register') {
     if (isset($_SESSION['inscriptionErreur'])) {
         unset($_SESSION['inscriptionErreur']);
     }
     $user = new User(
-        $_POST['nom'],
-        $_POST['prenom'],
+        $_POST['name'],
+        $_POST['firstname'],
         $_POST['password'],
+        $_POST['mail'],
+        $_POST['phone'],
         $_POST['email'],
         $_POST['telephone'],
         $_POST['location'],
-        0,
-        null
+        0 
     );
 
     UserController::validateMail($user->getMail());
@@ -26,16 +27,41 @@ if ($_GET['id'] == 'register') {
         $_SESSION['firstname'] = $user->getFirstname();
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
+        $_SESSION['mail'] = $user->getMail();
+     
         $_SESSION['email'] = $user->getMail();
 
-        header('Location: /pages/authentification/register.php');
+        header('Location: /pages/register.php');
         exit();
     } else {
         UserController::register($user);
+        header('Location: /');
+    
         $_SESSION['successMessage'] = "Votre inscription a été réussie. Vous pouvez maintenant vous connecter.";
         header('Location: /pages/authentification/login.php');
         exit();
     }
+
+   
+   
+    header('Location: /');
+}
+else if($_GET['id'] == 'login') {
+    $result = UserController::login($_POST['mail'], $_POST['password']);
+    if($result) {
+    //   echo $_SESSION['user']->getName();
+    $user= unserialize($_SESSION['user']);
+    if($user->getRole() < 1)
+    {
+        header('Location: ../pages/home.php');
+
+    }
+    else if($user->getRole() >= 1){
+        header('Location: ../pages/admin/dashboard.php');
+    }
+    }
+    else {
+        header('Location: ../pages/authentification/login.php');
 } else if ($_GET['id'] == 'login') {
     $result = UserController::login($_POST['email'], $_POST['password']);
     if ($result) {
@@ -53,6 +79,19 @@ if ($_GET['id'] == 'register') {
     }
 } else if ($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
+    header('Location: ../pages/home.php');
+}
+
+else if($_GET['id'] == 'updateRole') {
+    UserController::updateRole();
+}
+
+else if($_GET['id'] == 'deleteUser') {
+    $id_user = isset($_POST['id']) ? (int) $_POST['id'] : null;
+    UserController::deleteUser($id_user);
+}
+
+else{
     header('Location: /pages/home.php');
     exit();
 } else if ($_GET['id'] == 'update') {

@@ -1,68 +1,96 @@
-<?php
-require_once (__DIR__. '/components/headerHero.php');
-?> 
-<div class="page-du-site">
-    <div class="element-titre">
-        <h2>Les dernières nouveautés :</h2>
-    </div>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-        <img class="d-block w-100" src="../ressources/image/ICO-template-logo.png" alt="First slide">
-        </div>
-        <div class="carousel-item">
-        <img class="d-block w-100" src="../ressources/image/ICO-template-logo.png" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-        <img class="d-block w-100" src="../ressources/image/ICO-template-logo.png" alt="Third slide">
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil ICO</title>
+    <link rel="stylesheet" href="../ressources/css/home.css">
+</head>
+<body>
+    <?php
+    require_once (__DIR__. '/components/headerHero.php');
+    require_once (__DIR__. '/../config/init.php');
+    require_once(__DIR__ . '/../config/controller/PDOUtils.php');
 
-    <div class="histoire-du-jeu">
-        <h2>Synopsie</h2>
-        <span>
-            <p>Perdus dans la mer des Caraïbes, nos explorateurs n’ont plus qu’une seule solution afin de rentrer chez eux. Ils doivent récolter les 10 trésors de Barbe Rousse situés sur l’île interdite!!! (woouuuh on a peur)
-            Pour mener à bien leur mission, les marins devront démasquer les pirates au sein de leur équipage. Le but des pirates? Empoisonner les marins afin de faire échouer les expéditions vers l’île interdite. Mais attention, des bonus viendront pimenter les débats et compliqueront la tâche des pirates. Serez- vous prêts à braver marées et tempêtes pour vaincre les pirates? Ou bien trahirez-vous vos amis en faisant échouer les marins?</p>
-        </span>
-    </div>
+    // Récupération des dernières nouveautés depuis la base de données
+    $news = NewsController::getAllNews();
+    $news = array_slice($news, 0, 3);
+    ?>
 
-    <div class="presentation-fondateurs">
-        <div class="presentation-fondateur ">
-            <div class="container-gouvernail ">
-                <img src="../ressources/image/gouvernail.png" alt="gouvernail">
-                <div class="photo-fondateur1">
-                    <img src="../ressources/image/chinoise.jpg"alt="photo du fondateur 1">
+    <div class="homepage">
+        <!-- Section Dernières Nouveautés -->
+        <div class="container mx-auto py-16 px-8">
+            <h2 class="text-4xl font-[Chaloops] text-center text-[#3B60BC]">Les dernières nouveautés</h2>
+            <div id="carouselExampleIndicators" class="carousel slide mt-8" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <?php foreach ($news as $index => $item): ?>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="<?= $index ?>" class="<?= $index == 0 ? 'active' : '' ?>"></li>
+                    <?php endforeach; ?>
+                </ol>
+                <div class="carousel-inner">
+                    <?php foreach ($news as $index => $item): ?>
+                        <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
+                            <img class="d-block w-100" src="../ressources/images/news-banner.jpg" alt="<?= htmlspecialchars($item['title']) ?>">
+                            <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-4 rounded">
+                                <h5><?= htmlspecialchars($item['title']) ?></h5>
+                                <p><?= htmlspecialchars($item['wording'] ?? 'Description non disponible') ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section Synopsis -->
+        <section class="synopsis">
+            <h2>Synopsis</h2>
+            <p>
+                Perdus dans la mer des Caraïbes, nos explorateurs doivent récolter les 10 trésors de Barbe Rousse situés sur l'île interdite.
+                Mais attention, des pirates se cachent parmi eux, prêts à tout pour saboter l'expédition. Oserez-vous affronter la tempête ?
+            </p>
+        </section>
+
+        <!-- Section Achat -->
+        <section class="buy-game">
+            <div class="buy-container">
+                <img src="../ressources/images/jeu_de_carte.png" alt="Boîte du jeu ICO">
+                <div class="buy-info">
+                    <h2>Procurez-vous ICO dès maintenant !</h2>
+                    <p>Disponible dès aujourd’hui sur les principales plateformes d'achat en ligne.</p>
+                    <div class="buy-buttons">
+                        <a href="https://www.amazon.fr/dp/B0CF9VJYK4" target="_blank" class="amazon-btn">Acheter sur Amazon</a>
+                        <a href="products/index.php" class="site-btn">Acheter sur notre site</a>
+                    </div>
                 </div>
             </div>
-            <div class="text-presentation">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime error totam cumque possimus quis magni obcaecati culpa minima nostrum vero vel, vitae mollitia omnis eos! Veniam, excepturi eaque voluptates, soluta, eveniet veritatis saepe provident ratione deserunt nihil quasi minima neque?</p>
-            </div>
-            
-        </div>
-        <div class="presentation-fondateur">
-            <div class="text-presentation">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum beatae, repellat ab officia omnis consequuntur repellendus consequatur aspernatur iste sed! Corporis rem molestias qui hic. Velit, repellendus et, modi fuga voluptas quibusdam autem illo est nobis ad harum doloribus sint?</p>
-            </div>
-            <div class="container-gouvernail">
-                <img src="../ressources/image/gouvernail.png" alt="gouvernail">
-                <div class="photo-fondateur">
-                    <img src="../ressources/image/chinoise.jpg" alt="photo du foncateur 2">
+        </section>
+
+        <!-- Section Fondateurs -->
+        <section class="founders">
+            <h2>Les Fondateurs</h2>
+            <div class="founders-container">
+                <div class="founder">
+                    <img src="../ressources/images/chinoise.jpg" alt="Michael Fernandez">
+                    <h3>Michael Fernandez</h3>
+                    <p>Passionné par la piraterie et le jeu, Michael est l'esprit créatif derrière ICO.</p>
+                </div>
+                <div class="founder">
+                    <img src="../ressources/images/chinoise.jpg" alt="Fabio">
+                    <h3>Fabio</h3>
+                    <p>Expert en jeux de stratégie, Fabio a contribué au développement des mécaniques du jeu.</p>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</div>
+
+    <footer>
+        <?php require_once (__DIR__. '/components/footer.php');?>
+    </footer>
+</body>
+</html>

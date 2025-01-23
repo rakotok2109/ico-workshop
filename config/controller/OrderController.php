@@ -12,13 +12,11 @@ class OrderController {
             return $pdo->lastInsertId();
         }
         catch (PDOException $e) {
-            // Affiche le message d'erreur en cas d'exception PDO
             echo 'Erreur de base de données : ' . $e->getMessage();
-             return null; // Retourne null en cas d'échec
+             return null;
         } catch (Exception $e) {
-            // Affiche le message d'erreur pour d'autres exceptions
             echo 'Erreur : ' . $e->getMessage();
-             return null; // Retourne null en cas d'échec
+             return null;
         }
        
     }
@@ -30,7 +28,7 @@ class OrderController {
 
         $orders = [];
         foreach ($result as $row) {
-            $order = new Order($row['id'], $row['date'], $row['id_user'] );
+            $order = new Order($row['id'],  $row['id_user'], $row['date']);
             $orders[] = $order;
         }
       

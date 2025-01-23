@@ -4,12 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/config/init.php');
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
+require_once (dirname(__DIR__).'/config/init.php');
+require_once (dirname(__DIR__) . '/vendor/autoload.php');
 use Dotenv\Dotenv;
 
-// Charger le fichier .env
-$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT'] . '/');
+
+$dotenv = Dotenv::createImmutable(dirname(__DIR__) . '/');
 $dotenv->load();
 
 if (!isset($_ENV['STRIPE_API_KEY'])) {
@@ -24,7 +24,7 @@ $stripe_Api_Key = $_ENV['STRIPE_API_KEY'];
 header('Content-Type: application/json');
 
 $cart = json_decode($_POST['cart'], true);
-$totalAmount = $_POST['totalAmount'] * 100; // Stripe attend le montant en centimes
+$totalAmount = $_POST['totalAmount'] * 100;
 $firstName = $_POST['first_name'];
 $lastName = $_POST['last_name'];
 $address = $_POST['address'];
@@ -37,14 +37,10 @@ try {
             'allow_redirects' => 'never'
         ],
         'payment_method' => $_POST['payment_method_id'],
-        // 'confirmation_method' => 'manual',
         'confirm' => true,
     ]);
 
     if ($paymentIntent->status === 'succeeded') {
-        //  $user = unserialize($_SESSION['user']);
-         // Enregistrement de la commande dans la base de données
-        //  $order = new Order(null, date('Y-m-d H:i:s'), $user->getId());
          $order = new Order(null, date('Y-m-d H:i:s'), 1);
          $orderId =  OrderController::addOrder($order);
        

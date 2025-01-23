@@ -14,13 +14,12 @@ class ProductController {
     public static function getProductById($productId)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $result = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [$productId]);
-
-        if ($result) {
-            $product = $result[0]; // Prendre le premier élément du tableau (le produit)
-            return new Product($product['name'], $product['price'], $product['description'], $product['image'], $product['id']);
+        $product = $pdo->requestSQL('SELECT * FROM products WHERE id = ?', [intval($id)]);
+        if ($product) {
+            return new Product($product[0]['name'], $product[0]['price'], $product[0]['description'], $product[0]['image'], $product[0]['id']);
+        } else {
+            return null;
         }
-        return null; // Si aucun produit trouvé, retourne null
     }
     public static function updateProduct(Product $product)
     {
@@ -34,7 +33,7 @@ class ProductController {
             $product->getId()
         ]);
 
-        header("Location: ../pages/DashboardAdminView.php");
+        header("Location: ../pages/admin/dashboard.php#products");
         exit();
 
     }
@@ -44,7 +43,7 @@ class ProductController {
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)', [$product->getName(), $product->getPrice(), $product->getDescription(), $product->getImage()]);
 
-        header("Location: ../pages/DashboardAdminView.php");
+        header("Location: ../pages/admin/dashboard.php#products");
         exit();
     }
 
@@ -55,7 +54,7 @@ class ProductController {
 
             if ($id_product === null) {
                 $_SESSION['error'] = "ID produit invalide.";
-                header("Location: ../pages/DashboardAdminView.php");
+                header("Location: ../pages/admin/dashboard.php#products");
                 exit();
             }
 
@@ -65,11 +64,11 @@ class ProductController {
                 $pdo->execSQL($sql, [$id_product]);
 
                 $_SESSION['success'] = "Le produit a été supprimé avec succès.";
-                header("Location: ../pages/DashboardAdminView.php");
+                header("Location: ../pages/admin/dashboard.php#products");
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/DashboardAdminView.php");
+                header("Location: ../../pages/admin/dashboard.php#products");
                 exit();
             }
         }

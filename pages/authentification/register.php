@@ -1,114 +1,79 @@
 <?php
-require_once(__DIR__ . '/../../config/init.php');
+require_once(dirname(dirname(__DIR__)) . '/config/init.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un compte</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .bg-light-blue {
-            background-color: #E6F4F1; /* Bleu clair */
-        }
-        .text-beige {
-            color: #F5DEB3; /* Beige */
-        }
-        .border-strong-red {
-            border-color: #FF0000; /* Rouge */
-        }
-        .bg-strong-red {
-            background-color: #FF0000; /* Rouge vif */
-        }
-        .bg-white-beige {
-            background: linear-gradient(120deg, #FFFFFF, #F5DEB3);
-        }
-    </style>
+    <title>Sign Up | ICO</title>
+    <link rel="stylesheet" href="../../ressources/css/register.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
 </head>
-<body class="bg-gray-200 text-gray-900"
-style="background-image: url('/ressources/image/img2.png');">
->
-    <div class="min-h-screen flex items-center justify-center"
-    >
-        <div class="w-full max-w-md p-8 bg-white-beige rounded-lg shadow-lg">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Créer un compte</h1>
+<body>
+    <header>
+        <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
+    </header>
+    
+    <div class="register-container">
+        <div class="register-content">
+            <div class="register-image">
+                <img src="../../ressources/images/logo.png" alt="ICO Image">
+            </div>
 
-            <!-- Affichage des erreurs -->
-            <?php
-            if (isset($_SESSION['inscriptionErreur'])) {
-                echo '<div class="bg-red-500 text-white p-4 rounded mb-4">';
-                echo '<ul>';
-                foreach ($_SESSION['inscriptionErreur'] as $error) {
-                    echo '<li>' . $listOfSubscribeErrors[$error] . '</li>';
-                }
-                echo '</ul>';
-                echo '</div>';
-            }
-            ?>
+            <div class="register-form">
+                <h1 class="register-title">Bienvenue sur <span>ICO</span></h1>
+                <h2 class="register-subtitle">Créer un compte</h2>
 
-            <!-- Formulaire -->
-            <form action="../../routes/user.php?id=register" method="POST" class="space-y-4">
-                <!-- Nom -->
-                <div>
-                    <label for="nom" class="block text-sm font-medium text-beige">Nom :</label>
-                    <input type="text" id="nom" name="nom" placeholder="Entrer votre nom" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
+                <?php if (isset($_SESSION['inscriptionErreur'])): ?>
+                    <div class="error-message">
+                        <ul>
+                            <?php foreach ($_SESSION['inscriptionErreur'] as $error): ?>
+                                <li><?= $listOfSubscribeErrors[$error]; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+                <form action="../../routes/user.php?id=register" method="POST">
+                    <div class="input-group">
+                        <label for="name">Nom :</label>
+                        <input type="text" id="name" name="name" placeholder="Entrer le nom" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="firstname">Prénom :</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="Entrer le prénom" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="mail">Email :</label>
+                        <input type="email" id="mail" name="mail" placeholder="Entrer l'Email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="phone">Téléphone :</label>
+                        <input type="number" id="phone" name="phone" placeholder="Entrer le téléphone" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="location">Adresse :</label>
+                        <input type="text" id="location" name="location" placeholder="Entrer l'adresse" required>
+                    </div>
+
+                    <button type="submit" class="register-btn">S'inscrire</button>
+                </form>
+
+                <div class="register-footer">
+                    <a href="login.php"><button class="link-btn">Se connecter</button></a>
                 </div>
-
-                <!-- Prénom -->
-                <div>
-                    <label for="prenom" class="block text-sm font-medium text-beige">Prénom :</label>
-                    <input type="text" id="prenom" name="prenom" placeholder="Entrer votre prénom" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
-                </div>
-
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-beige">Email :</label>
-                    <input type="email" id="email" name="email" placeholder="Entrer votre email" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
-                </div>
-
-                <!-- Téléphone -->
-                <div>
-                    <label for="telephone" class="block text-sm font-medium text-beige">Téléphone :</label>
-                    <input type="text" id="telephone" name="telephone" placeholder="Entrer votre numéro de téléphone" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
-                </div>
-
-                <!-- Mot de passe -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-beige">Mot de passe :</label>
-                    <input type="password" id="password" name="password" placeholder="Entrer votre mot de passe" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
-                </div>
-
-                <!-- Adresse -->
-                <div>
-                    <label for="location" class="block text-sm font-medium text-beige">Adresse :</label>
-                    <input type="text" id="location" name="location" placeholder="Entrer votre adresse" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-strong-red">
-                </div>
-
-                <!-- Bouton de soumission -->
-                <div>
-                    <button type="submit" class="w-full py-2 bg-strong-red text-white font-semibold rounded hover:bg-opacity-90 transition">
-                        Créer un compte
-                    </button>
-                </div>
-            </form>
-
-            <p class="text-center mt-4 text-sm text-gray-600">
-                Vous avez déjà un compte ? 
-                <a href="login.php" class="text-strong-red font-medium hover:underline">Connectez-vous</a>.
-            </p>
+            </div>
         </div>
     </div>
 </body>

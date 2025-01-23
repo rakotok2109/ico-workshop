@@ -1,3 +1,7 @@
+<?php
+require_once(dirname(dirname(__DIR__)) . '/config/init.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,43 +16,47 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
-    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center" 
-         style="background-image: url('/ressources/image/img2.png');">
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+<body>
 
-        <div class="relative z-10 text-center px-8 py-12 max-w-2xl">
-            <h1 class="text-4xl md:text-6xl font-bold text-blue-200">Se connecter</h1>
+    <header>
+        <?php include (dirname(__DIR__) . '/components/navbar.php'); ?>
+    </header>
 
-            <div class="mt-6 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg text-left">
-                <form action="../../routes/user.php?id=login" method="POST" class="space-y-4">
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-beige-500">Email :</label>
-                        <input type="email" id="email" name="email" placeholder="Entrer l'Email" required
-                            class="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded border border-beige-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
+    <div class="login-container">
+        <div class="login-content">
+            <div class="login-image">
+                <img src="../../ressources/images/logo.png" alt="ICO Image">
+            </div>
+
+            <div class="login-form">
+                <h1 class="login-title">Bienvenue sur <span>ICO</span></h1>
+                <h2 class="login-subtitle">Connexion</h2>
+
+                <?php if (isset($error)): ?>
+                    <p class="error-message"><?php echo $error; ?></p>
+                <?php endif; ?>
+
+                <form action="../../routes/user.php?id=login" method="POST">
+                    <div class="input-group">
+                        <label for="mail">Email :</label>
+                        <input type="email" id="mail" name="mail" placeholder="Entrer l'Email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required>
                     </div>
 
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-beige-500">Mot de passe :</label>
-                        <input type="password" id="password" name="password" placeholder="Entrer le mot de passe" required
-                            class="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded border border-beige-400 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                    </div>
-
-                    <div>
-                        <input type="submit" value="Se connecter" 
-                            class="w-full px-4 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 transition">
-                    </div>
+                    <button type="submit" class="login-btn">Se connecter</button>
                 </form>
 
-                <div class="mt-4 text-center">
-                    <a href="register.php" class="text-blue-500 hover:underline">Créer un compte</a>
+                <div class="login-footer">
+                    <a href="register.php"><button class="link-btn">Créer un compte</button></a>
+                    <a href="register.php"><button class="link-btn">Mot de passe oublié ?</button></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-gray-800 text-gray-400 text-center py-4">
-        <p>&copy; 2025 Votre Entreprise. Tous droits réservés.</p>
-    </footer>
 </body>
 </html>

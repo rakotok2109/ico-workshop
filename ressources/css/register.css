@@ -18,18 +18,20 @@ a {
 }
 
 /* Container styles */
-.login-container {
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     background-color: #3c60bc;
+    margin-top: 60px;
 }
 
-.login-content {
+.register-content {
     display: flex;
     flex-direction: row;
     max-width: 1200px;
+    max-height: 1300px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -38,7 +40,14 @@ a {
 }
 
 /* Image section */
-.login-image img {
+
+.register-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-image img {
     width: 100%;
     max-height: 400px;
     object-fit: cover;
@@ -46,7 +55,7 @@ a {
 }
 
 /* Form section */
-.login-form {
+.register-form {
     padding-left: 2rem;
     flex: 1;
     display: flex;
@@ -54,18 +63,18 @@ a {
     justify-content: center;
 }
 
-.login-title {
+.register-title {
     font-size: 2.5rem;
     color: #3c60bc;
     text-align: left;
     font-weight: bold;
 }
 
-.login-title span {
+.register-title span {
     color: #ecba75;
 }
 
-.login-subtitle {
+.register-subtitle {
     font-size: 1.5rem;
     margin-top: 1rem;
     color: #574a45;
@@ -77,6 +86,10 @@ a {
     color: red;
     text-align: center;
     margin-bottom: 1rem;
+}
+
+.error-message ul {
+    list-style: none;
 }
 
 /* Form inputs */
@@ -106,7 +119,7 @@ input:focus {
 }
 
 /* Submit button */
-.login-btn {
+.register-btn {
     background-color: #3c60bc;
     color: white;
     padding: 0.8rem;
@@ -118,14 +131,14 @@ input:focus {
     transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
+.register-btn:hover {
     background-color: #2a4f8c;
 }
 
 /* Footer buttons */
-.login-footer {
+.register-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 2rem;
 }
 
@@ -148,24 +161,24 @@ input:focus {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .login-content {
+    .register-content {
         flex-direction: column;
         padding: 1rem;
     }
 
-    .login-image img {
+    .register-image img {
         max-height: 300px;
     }
 
-    .login-form {
+    .register-form {
         padding-left: 0;
     }
 
-    .login-title {
+    .register-title {
         font-size: 2rem;
     }
 
-    .login-subtitle {
+    .register-subtitle {
         font-size: 1.2rem;
     }
 
@@ -173,7 +186,7 @@ input:focus {
         padding: 0.7rem;
     }
 
-    .login-btn {
+    .register-btn {
         padding: 0.7rem;
     }
 }

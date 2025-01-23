@@ -1,7 +1,7 @@
 <?php
 require_once (dirname(__DIR__).'/config/init.php');
 
-if($_GET['id'] == 'addProduct') {
+if($_GET['id'] == 'addCard') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $uploadDir =(dirname(__DIR__).'/ressources/images/');
 
@@ -10,38 +10,36 @@ if($_GET['id'] == 'addProduct') {
         $uploadFilePath = $uploadDir . $imageName;
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)) {
-            $product = new Product(
+            $card = new Card(
                 $_POST['name'],
-                $_POST['price'],
+                $_POST['type'],
                 $_POST['description'],
                 $imageName
             );
-            ProductController::addProduct($product);
+            CardController::addCard($card);
+            header('Location: ../pages/admin/dashboard.php#cards');
            }
     }
     else {
        $_SESSION['ajoutProduitErreur'] = "Aucune image téléchargée ou erreur de téléchargement.";
-       header('Location: ../pages/admin/dashboard.php#products');
+       header('Location: ../pages/admin/dashboard.php#cards');
    }
+
 }
 
-else if($_GET['id'] == 'deleteProduct') {
-    ProductController::deleteProduct();
+else if($_GET['id'] == 'deleteCard') {
+    CardController::deleteCard();
+
 }
 
-
-else if($_GET['id'] == 'updateProduct') {
-    $product = new Product(
+else if($_GET['id'] == 'updateCard') {
+    $card = new Card(
         $_POST['name'],
-        $_POST['price'],
+        $_POST['type'],
         $_POST['description'],
         $_POST['image'],
         $_POST['id']
     );
-
-    ProductController::updateProduct($product);
-}
-
-else{
-    header('Location: /pages/home.php');
+    CardController::updateCard($card);
+    header('Location: ../pages/admin/dashboard.php#cards');
 }

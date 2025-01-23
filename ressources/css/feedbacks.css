@@ -1,0 +1,132 @@
+/* Importation de la police */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
+
+/* Style global */
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(to right, #3c60bc, #d88a32);
+    color: #574a45;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal */
+.feedbacks-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fafcfd;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Titre principal */
+.page-title {
+    font-size: 3rem;
+    color: #3c60bc;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: slideIn 1s ease-in-out;
+}
+
+/* Liste des avis */
+.feedback-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Carte d'avis individuelle */
+.feedback-card {
+    background: #ecba75;
+    color: #574a45;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: bounceIn 0.8s ease-in-out;
+}
+
+.feedback-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Titre du prénom */
+.feedback-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #3c60bc;
+}
+
+/* Note de l'utilisateur */
+.rating {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #d88a32;
+}
+
+/* Texte de l'avis */
+.feedback-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #574a45;
+}
+
+/* Message aucun avis */
+.no-feedback {
+    font-size: 1.5rem;
+    color: #d88a32;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .feedback-card {
+        max-width: 100%;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+}
