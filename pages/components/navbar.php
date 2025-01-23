@@ -32,7 +32,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <!-- <li><a href="contact.php">contact</a></li> -->
-                <li><a href="products/">Acheter</a></li>
+                <li><a href="/pages/products/">Acheter</a></li>
                     <?php if (isset( $_SESSION['user'])) :
                             $user = unserialize($_SESSION['user']);
                     ?>
