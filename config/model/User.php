@@ -57,7 +57,7 @@ class User {
         return $this->mail_;
     }
 
-    public function setMail($email) {
+    public function setMail($mail) {
         $this->mail_ = $mail;
     }
 
