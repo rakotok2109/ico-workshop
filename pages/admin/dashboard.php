@@ -27,6 +27,7 @@ $users = UserController::getAllUsers();
 $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
+$cards = CardController::getAllCards();
 ?>
 <div class="dashboard-container">
     <aside class="sidebar">
@@ -40,6 +41,7 @@ $newsList = NewsController::getAllNews();
                 <li><a href="#products" onclick="showSection('products')">Produits</a></li>
                 <li><a href="#feedbacks" onclick="showSection('feedbacks')">Avis</a></li>
                 <li><a href="#news" onclick="showSection('news')">Actualités</a></li>
+                <li><a href="#cards" onclick="showSection('cards')">Cartes du jeu</a></li>
                 <li><a href="../profil.php">Mon profil</a></li>
                 <li><a href="../../routes/user.php?id=logout">Se déconnecter</a></li>
             </ul>
@@ -101,7 +103,6 @@ $newsList = NewsController::getAllNews();
                         <th>Nom</th>
                         <th>Prix</th>
                         <th>Description</th>
-                        <th>Image</th>
                         <th>Modifier</th>
                         <th>Supprimer</th>
                     </tr>
@@ -109,11 +110,12 @@ $newsList = NewsController::getAllNews();
                 <tbody>
                     <?php foreach($products as $product): ?>
                         <tr>
-                            <form method="POST" action="../../routes/product.php?id=updateProduct">
-                                <td><?= $product['name']?></td>
-                                <td><?= $product['price']?></td>
-                                <td><?= $product['description']?></td>
-                                <td><img src="<?= $product['image']?>" alt="Produit"></td>
+                            <form method="POST" action="../../routes/product.php?id=updateProduct" enctype="multipart/form-data">                                
+                                <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
+                                <input type="hidden" name="image" value="<?= $product['image'] ?>">
+                                <td><input type="text" name="name" value="<?= $product['name'] ?>" required></td>
+                                <td><input type="number" name="price" value="<?= $product['price'] ?>" step="0.01" required></td>
+                                <td><textarea name="description"><?= $product['description'] ?></textarea></td>
                                 <td>
                                     <button type="submit" class="edit-btn">Modifier</button>
                                 </td>
@@ -192,9 +194,9 @@ $newsList = NewsController::getAllNews();
                         <tr>
                             <form method="POST" action="../../routes/news.php?id=updateNews">
                                 <input type="hidden" name="id" value="<?= isset($newsItem['id']) ? $newsItem['id'] : '' ?>">
-                                <td><?= $newsItem['title']?></td>
-                                <td><?= $newsItem['wording']?></td>
-                                <td><?= $newsItem['date']?></td>
+                                <td><input type="text" name="title" value="<?= $newsItem['title']?>" required></td>
+                                <td><textarea name="wording"> <?= $newsItem['wording']?></textarea></td>
+                                <td><input type="date" name="date" value="<?= $newsItem['date']?>" required></td>
                                 <td><button type="submit" class="edit-btn">Modifier</button></td>
                             </form>
                             <td>
@@ -218,6 +220,69 @@ $newsList = NewsController::getAllNews();
                 <input type="date" name="date" class="form-input" required>
 
                 <button type="submit" class="form-button">Ajouter l'actualité</button>
+            </form>
+        </section>
+
+        <section id="cards" class="dashboard-section" style="display: none;">
+            <h2>Gestion des Cartes du jeu</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Role</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($cards as $card): ?>
+                        <tr>
+                            <form method="POST" action="../../routes/cards.php?id=updateCard" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<?= $card['id'] ?>">
+                                <input type="hidden" name="image" value="<?= $card['image'] ?>">
+                                <td><input type="text" name="name" value="<?= $card['name']?>"></td>
+                                <td>
+                                    <select name="type">
+                                    <option value="0" <?= $card['type'] == 0 ? 'selected' : '' ?>>Rôle</option>
+                                    <option value="1" <?= $card['type'] == 1 ? 'selected' : '' ?>>Action</option>
+                                    <option value="2" <?= $card['type'] == 2 ? 'selected' : '' ?>>Bonus</option>
+                                    </select>
+                                </td>
+                                <td><textarea name="description"><?= $card['description']?></textarea></td>
+                                <td>
+                                    <button type="submit" class="edit-btn">Modifier</button>
+                                </td>
+                            </form>
+                            <td>
+                                <form method="POST" action="../../routes/cards.php?id=deleteCard" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette carte ?');">
+                                    <input type="hidden" name="id" value="<?= $card['id'] ?>">
+                                    <button type="submit" class="delete-btn">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <form method="POST" action="../../routes/cards.php?id=addCard" class="form-add" enctype="multipart/form-data">
+                <label for="name" class="form-label">Nom de la carte</label>
+                <input type="text" name="name" placeholder="Nom de la carte" class="form-input" required>
+
+                <select name="type">
+                    <option value="0">Rôle</option>
+                    <option value="1">Action</option>
+                    <option value="2">Bonus</option>
+                </select>
+                <br>
+                <br>
+                <label for="description" class="form-label">Rôle de la carte</label>
+                <textarea name="description" placeholder="Rôle de la carte" class="form-textarea" required></textarea>
+
+                <label for="image" class="form-label">Lien de l'image</label>
+                <input required type="file" name="image"><br><br>
+
+                <button type="submit" class="form-button">Ajouter la carte</button>
             </form>
         </section>
     </main>
