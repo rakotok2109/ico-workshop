@@ -1,6 +1,7 @@
 <?php 
 
-require_once (__DIR__ . '/../init.php');  
+require_once (dirname(__DIR__).'/init.php');
+
 
 class UserController {
 
@@ -217,4 +218,17 @@ class UserController {
     }
 
    
+
+    public static function findRoleUser($id_user){
+        try {
+            $pdo = PDOUtils::getSharedInstance();
+            $sql = "SELECT role FROM users WHERE id = ?";
+            $pdo->execSQL($sql, [$id_user]);
+
+            $_SESSION['user'];
+        }catch(PDOException $e){
+
+        }
+    }
+
 }

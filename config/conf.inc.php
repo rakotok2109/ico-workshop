@@ -22,3 +22,11 @@ $listOfLoginErrors = [
     0=> "L'email ou le mot de passe est incorrect",
     1=> "Une erreur est survenue lors de la connexion"
 ]; 
+
+$listeOfAdminCarteMessage = [
+    0=>"La carte a été créé avec succès.",
+];
+
+$listeOfAdminErrorCarteMessage =[
+    0=>"Echec lors de la création de la nouvelle carte : ",
+];

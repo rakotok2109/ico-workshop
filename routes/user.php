@@ -9,20 +9,17 @@ if($_GET['id'] == 'register') {
         unset( $_SESSION['inscriptionErreur']);
     }
     $user = new User(
-        $_POST['nom'],
-        $_POST['prenom'],
+        $_POST['name'],
+        $_POST['firstname'],
         $_POST['password'],
-        $_POST['email'],
-     
-    
-        $_POST['telephone'],
+        $_POST['mail'],
+        $_POST['phone'],
         $_POST['location'],
         0,
         null
     );
 
-    UserController::validateMail($user->getMail());
-    UserController::validateMail($user->getMail());
+    
     UserController::validateMail($user->getMail());
     UserController::validateFirstname($user->getFirstname());
     UserController::validateName($user->getName());
@@ -35,19 +32,13 @@ if($_GET['id'] == 'register') {
         $_SESSION['lastname'] = $user->getName();
         $_SESSION['phone'] = $user->getPhone();
         $_SESSION['email'] = $user->getMail();
-        $_SESSION['email'] = $user->getMail();
-        $_SESSION['email'] = $user->getMail();
      
 
-        header('Location: /pages/authentification/register.php');
-        exit();
-
-    }
-
-    else{
-
+        header('Location: ../pages/authentification/register.php');
+        var_dump($user);
+    }else{
         UserController::register($user);
-        header('Location: /pages/authentification/login.php');
+        header('Location: ../pages/authentification/login.php');
     
     }
 
@@ -75,6 +66,7 @@ else if($_GET['id'] == 'login') {
         header('Location: ../pages/authentification/login.php');
     }
 }
+
 else if($_GET['id'] == 'logout') {
     unset($_SESSION['user']);
     header('Location: ../pages/home.php');

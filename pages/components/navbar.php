@@ -1,6 +1,8 @@
 <?php
 require_once (dirname(dirname(__DIR__)).'/config/init.php');
-
+if(isset($_SESSION['user'])){
+$user = unserialize($_SESSION['user']);
+}
 ?>
 
 <head>
@@ -25,14 +27,13 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                         <?php
                     endif;
                     endif; ?>
-                <!-- <li><a href="DashboardAdminView.php">Dashboard</a></li> -->
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/pages/jeu/">Le Jeu</a></li>
 
                 <li><a href="avis.php">Avis</a></li>
                 <li><a href="faq.php">FAQ</a></li>
                 <!-- <li><a href="contact.php">contact</a></li> -->
-                <li><a href="products/">Acheter</a></li>
+                <li><a href="/pages/products/">Acheter</a></li>
                     <?php if (isset( $_SESSION['user'])) :
                             $user = unserialize($_SESSION['user']);
                     ?>
@@ -42,7 +43,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                             <span><?php echo $user->getName();?> <?php echo $user->getFirstname();?></span>
                         </a>
                         <div class="dropdown-content">
-                            <a href="../../pages/Profile.php">Profil</a>
+                            <a href="../../pages/profile.php">Profil</a>
                             <a href="../../pages/products/checkout.php">Panier</a>
                             <a style="color: #FCD3A1;" href="../../routes/user.php?id=logout">Déconnexion</a>
                         </div>
@@ -53,3 +54,4 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
             </ul>
         </div>
     </div>
+</div>
