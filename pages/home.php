@@ -65,7 +65,7 @@
                     <p>Disponible dès aujourd’hui sur les principales plateformes d'achat en ligne.</p>
                     <div class="buy-buttons">
                         <a href="https://www.amazon.fr/dp/B0CF9VJYK4" target="_blank" class="amazon-btn">Acheter sur Amazon</a>
-                        <a href="/pages/products/" class="site-btn">Acheter sur notre site</a>
+                        <a href="products/index.php" class="site-btn">Acheter sur notre site</a>
                     </div>
                 </div>
             </div>
@@ -88,5 +88,9 @@
             </div>
         </section>
     </div>
+
+    <footer>
+        <?php require_once (__DIR__. '/components/footer.php');?>
+    </footer>
 </body>
 </html>

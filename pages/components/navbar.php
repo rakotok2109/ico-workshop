@@ -31,7 +31,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
         <div class="container-navigation">
             <ul>
                 <li><a href="../pages/rules.php">Le jeu</a></li>    
-                <li><a href="../pages/avis.php">Avis</a></li>
+                <li><a href="../pages/feedbacks.php">Avis</a></li>
                 <li><a href="../pages/products/index.php">Acheter</a></li>
                
                     <?php if (isset( $_SESSION['user'])) :
