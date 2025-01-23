@@ -1,7 +1,7 @@
 
 <?php
-require_once(dirname(__DIR__) . '/config/init.php');
-require_once(dirname(__DIR__).'/pages/components/header.php');
+require_once(dirname(__DIR__) . '/../config/init.php');
+require_once(dirname(__DIR__).'/../pages/components/header.php');
 if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
     header('Location: ../authentification/login.php');
     exit();
@@ -72,15 +72,16 @@ $newsList = NewsController::getAllNews();
         <?php foreach($products as $product): ?>
             <tr>
                 <form method="POST" action="../../routes/product.php?id=updateProduct" style="display:inline;">
-                    <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
-                    <td><input type="text" name="name" value="<?= $product['name'] ?>" required></td>
-                    <td><input type="number" name="price" value="<?= $product['price'] ?>" step="0.01" required></td>
-                    <td><textarea name="description"><?= $product['description'] ?></textarea></td>
-                    <td><input type="text" name="image" value="<?= $product['image'] ?>" required></td>
+                    <input type="hidden" name="id" value="<?= ($product->getId())!==null ? $product->getId() : '' ?>">
+                    <td><input type="text" name="name" value="<?= $product->getName()
+                     ?>" required></td>
+                    <td><input type="number" name="price" value="<?= $product->getPrice() ?>" step="0.01" required></td>
+                    <td><textarea name="description"><?= $product->getDescription() ?></textarea></td>
+                    <td><input type="text" name="image" value="../../ressources/image/produits/<?= $product->getImage() ?>" required></td>
                     <td><button type="submit">Modifier</button></td>
                 </form>
                 <td><form method="POST" action="../../routes/product.php?id=deleteProduct" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
-                    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                    <input type="hidden" name="id" value="<?= $product->getId() ?>">
                     <button type="submit" style="background-color:red; color:white;">Supprimer le produit</button>
                     </form>
                 </td>
@@ -89,11 +90,13 @@ $newsList = NewsController::getAllNews();
     </tbody>
 </table>
 
-<form method="POST" action="../../routes/product.php?id=addProduct">
+<form method="POST" action="../../routes/product.php?id=addProduct" enctype="multipart/form-data">
     <input type="text" name="name" placeholder="Nom du produit" required>
     <input type="number" name="price" placeholder="Prix en €" step="0.01" required>
     <textarea name="description" placeholder="Description du produit" required></textarea>
-    <input type="text" name="image" placeholder="Lien de l'image" required>
+    <input required type="file" name="image"><br><br>
+
+    <!-- <input type="text" name="image" placeholder="Lien de l'image" required> -->
     <button type="submit">Ajouter le produit</button>
 </form>
 

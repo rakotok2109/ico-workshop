@@ -22,8 +22,8 @@ class PDOUtils {
                 'password' => 'Asking@1234',
             ],
         ]; 
-        $environment = 'production'; 
-        // $environment = 'development'; 
+        // $environment = 'production'; 
+        $environment = 'development'; 
         $dbConfig = $environments[$environment];
 
         $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset=utf8";
