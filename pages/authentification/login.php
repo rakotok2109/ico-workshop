@@ -14,7 +14,7 @@
 </head>
 <body class="bg-gray-900 text-gray-100">
     <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center" 
-         style="background-image: url('/ressources/image/img2.png');">
+         style="background-image: url('/ressources/images/img2.png');">
         <div class="absolute inset-0 bg-black bg-opacity-60"></div>
 
         <div class="relative z-10 text-center px-8 py-12 max-w-2xl">

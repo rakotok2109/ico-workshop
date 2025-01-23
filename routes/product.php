@@ -5,7 +5,7 @@ if($_GET['id'] == 'addProduct') {
                      // Vérifiez si le fichier a été téléchargé
                      if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                          // Définir le dossier de destination
-                         $uploadDir =(dirname(__DIR__).'/ressources/image/produits/');
+                         $uploadDir =(dirname(__DIR__).'/ressources/images/produits/');
                         
                          // Récupérer le nom du fichier
                          $imageName = basename($_FILES['image']['name']);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICO</title>
-    <link rel="icon" href="/ressources/image/ICO_Logo.png" type="image/x-icon">
+    <link rel="icon" href="/ressources/images/ICO_Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../ressources/css/home.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
 
     <!-- <div class="container-logo-regle"> -->
         <!-- <div class="logo-ico"> -->
-            <!-- <img src="../ressources/image/ICO-template-logo.png" alt="logo-ICO"> -->
+            <!-- <img src="../ressources/images/ICO-template-logo.png" alt="logo-ICO"> -->
         <!-- </div> -->
         <!-- <div class="navigation-regle-du-jeu"> -->
             <!-- <a href="regleDuRegle.php">Règle du Jeu</a> -->
@@ -39,7 +39,7 @@
 <div class="">
 <?php include (__DIR__ . '/navbar.php'); ?>
       <!-- Section Héros -->
-      <div class="relative w-full h-[500px] bg-cover bg-center" style="background-image: url('../ressources/image/ICO-template-logo.png');">
+      <div class="relative w-full h-[500px] bg-cover bg-center" style="background-image: url('../ressources/images/ICO-template-logo.png');">
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white">
             <h1 class="text-6xl font-[Chaloops]">Le Code Pirate : L'or ou rien !</h1>
             <p class="mt-4 text-xl">Prêt à démasquer les traîtres et remporter le trésor ?</p>

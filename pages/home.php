@@ -26,7 +26,7 @@ $news = array_slice($news, 0, 3);
             <div class="carousel-inner">
                 <?php foreach ($news as $index => $item): ?>
                     <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
-                        <img class="d-block w-100" src="../ressources/image/gouvernail.png" alt="<?= htmlspecialchars($item['title']) ?>">
+                        <img class="d-block w-100" src="../ressources/images/gouvernail.png" alt="<?= htmlspecialchars($item['title']) ?>">
                         <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-4 rounded">
                             <h5><?= htmlspecialchars($item['title']) ?></h5>
                             <p><?= htmlspecialchars($item['wording'] ?? 'Description non disponible') ?></p>
@@ -56,7 +56,7 @@ $news = array_slice($news, 0, 3);
 <div class="mt-10 container mx-auto py-16 px-8 flex flex-col md:flex-row items-center bg-[#FCD3A1] text-gray-900 rounded-lg shadow-lg">
     <!-- Image du jeu -->
     <div class="md:w-1/2 w-full flex justify-center">
-        <img src="../ressources/image/jeu_de_carte.png" alt="Boîte du jeu ICO" class="max-w-xs md:max-w-md rounded-lg shadow-lg">
+        <img src="../ressources/images/jeu_de_carte.png" alt="Boîte du jeu ICO" class="max-w-xs md:max-w-md rounded-lg shadow-lg">
     </div>
     <!-- Boutons d'achat -->
     <div class="md:w-1/2 w-full text-center md:text-left mt-8 md:mt-0">
@@ -85,7 +85,7 @@ $news = array_slice($news, 0, 3);
         <div class="flex flex-wrap justify-center mt-8">
             <div class="w-full md:w-1/2 lg:w-1/3 p-4">
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="../ressources/image/chinoise.jpg" alt="Fondateur 1" class="w-full h-64 object-cover">
+                    <img src="../ressources/images/chinoise.jpg" alt="Fondateur 1" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-[#FBC434]">Michael Fernandez</h3>
                         <p class="mt-2 text-gray-600">Passionné par la piraterie et le jeu, Michael est l'esprit créatif derrière ICO.</p>
@@ -94,7 +94,7 @@ $news = array_slice($news, 0, 3);
             </div>
             <div class="w-full md:w-1/2 lg:w-1/3 p-4">
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="../ressources/image/chinoise.jpg" alt="Fondateur 2" class="w-full h-64 object-cover">
+                    <img src="../ressources/images/chinoise.jpg" alt="Fondateur 2" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-[#FBC434]">Fabio</h3>
                         <p class="mt-2 text-gray-600">Expert en jeux de stratégie, Fabio a contribué au développement des mécaniques du jeu.</p>

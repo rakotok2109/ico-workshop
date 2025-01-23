@@ -33,7 +33,7 @@ require_once(__DIR__ . '/../../config/init.php');
     </style>
 </head>
 <body class="bg-gray-200 text-gray-900"
-style="background-image: url('/ressources/image/img2.png');">
+style="background-image: url('/ressources/images/img2.png');">
 >
     <div class="min-h-screen flex items-center justify-center"
     >

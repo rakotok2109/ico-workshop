@@ -25,7 +25,7 @@
                 if ($product) { 
             ?>
                 <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="../../ressources/image/produits/<?= $product->getImage() ?>" alt="Produit" class="w-full h-80 object-cover">
+                    <img src="../../ressources/images/produits/<?= $product->getImage() ?>" alt="Produit" class="w-full h-80 object-cover">
                     <div class="p-6">
                         <h2 class="text-3xl font-bold text-[#af2127]"> <?= $product->getName(); ?> </h2>
                         <p class="text-gray-600 mt-4"> <?= $product->getDescription(); ?> </p>
