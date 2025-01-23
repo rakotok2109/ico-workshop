@@ -42,7 +42,7 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
                             <span><?php echo $user->getName();?> <?php echo $user->getFirstname();?></span>
                         </a>
                         <div class="dropdown-content">
-                            <a href="../../pages/Profile.php">Profil</a>
+                            <a href="../../pages/profile.php">Profil</a>
                             <a href="../../pages/products/checkout.php">Panier</a>
                             <a style="color: #FCD3A1;" href="../../routes/user.php?id=logout">Déconnexion</a>
                         </div>
