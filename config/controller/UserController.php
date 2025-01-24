@@ -20,7 +20,7 @@ class UserController {
                     $user = new User($result[0]['name'], $result[0]['firstname'], $result[0]['password'], $result[0]['mail'], $result[0]['phone'], $result[0]['location'], $result[0]['role'], $result[0]['id']);
                   
                     $_SESSION['user'] = serialize($user);
-                    $_SESSION['user_expiration'] = time() + 86400; // 86400 secondes = 1 jour
+                    $_SESSION['user_expiration'] = time() + 86400;
                     return true;
                    
                 } else {
@@ -52,7 +52,6 @@ class UserController {
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['inscriptionErreur'][] = 3;
         }
-        //Vérifier si l'email existe déjà
         if (UserController::mailExists($mail)) {
             $_SESSION['inscriptionErreur'][] = 2;
           
@@ -64,14 +63,14 @@ class UserController {
     public static function validateName($name)
     {
         if (strlen($name) < 3) {
-            $_SESSION['inscriptionErreur'][] = 0; // Le nom doit faire plus de 2 caractères
+            $_SESSION['inscriptionErreur'][] = 0;
         }
     }
 
     public static function validateFirstname($firstname)
     {
         if (strlen($firstname) < 3) {
-            $_SESSION['inscriptionErreur'][] = 1; // Le prénom doit faire plus de 2 caractères
+            $_SESSION['inscriptionErreur'][] = 1;
         }
     }
 
@@ -82,14 +81,14 @@ class UserController {
             !preg_match('/[a-z]/', $password) || 
             !preg_match('/[0-9]/', $password) || 
             !preg_match('/[\W]/', $password)) {
-            $_SESSION['inscriptionErreur'][] = 4; // Le mot de passe doit respecter les critères
+            $_SESSION['inscriptionErreur'][] = 4;
         }
     }
 
     public static function validatePhone($phone)
     {
         if (!preg_match('/^\+?[0-9]{10,15}$/', $phone)) {
-            $_SESSION['inscriptionErreur'][] = 9; // Veuillez entrer un numéro de téléphone valide
+            $_SESSION['inscriptionErreur'][] = 9;
         }
     }
 
@@ -176,14 +175,11 @@ class UserController {
     {
         try {
             $pdo = PDOUtils::getSharedInstance();
-    
-            // Requête SQL avec la méthode générique requestSQL
             $result = $pdo->requestSQL("SELECT * FROM users WHERE id = ?", [$userId]);
     
             if ($result && count($result) > 0) {
-                $row = $result[0]; // Récupère la première ligne
+                $row = $result[0];
     
-                // Création d'un nouvel objet User
                 $user = new User(
                     $row['name'],
                     $row['firstname'],
@@ -195,10 +191,9 @@ class UserController {
                     $row['id']
                 );
     
-                // Met à jour la session avec l'objet utilisateur
                 $_SESSION['user'] = serialize($user);
     
-                return $user; // Retourne l'objet utilisateur
+                return $user; 
             } else {
                 throw new Exception("Utilisateur non trouvé.");
             }

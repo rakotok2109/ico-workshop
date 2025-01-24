@@ -1,160 +1,239 @@
-/* Styles généraux */
-body {
-    font-family: 'Filson Pro', sans-serif;
-    color: #574a45; /* Texte principal */
-    background-color: #ecba75; /* Fond général */
-    margin: 0;
-    padding: 0;
+*{
+    font-family: "Indie Flower", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.container-navbar{
+    position :relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 80px;
+    z-index: 10;
+    background-color: #3b60bc;
+}
+.container-logo a img{
+    height: 100px;
+    width: 120px;
+    border-radius: 50%;
+}
+.container-navigation ul li {
+    list-style: none;
+}
+.container-navigation ul li a{
+    color: #FCD3A1;
+}
+.container-login-user img{
+    height: 50px;
+    width:50px;
+    border-radius: 50%;
+}
+.container-navigation ul{
+    display: flex;
+    justify-content: space-around;
+    gap:30px;
+    align-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+.container-navigation{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding-right: 30px;
+
+} 
+.container-main-header{
+    position: relative;
+    background-color: #3B60BC;
+    height: 500px;
+
+}
+.container-main-header::before{ 
+content:'';
+height: 100vh;
+font-family:'shape divider from ShapeDividers.com';
+position: absolute;
+z-index: 3;
+pointer-events: none;
+background-repeat: no-repeat;
+bottom: -0.1vw;
+left: -0.1vw;
+right: -0.1vw;
+top: 32vw; 
+background-size: 153% 109px;
+background-position: 50% 0%;  background-image: url('data:image/svg+xml;charset=utf8, <svg preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000.4 78"><g fill="%233b60bc"><path d="M1786 0h125c11 6 21 11 33 13a63 63 0 0012 2 58 58 0 007 0 62 62 0 009-1c9-2 20-7 26-14h2v2a44 44 0 01-2 13c-4 13-14 25-26 30-25 11-55 5-78-3l-44-18c-10-4-20-8-31-7s-23 8-23 19c-7-5-10-12-12-20v-1a36 36 0 012-15z"/><path d="M1572 0h126c10 6 21 11 33 13a63 63 0 0012 2 58 58 0 006 0 62 62 0 0010-1c8-2 19-7 25-14h3a43 43 0 01-2 15l-1 1c-4 13-13 24-25 29-25 11-56 5-78-3l-44-18c-10-4-20-7-32-7s-23 8-23 19c-6-5-10-12-11-21a36 36 0 011-15z"/><path d="M1359 0h125c10 6 21 11 33 13a63 63 0 0012 2 58 58 0 006 0 62 62 0 0010-1c8-2 20-7 25-14h3a43 43 0 01-2 15c-4 13-14 25-26 30-25 11-56 5-78-3l-44-18c-10-4-20-7-31-7s-23 8-23 19c-7-5-11-12-12-21a36 36 0 012-15z"/><path d="M1145 0h125c11 6 21 11 33 13a63 63 0 0012 2 58 58 0 006 0 62 62 0 0010-1c9-2 20-7 26-14h2a43 43 0 01-2 15c-4 13-14 25-26 30-25 11-55 5-78-3l-44-18c-10-4-20-7-31-7s-23 8-23 19c-7-5-11-12-12-21a36 36 0 012-15z"/><path d="M931 0h125c11 6 21 11 33 13a63 63 0 0012 2 58 58 0 007 0 62 62 0 009-1c9-2 20-7 26-14h2a44 44 0 01-2 15c-4 13-14 25-26 30-25 11-55 5-77-3l-44-18c-11-4-21-8-32-7s-23 8-23 19c-7-5-11-13-12-21a36 36 0 012-15z"/><path d="M717 0h125c11 6 22 11 33 13a63 63 0 0012 2 58 58 0 007 0 62 62 0 009-1c9-2 20-7 26-14h3a43 43 0 01-3 15c-4 13-13 25-25 30-26 11-56 5-78-3l-44-18c-11-4-21-8-32-7s-23 8-23 19c-7-5-10-13-11-21a36 36 0 011-15z"/><path d="M503 0h125c11 6 22 11 33 13a62 62 0 0013 2 58 58 0 006 0 62 62 0 009-1c9-2 20-7 26-14h3a43 43 0 01-2 15c-5 13-14 25-26 30-26 11-56 5-78-3l-44-18c-10-4-21-7-32-7s-23 8-23 19c-6-5-10-12-11-21a36 36 0 011-15z"/><path d="M289 0h126c10 6 21 11 32 13a63 63 0 0013 2 58 58 0 006 0 62 62 0 009-1c9-2 20-7 26-14h3a44 44 0 01-2 15c-4 13-14 25-26 30-26 11-56 5-78-3l-44-18c-10-4-21-8-32-7s-23 8-23 19c-6-5-10-13-11-21a36 36 0 011-15z"/><path d="M75 0h126c10 6 21 11 33 13a63 63 0 0012 2 58 58 0 006 0 62 62 0 0010-1c8-2 19-7 25-14h3a43 43 0 01-2 15c-4 13-14 25-26 30-25 11-56 5-78-3l-44-18c-10-4-20-8-32-7s-23 8-23 19c-6-5-10-13-11-21a36 36 0 011-15z"/><path d="M0 50V6a121 121 0 0020 7 63 63 0 0012 2 58 58 0 006 0 62 62 0 0010-1c8-2 20-7 26-14h2a43 43 0 01-2 15c-4 13-14 25-26 30-15 7-32 7-48 5z"/><path d="M0 0h1998v15H0z"/><circle cx="1826.1" cy="44.1" r="14.3"/><circle cx="1979.1" cy="67.1" r="10.9"/><circle cx="1909.7" cy="63.9" r="6.4"/><circle cx="1610.7" cy="44.1" r="14.3"/><circle cx="1763.7" cy="67.1" r="10.9"/><circle cx="1694.3" cy="63.9" r="6.4"/><circle cx="1395.4" cy="44.1" r="14.3"/><circle cx="1548.4" cy="67.1" r="10.9"/><circle cx="1478.9" cy="63.9" r="6.4"/><circle cx="1181.9" cy="44.1" r="14.3"/><circle cx="1333" cy="67.1" r="10.9"/><circle cx="1263.6" cy="63.9" r="6.4"/><circle cx="967.2" cy="44.1" r="14.3"/><circle cx="1117.7" cy="67.1" r="10.9"/><circle cx="1048.2" cy="63.9" r="6.4"/><circle cx="757.7" cy="44.1" r="14.3"/><circle cx="902.3" cy="67.1" r="10.9"/><circle cx="832.9" cy="63.9" r="6.4"/><circle cx="542.3" cy="44.1" r="14.3"/><circle cx="686.9" cy="67.1" r="10.9"/><circle cx="617.5" cy="63.9" r="6.4"/><circle cx="326.9" cy="44.1" r="14.3"/><circle cx="471.6" cy="67.1" r="10.9"/><circle cx="402.2" cy="63.9" r="6.4"/><circle cx="111.2" cy="44.1" r="14.3"/><circle cx="256.2" cy="67.1" r="10.9"/><circle cx="186.8" cy="63.9" r="6.4"/><circle cx="40.9" cy="67.1" r="10.9"/></g></svg>'); 
 }
 
-/* Titres */
-h2 {
-    font-family: 'Chaloops', sans-serif;
-    color: #ffffff;
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+.logo-ico img{
+    position: relative;
+    height: 270px;
+    left: 35%;
 }
 
-/* Section Dernières nouveautés */
-.latest-news {
-    background-color: #ecba75; /* Beige charte */
-    padding: 60px 20px;
+.carousel-container {
+    position: relative; 
+    z-index: 5; 
+    margin-top: 20px; 
+}
+
+#carouselExampleIndicators {
+    position: relative;
+    z-index: 5; 
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 17px;
+    border: solid 5px #FCD3A1;
+
+}
+
+#carouselExampleIndicators img{
+    max-height: 250px;
     border-radius: 10px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
+    
 }
 
-/* Carrousel */
-.carousel-item img {
-    max-width: 80%;
-    border-radius: 10px;
+.element-titre{
+    margin-top: 120px;
+    margin-left: 5%;
 }
 
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 20px;
+.navigation-regle-du-jeu{
+    width: 120px;
+    height: 70px;
+    background-color: white;
+    border-radius: 40px;
+    position: relative;
+    left: 45%;
+    box-shadow: 5px 5px 0px 0px #FCD3A1;
+    transition: all 0.2s ease; 
 }
 
-/* Section Synopsis */
-.synopsis {
-    background: #3c60bc; /* Bleu charte */
-    color: #fafcfd; /* Blanc charte */
-    border-radius: 10px;
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: 40px auto;
-    text-align: center;
+.navigation-regle-du-jeu a{
+    width: 120px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3B60BC;
 }
 
-/* Section Achat du jeu */
-.buy-game {
+.navigation-regle-du-jeu a:hover {
+    text-decoration: none;
+}
+.navigation-regle-du-jeu:hover {
+    transform: translate(5px, 5px); 
+    box-shadow: 0px 0px 0px 0px #FCD3A1; 
+}
+
+#carouselExampleIndicators {
+    position: relative;
+    z-index: 5; 
+    margin-top: 20px;
+}
+
+.histoire-du-jeu{
+    position:relative;
+    margin: 20px 5% 20px 5%;
+}
+.histoire-du-jeu h2{
+    margin-bottom: 20px;
+}
+.histoire-du-jeu p {
+    padding: 0px 20px;
+    font-family: "Indie Flower", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5em;
+}
+.presentation-fondateur{
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+}
+.presentation-fondateurs{
+   
+    background-color: #b9b9b9;
+    margin-top: 50px;
+    display: flex;
+}
+.text-presentation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.container-gouvernail img{
+    padding: 30px;
+    height: 500px;
+}
+.photo-fondateur1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    background-color: #d88a32; /* Orange charte */
-    padding: 60px 20px;
-    border-radius: 10px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.photo-fondateur1 img{
+    
+    height: 212px;
+    width: 245px;
+    border-radius: 50%;
+    border: solid 2px #bf732b;
+    padding: 0px;
+}
+.photo-fondateur {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.photo-fondateur img{
+    height: 212px;
+    width: 245px;
+    border-radius: 50%;
+    border: solid 2px #bf732b;
+    padding: 0px;
+}
+
+@keyframes apparition {
+    from{
+        opacity:0;
+        scale: 0.5;
+    }
+    to{
+        opacity:1;
+        scale:1;
+    }
+}
+
+.presentation-fondateur,.photo-fondateur1,.photo-fondateur{
+    animation: apparition linear;
+    animation-timeline: view();
+    animation-range: entry 0;
+}
+section.buy-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .buy-container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-}
-
-.buy-info {
-    max-width: 600px;
-    text-align: left;
-    margin-left: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.buy-game img {
-    max-width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Boutons d'achat */
-.amazon-btn, .site-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-}
-
-.amazon-btn {
-    background-color: #ecba75; /* Beige charte */
-    color: #574a45;
-}
-
-.amazon-btn:hover {
-    background-color: #d88a32; /* Orange charte */
-    color: #fafcfd;
-}
-
-.site-btn {
-    background-color: #3c60bc; /* Bleu charte */
-    color: #fafcfd;
-}
-
-.site-btn:hover {
-    background-color: #574a45;
-    color: #fafcfd;
-}
-
-/* Section Présentation des fondateurs */
-.founders {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-}
-
-.founders-container {
-    display: flex;
-    justify-content: center;
     gap: 40px;
-    flex-wrap: wrap;
+    box-shadow: 10px 10px 20px #FCD3A1;
+    border-radius: 20px;
+    margin: 20px 0;
 }
 
-.founder {
-    background: #fafcfd; /* Blanc charte */
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.buy-buttons {
+    display: flex;
+    justify-content: space-around;
 }
-
-.founder img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+h2{
+    font-size: 2em;
 }
-
-.founder h3 {
-    color: #d88a32; /* Orange charte */
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.founder p {
-    color: #574a45;
-    font-size: 1rem;
+.page-du-site {
+position: relative;
+top: 40px;
 }

@@ -1,7 +1,6 @@
-/* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
 
-/* Style global */
+
 body {
     font-family: 'Nunito', sans-serif;
     background: linear-gradient(to right, #3c60bc, #d88a32);
@@ -10,7 +9,7 @@ body {
     padding: 0;
 }
 
-/* Conteneur principal */
+
 .feedbacks-container {
     max-width: 1000px;
     margin: 50px auto;
@@ -21,7 +20,7 @@ body {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Titre principal */
+
 .page-title {
     font-size: 3rem;
     color: #3c60bc;
@@ -31,7 +30,7 @@ body {
     animation: slideIn 1s ease-in-out;
 }
 
-/* Liste des avis */
+
 .feedback-list {
     display: flex;
     flex-wrap: wrap;
@@ -39,7 +38,7 @@ body {
     justify-content: center;
 }
 
-/* Carte d'avis individuelle */
+
 .feedback-card {
     background: #ecba75;
     color: #574a45;
@@ -57,28 +56,28 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Titre du prénom */
+
 .feedback-card h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;
     color: #3c60bc;
 }
 
-/* Note de l'utilisateur */
+
 .rating {
     font-size: 1.4rem;
     font-weight: bold;
     color: #d88a32;
 }
 
-/* Texte de l'avis */
+
 .feedback-text {
     font-size: 1.2rem;
     line-height: 1.5;
     color: #574a45;
 }
 
-/* Message aucun avis */
+
 .no-feedback {
     font-size: 1.5rem;
     color: #d88a32;
@@ -86,7 +85,7 @@ body {
     margin-top: 20px;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -120,7 +119,7 @@ body {
     }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .feedback-card {
         max-width: 100%;

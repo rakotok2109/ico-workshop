@@ -1,5 +1,9 @@
 <?php
 require_once (dirname(dirname(__DIR__)).'/config/init.php');
+if(isset($_SESSION['user'])){
+    $user = unserialize($_SESSION['user']);
+}
+
 ?>
 
 <head>
@@ -26,6 +30,11 @@ require_once (dirname(dirname(__DIR__)).'/config/init.php');
         </div>
         <div class="container-navigation">
             <ul>
+            <?php 
+                    if(isset($_SESSION['user']) && $user->getRole() > 0){
+                    ?>
+                    <li><a href="../admin/dashboard.php">Dashboard</a></li>
+                 <?php }?>
                 <li><a href="../rules.php">Le jeu</a></li>    
                 <li><a href="../feedbacks.php">Avis</a></li>
                 <li><a href="../products/index.php">Acheter</a></li>

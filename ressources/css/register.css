@@ -1,4 +1,3 @@
-/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +16,7 @@ a {
     text-decoration: none;
 }
 
-/* Container styles */
+
 .register-container {
     display: flex;
     justify-content: center;
@@ -38,7 +37,7 @@ a {
     padding: 2rem;
 }
 
-/* Image section */
+
 
 .register-image {
     display: flex;
@@ -53,7 +52,7 @@ a {
     border-radius: 8px;
 }
 
-/* Form section */
+
 .register-form {
     padding-left: 2rem;
     flex: 1;
@@ -80,7 +79,7 @@ a {
     margin-bottom: 1.5rem;
 }
 
-/* Error message */
+
 .error-message {
     color: red;
     text-align: center;
@@ -91,7 +90,7 @@ a {
     list-style: none;
 }
 
-/* Form inputs */
+
 .input-group {
     margin-bottom: 1.5rem;
 }
@@ -117,7 +116,7 @@ input:focus {
     outline: none;
 }
 
-/* Submit button */
+
 .register-btn {
     background-color: #3c60bc;
     color: white;
@@ -134,7 +133,7 @@ input:focus {
     background-color: #2a4f8c;
 }
 
-/* Footer buttons */
+
 .register-footer {
     display: flex;
     justify-content: center;
@@ -158,7 +157,7 @@ input:focus {
     color: white;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .register-content {
         flex-direction: column;

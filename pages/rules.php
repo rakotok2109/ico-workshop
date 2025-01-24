@@ -38,7 +38,7 @@
             transform: rotateY(180deg);
         }
         .active-tab {
-            background-color: #f5deb3 !important; /* Couleur beige */
+            background-color: #f5deb3 !important;
          
         }
     </style>
@@ -48,7 +48,6 @@
 <?php include(__DIR__ . '/components/navbar.php') ?>
 
 
-<!-- Tabs -->
 <div class="flex justify-center mt-12">
     <a href="#rules" onclick="showSectionRules('rules')"><button id="tab-rules"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Règles du jeu</button></a>
     <a href="#cards" onclick="showSectionRules('cards')"><button id="tab-cards"  class="tab-button px-4 py-2 mx-2 bg-[#00253e] text-white rounded hover:bg-[#af2127]">Cartes</button></a>
@@ -58,14 +57,12 @@
 <section id="rules" class="rules-section">
     <div class="max-w-6xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
         <h1 class="text-4xl font-bold text-center text-[#af2127] mb-6">Règles du Jeu</h1>
-        <!-- Intro -->
         <p>
             Quelque part en pleine Mer, un groupe de Marins est chargé de transporter un Trésor, mais des pirates ont peut-être infiltré leur équipage afini de le voler.
             <strong>
                 <i>Entre tempête, mal de mer, sirènes, trahisons et autres dangers, le trésor arrivera-t-il à bon port?</i>
             </strong>
         </p>
-        <!-- Objectif -->
         <h2 class="text-2xl font-semibold text-[#00253e] mt-4">Objectif du jeu</h2>
         <ul>
             <li>
@@ -81,7 +78,6 @@
         </ul>
 
 
-        <!-- Materiel  -->
         <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
             <h2 class="text-2xl font-semibold text-[#00253e] mt-6">Matériel</h2>
             <p class="mt-2 text-gray-700 leading-relaxed">
@@ -135,17 +131,14 @@
                 </div>
             </div>
         </div>
-        <!-- Distributon des cartes -->
         <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
             <h2 class="text-2xl font-semibold text-[#00253e] mb-4">Distributions des cartes</h2>
             <div class="grid grid-cols-4 gap-4 text-center">
-                <!-- En-têtes -->
                 <div class="font-bold">JOUEURS</div>
                 <div class="font-bold">PIRATES</div>
                 <div class="font-bold">MARINS</div>
                 <div class="font-bold">SIRÈNE</div>
 
-                <!-- Lignes de données -->
                 <div>7</div><div>3</div><div>3</div><div>1</div>
                 <div>8</div><div>3</div><div>4</div><div>1</div>
                 <div>9</div><div>4</div><div>4</div><div>1</div>
@@ -163,10 +156,8 @@
             </div>
         </div>
         
-        <!-- Déroulement d'une partie -->
         <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
             <h2 class="text-3xl font-bold text-center text-[#af2127] mb-6">Déroulement d’une partie</h2>
-            <!-- Mise en place -->
             <div class="mb-6">
                 <h3 class="text-2xl font-semibold text-[#00253e] mb-2">Mise en place</h3>
                 <p class="text-gray-700 leading-relaxed">
@@ -184,7 +175,6 @@
                 </p>
             </div>
 
-            <!-- Premier voyage -->
             <div class="mb-6">
                 <h3 class="text-2xl font-semibold text-[#00253e] mb-2">Premier voyage</h3>
                 <p class="text-gray-700 leading-relaxed">
@@ -201,7 +191,6 @@
                 </p>
             </div>
 
-            <!-- Suite de la partie -->
             <div class="mb-6">
                 <h3 class="text-2xl font-semibold text-[#00253e] mb-2">Suite de la partie</h3>
                 <p class="text-gray-700 leading-relaxed">
@@ -218,7 +207,6 @@
                 </p>
             </div>
 
-            <!-- Condition de victoire -->
             <div>
                 <h3 class="text-2xl font-semibold text-[#00253e] mb-2">Condition de victoire</h3>
                 <p class="text-gray-700 leading-relaxed">
@@ -227,14 +215,11 @@
             </div>
         </div>
 
-        <!-- Conseils aux joueurs -->
         <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
             <h2 class="text-3xl font-bold text-center text-[#af2127] mb-6">Astuces et stratégies</h2>
-            <!-- Conseils aux Joueurs -->
             <div class="mb-6">
                 <h3 class="text-2xl font-semibold text-[#00253e] mb-2">Conseils aux Joueurs</h3>
                 
-                <!-- Le Capitaine -->
                 <div class="mb-4">
                     <h4 class="text-xl font-semibold text-[#00253e]">Le Capitaine</h4>
                     <p class="text-gray-700 leading-relaxed">
@@ -242,7 +227,6 @@
                     </p>
                 </div>
                 
-                <!-- La Sirène -->
                 <div class="mb-4">
                     <h4 class="text-xl font-semibold text-[#00253e]">La Sirène</h4>
                     <p class="text-gray-700 leading-relaxed">
@@ -250,7 +234,6 @@
                     </p>
                 </div>
                 
-                <!-- Les Marins -->
                 <div class="mb-4">
                     <h4 class="text-xl font-semibold text-[#00253e]">Les Marins</h4>
                     <p class="text-gray-700 leading-relaxed">
@@ -258,7 +241,6 @@
                     </p>
                 </div>
                 
-                <!-- Les Pirates -->
                 <div>
                     <h4 class="text-xl font-semibold text-[#00253e]">Les Pirates</h4>
                     <p class="text-gray-700 leading-relaxed">
@@ -272,20 +254,16 @@
 
 
 <section id="cards" class="rules-section" style="display: none;">
-    <!-- Cartes -->
     <div class="max-w-5xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
         <h1 class="text-4xl font-bold text-center text-[#af2127] mb-6">Cartes du Jeu</h1>
         <h2 class="text-2xl font-semibold text-[#00253e] mt-6">Carte Rôles</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-            <!-- Carte Pirate -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32">
-                        <!-- Face avant -->
                         <div class="absolute w-full h-full backface-hidden">
                             <img src=" ../ressources/images/Cartes/CartesRoles/Carte-Pirate.png" alt="Carte Pirate" class="object-cover rounded-md">
                         </div>
-                        <!-- Face arrière -->
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
                             <img src="../ressources/images/Cartes/CartesRoles/Carte-dos-role.png" alt="Carte Pirate - arrière" class="object-cover rounded-md">
                         </div>
@@ -296,7 +274,6 @@
                     <p class="text-gray-700">Leur but est d'empoisonner les marins sans se faire repérer. Pour noyer les soupçons, ils ont le choix entre une carte <i>ÎLE</i> ou une carte <i>POISON</i>.Ils connaissent leurs complices </p>
                 </div>
             </div>
-            <!-- Carte Marin -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -314,7 +291,6 @@
                 </div>
             </div>
 
-            <!-- Carte Sirène -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -344,15 +320,12 @@
 
         <h2 class="text-2xl font-semibold text-[#00253e] mt-6">Cartes Action</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-            <!-- Carte Île -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32">
-                        <!-- Face avant -->
                         <div class="absolute w-full h-full backface-hidden">
                             <img src="../ressources/images/Cartes/CartesAction/Carte-île.png" alt="Carte île" class="object-cover rounded-md">
                         </div>
-                        <!-- Face arrière -->
                         <div class="absolute w-full h-full backface-hidden rotate-y-180">
                             <img src="../ressources/images/Cartes/CartesAction/Carte-dos-action.png" alt="Carte île - arrière" class="object-cover rounded-md">
                         </div>
@@ -366,7 +339,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Poison -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -391,7 +363,6 @@
                 </div>
             </div>
 
-            <!-- Carte Sirène -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -413,32 +384,27 @@
         <h2 class="text-2xl font-semibold text-[#00253e] mt-6">Cartes Bonus</h2>
 
         <div class="flex justify-around items-center">
-            <!-- Carte  1 -->
             <div class="flex items-center">
                 <div class="w-8 h-8 bg-green-500 rounded-full mr-2"></div>
                 <p class="text-gray-700">Utilisable lorsque les cartes Actions ont été dévoilées</p>
             </div>
 
-            <!-- Carte  2 -->
             <div class="flex items-center">
                 <div class="w-8 h-8 bg-purple-500 rounded-full mr-2"></div>
                 <p class="text-gray-700">Utilisable à n'importe quel moment</p>
             </div>
 
-            <!-- Carte  3 -->
             <div class="flex items-center">
                 <div class="w-8 h-8 bg-yellow-500 rounded-full mr-2"></div>
                 <p class="text-gray-700">Utilisable avant la phase de vote</p>
             </div>
 
-            <!-- Carte  4 -->
             <div class="flex items-center">
                 <div class="w-8 h-8 bg-blue-500 rounded-full mr-2"></div>
                 <p class="text-gray-700">Utilisable avant la phase d'action</p>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-            <!-- Carte Antidote -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -462,7 +428,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Observateur -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -482,7 +447,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Perroquet -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -519,7 +483,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Voyage Express -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -543,7 +506,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Mal de mer -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -565,7 +527,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Troc -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -586,7 +547,6 @@
                     </p>
                 </div>
             </div>
-            <!-- Carte Mer Agitée -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -605,7 +565,6 @@
                         ils rendent leurs cartes.</p>
                 </div>
             </div>
-            <!-- Carte Medusa -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -623,7 +582,6 @@
                         à tout le monde</p>
                 </div>
             </div>
-            <!-- Carte Malandrin -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
@@ -643,7 +601,6 @@
                         en avoir une idée.</p>
                 </div>
             </div>
-            <!-- Carte Charlatin -->
             <div class="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col items-center">
                 <div class="relative perspective">
                     <div class="card w-32 h-32 transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">

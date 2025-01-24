@@ -20,20 +20,16 @@ class PDOUtils {
         public function requestSQL($sql, $params = null) {
             $statement = $this->pdo_->prepare($sql);
             
-            // Vérifie si la préparation de la requête a réussi
             if ($statement) {
-                // Exécute la requête avec les paramètres fournis
                 if ($statement->execute($params)) {
                    
                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                     unset($statement);
                     return $result;
                 } else {
-                    // Gérer les erreurs d'exécution
                     throw new Exception('Erreur lors de l\'exécution de la requête : ' . implode(", ", $statement->errorInfo()));
                 }
             } else {
-                // Gérer les erreurs de préparation
                 throw new Exception('Erreur lors de la préparation de la requête : ' . implode(", ", $this->pdo_->errorInfo()));
             }
         }

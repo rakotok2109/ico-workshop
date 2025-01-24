@@ -28,7 +28,7 @@ $products = ProductController::getAllProducts();
 $feedbacks = FeedbackController::getAllFeedbacks();
 $newsList = NewsController::getAllNews();
 $cards = CardController::getAllCards();
-$orders = DetailOrderController::getAdminAllOrder();
+$orders = DetailOrderController::getAdminAllOrders();
 ?>
 <div class="dashboard-container">
     <aside class="sidebar">
@@ -171,19 +171,18 @@ $orders = DetailOrderController::getAdminAllOrder();
                 <tbody>
                     <?php foreach($orders as $order): ?>
                         <tr>
-                            <td><?= $order['user_id'] ?></td>
-                            <td><?= $order['user_name'] ?></td>
-                            <td><?= $order['user_firstname'] ?></td>
-                            <td><?= $order['user_email'] ?></td>
-                            <td><?= $order['order_id'] ?></td>
-                            <td><?= $order['order_date'] ?></td>
-                            <td><?= $order['product_id'] ?></td>
+                            <td><?= $order['id_user'] ?></td>
+                            <td><?= $order['name'] ?></td>
+                            <td><?= $order['firstname'] ?></td>
+                            <td><?= $order['email'] ?></td>
+                            <td><?= $order['id_order'] ?></td>
+                            <td><?= $order['date_order'] ?></td>
+                            <td><?= $order['id_product'] ?></td>
                             <td><?= $order['product_name'] ?></td>
-                            <td><?= $order['product_price'] ?></td>
-                            <td><?= $order['product_quantity'] ?></td>
+                            <td><?= $order['price'] ?></td>
+                            <td><?= $order['quantity'] ?></td>
                             <td><?= $order['total_amount'] ?></td>
                         </tr>
-                    <?php var_dump($orders);?>
                     <?php endforeach; ?>
                 </tbody>
             </table>

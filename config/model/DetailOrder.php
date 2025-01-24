@@ -1,6 +1,6 @@
 <?php
 
-class DetailsOrder {
+class DetailOrder {
     public $_id;
     public $_quantity;
     public $_amount;
@@ -15,6 +15,14 @@ class DetailsOrder {
         $this->_id = $_id;
     }
 
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id){
+        $this->_id = $id;
+    }
+    
     public function getidOrder(){
         return $this->_id_order;
     }

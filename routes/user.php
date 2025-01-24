@@ -51,7 +51,6 @@ if($_GET['id'] == 'register') {
 else if($_GET['id'] == 'login') {
     $result = UserController::login($_POST['mail'], $_POST['password']);
     if($result) {
-    //   echo $_SESSION['user']->getName();
     $user= unserialize($_SESSION['user']);
     if($user->getRole() < 1)
     {

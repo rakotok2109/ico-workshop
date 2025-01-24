@@ -7,13 +7,9 @@ if (!isset($_SESSION['user'])) {
     exit;
 }else{
     $user = unserialize($_SESSION['user']); 
-    // var_dump($user); Pour vérifier que les données sont à jour
 }
-// $user = UserController::getAllInfoUser($user->getId());
-// var_dump($user);
 ?>
 <?php
-// var_dump($_SESSION['user']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -97,10 +93,10 @@ if (!isset($_SESSION['user'])) {
                             $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
                             if (!empty($orderDetails)): 
                                 foreach ($orderDetails as $detail):
-                                    $product = ProductController::getProductById($detail->getIdProduit()); // Assuming you have a method to fetch product by ID
+                                    $product = ProductController::getProductById($detail->getIdProduit());
                             ?>
                             <tr>
-                                <td class="px-4 py-2 border"><?= htmlspecialchars($product->getName()); ?></td> <!-- Display product name -->
+                                <td class="px-4 py-2 border"><?= htmlspecialchars($product->getName()); ?></td>
                                 <td class="px-4 py-2 border"><?= $detail->getQuantite(); ?></td>
                                 <td class="px-4 py-2 border"><?= number_format($detail->getPrix(), 2); ?>€</td>
                             </tr>

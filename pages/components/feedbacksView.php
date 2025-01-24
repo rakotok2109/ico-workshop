@@ -17,9 +17,9 @@ $feedbacks = FeedbackController::getAllFeedbacks();
     h1 {
         text-align: center;
         color: #333;
-        margin: 20px 0;
+        margin-top: 40px;
     }
-    .container {
+    .footer-container {
         display: flex;
         justify-content: space-around;
         align-items: flex-start;
@@ -56,7 +56,7 @@ $feedbacks = FeedbackController::getAllFeedbacks();
         color: #fff;
         border: none;
         cursor: pointer;
-        padding: 8px; /* Réduction de la hauteur */
+        padding: 8px;
         font-size: 14px;
     }
     button:hover {
@@ -71,7 +71,7 @@ $feedbacks = FeedbackController::getAllFeedbacks();
         display: none;
     }
     .star-rating label {
-        font-size: 20px; /* Taille inchangée pour les étoiles */
+        font-size: 20px;
         color: #ccc;
         cursor: pointer;
     }
@@ -138,7 +138,7 @@ $feedbacks = FeedbackController::getAllFeedbacks();
         <div class="title-footer">
             <h1 style="color: #FFFFFF;">Partagez et Consultez les Avis</h1>
         </div>
-        <div class="container" style="background-color: #3B60BC;">
+        <div class="footer-container" style="background-color: #3B60BC;">
             <div class="form-section">
                 <form action="../../routes/feedback.php?id=addFeedback" method="POST">
                     <div class="ss">

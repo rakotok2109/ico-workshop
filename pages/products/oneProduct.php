@@ -42,6 +42,5 @@ $product = ProductController::getProductbyId($id);
         <?php require_once(dirname(__DIR__) . '/components/cart_sidebar.php'); ?>
     </div>
 </div>
-<!-- todo: include footer -->
 </body>
 </html>
