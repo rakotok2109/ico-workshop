@@ -7,10 +7,13 @@
  dev5socializus/Elazami_Ayoub
  rakotok2109/Rakotonoera_Ny_Arovantsoa
 
-## Procédure de lancement
+## Procédure de lancement en local
  1. Lancer Wamp/Xampp
  2. Importer la base de données workshop_ico
  3. Accéder au site en local -> localhost/ico-workshop/index.php
+
+## Procédure de lancement en prod
+- Accéder au site en production [ICO](https://ico.charbelsnn.com/) 
 
  ### Informations utiles
   Cartes pour tester le payement :
@@ -39,7 +42,9 @@
  * Fonctionnalité de paiement avec Stripe - Charbel
  * Fonctionnalité d'ajout d'un produit au panier - Charbel
  * Page des règles du jeu - Charbel
+ * Page liste des cartes - Charbel
  * Page produit - Charbel
+ * Page FAQ - Charbel
  * Dashboard Admin - Nathan et Alvyn
  * Mise à jour du rôle de l'utilisateur par le super admin - Nathan
  * Création d'un produit par l'admin - Nathan
