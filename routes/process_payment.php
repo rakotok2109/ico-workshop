@@ -56,7 +56,9 @@ try {
         {
         
             foreach($cart as $item){
-                $details = new DetailsOrder(null, $orderId, $item['id'], $item['quantite'], $item['prix'] * $item['quantite']);
+
+
+                    $details = new DetailsOrder($item['quantite'], $item['prix'] * $item['quantite'], $orderId, $item['id'], NULL);
                 DetailOrderController::addOrderDetails($details);
                 echo json_encode(['success' => true]);
         
