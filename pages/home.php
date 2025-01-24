@@ -57,7 +57,7 @@ $news = NewsController::getAllNews();
 
 
     <div class="histoire-du-jeu">
-        <h2>Synopsie</h2>
+        <h2>Synopsis</h2>
         <span>
             <p>Perdus dans la mer des Caraïbes, nos explorateurs n’ont plus qu’une seule solution afin de rentrer chez eux. Ils doivent récolter les 10 trésors de Barbe Rousse situés sur l’île interdite!!! (woouuuh on a peur)
             Pour mener à bien leur mission, les marins devront démasquer les pirates au sein de leur équipage. Le but des pirates? Empoisonner les marins afin de faire échouer les expéditions vers l’île interdite. Mais attention, des bonus viendront pimenter les débats et compliqueront la tâche des pirates. Serez- vous prêts à braver marées et tempêtes pour vaincre les pirates? Ou bien trahirez-vous vos amis en faisant échouer les marins?</p>

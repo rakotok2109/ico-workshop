@@ -19,6 +19,7 @@ if(isset($_SESSION['user'])){
                  <?php }?>
                 <li><a href="../pages/rules.php">Le jeu</a></li>    
                 <li><a href="../pages/feedbacks.php">Avis</a></li>
+                <li><a href="../pages/faq.php">FAQ</a></li>
                 <li><a href="../pages/products/index.php">Acheter</a></li>
                
                     <?php if (isset( $_SESSION['user'])) :
