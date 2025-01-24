@@ -1,0 +1,192 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #3c60bc;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Container styles */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #3c60bc;
+    margin-top: 60px;
+}
+
+.register-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    max-height: 1300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    padding: 2rem;
+}
+
+/* Image section */
+
+.register-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Form section */
+.register-form {
+    padding-left: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-title {
+    font-size: 2.5rem;
+    color: #3c60bc;
+    text-align: left;
+    font-weight: bold;
+}
+
+.register-title span {
+    color: #ecba75;
+}
+
+.register-subtitle {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #574a45;
+    margin-bottom: 1.5rem;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.error-message ul {
+    list-style: none;
+}
+
+/* Form inputs */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3c60bc;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #3c60bc;
+    outline: none;
+}
+
+/* Submit button */
+.register-btn {
+    background-color: #3c60bc;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: #2a4f8c;
+}
+
+/* Footer buttons */
+.register-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.link-btn {
+    background-color: transparent;
+    color: #3c60bc;
+    padding: 0.6rem;
+    border: 1px solid #3c60bc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.link-btn:hover {
+    background-color: #3c60bc;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .register-image img {
+        max-height: 300px;
+    }
+
+    .register-form {
+        padding-left: 0;
+    }
+
+    .register-title {
+        font-size: 2rem;
+    }
+
+    .register-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .input-group input {
+        padding: 0.7rem;
+    }
+
+    .register-btn {
+        padding: 0.7rem;
+    }
+}

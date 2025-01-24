@@ -4,12 +4,12 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-require_once (dirname(dirname(__DIR__)).'/config/init.php');
-require_once (dirname(dirname(__DIR__)) . '/vendor/autoload.php');
+require_once ('../config/init.php');
+require_once ('../vendor/autoload.php');
 use Dotenv\Dotenv;
 
 // Charger le fichier .env
-$dotenv = Dotenv::createImmutable(dirname(dirname(__DIR__)) . '/');
+$dotenv = Dotenv::createImmutable ('../');
 $dotenv->load();
 
 if (!isset($_ENV['STRIPE_API_KEY'])) {
@@ -42,32 +42,34 @@ try {
     ]);
 
     if ($paymentIntent->status === 'succeeded') {
-        //  $user = unserialize($_SESSION['user']);
+         $user = unserialize($_SESSION['user']);
+
          // Enregistrement de la commande dans la base de données
-        //  $order = new Order(null, date('Y-m-d H:i:s'), $user->getId());
-         $order = new Order(null, date('Y-m-d H:i:s'), 1);
+         $order = new Order(null, $user->getId(),  date('Y-m-d H:i:s'));
          $orderId =  OrderController::addOrder($order);
        
-if($orderId == null ){
-    echo json_encode(['error' => 'Erreur avec la base de données.']);
+         if($orderId == null ){
+            echo json_encode(['error' => 'Erreur avec la base de données.']);
+        
+        }
+        else
+        {
+        
+            foreach($cart as $item){
 
-}
-else
-{
 
-    foreach($cart as $item){
-        $details = new DetailsOrder(null, $orderId, $item['id'], $item['quantite'], $item['prix'] * $item['quantite']);
-        DetailsOrderController::addOrderDetails($details);
-        echo json_encode(['success' => true]);
-
-    }
-
-}
-     
-       
-
-     
-        exit;
+                    $details = new DetailsOrder($item['quantite'], $item['prix'] * $item['quantite'], $orderId, $item['id'], NULL);
+                DetailOrderController::addOrderDetails($details);
+                echo json_encode(['success' => true]);
+        
+            }
+        
+        }
+             
+               
+        
+             
+                exit;
     } else {
         echo json_encode(['error' => 'Le paiement a échoué.']);
     }

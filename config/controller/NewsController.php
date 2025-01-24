@@ -32,7 +32,7 @@ class NewsController {
             $news->getId()
         ]);
 
-        header("Location: ../pages/admin/dashboard.php");
+        header("Location: ../pages/admin/dashboard.php#news");
         exit();
 
     }
@@ -42,7 +42,7 @@ class NewsController {
         $pdo = PDOUtils::getSharedInstance();
         $pdo->execSQL('INSERT INTO news (title, wording, date) VALUES (?, ?, ?)', [$news->getTitle(), $news->getWording(), $news->getDate()]);
 
-        header("Location: ../pages/admin/dashboard.php");
+        header("Location: ../pages/admin/dashboard.php#news");
         exit();
     }
 
@@ -53,7 +53,7 @@ class NewsController {
 
             if ($id_news === null) {
                 $_SESSION['error'] = "ID produit invalide.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#news");
                 exit();
             }
 
@@ -63,11 +63,11 @@ class NewsController {
                 $pdo->execSQL($sql, [$id_news]);
 
                 $_SESSION['success'] = "L'actualité' a été supprimé avec succès.";
-                header("Location: ../pages/admin/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#news");
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../../pages/admin/dashboard.php");
+                header("Location: ../../pages/admin/dashboard.php#news");
                 exit();
             }
         }

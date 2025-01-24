@@ -1,0 +1,108 @@
+body {
+    background-color: #FCD3A1;
+    font-family: Arial, sans-serif;
+    color: #00253e;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #3c60bc;
+    text-align: center;
+    color: #fff;
+}
+
+.checkout-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-title {
+    text-align: center;
+    font-size: 32px;
+    color: #3c60bc;
+    margin-bottom: 20px;
+}
+
+.order-summary {
+    margin-bottom: 30px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #00253e;
+    padding: 15px;
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #3c60bc;
+    color: white;
+}
+
+.total-price {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.checkout-form-container {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d88a32;
+    border-radius: 5px;
+}
+
+.card-element {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ecba75;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.checkout-button {
+    background-color: #3c60bc;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkout-button:hover {
+    background-color: #d88a32;
+}
+
+.error-message {
+    color: #af2127;
+    margin-top: 15px;
+    font-weight: bold;
+}

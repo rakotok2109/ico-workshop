@@ -2,19 +2,17 @@
 require_once (dirname(__DIR__).'/init.php');
 
 class CardController {
-
-    public static function getAllCard(){
-        
+    public static function getAllCards(){
         $pdo = PDOUtils::getSharedInstance();
-        $results = $pdo->requestSQL('SELECT id, type, nom, couleur, dos, role_de_carte, path  FROM carte');
+        $results = $pdo->requestSQL('SELECT id, name, type, description, image  FROM cards');
         return $results;
 
     }
 
-    public static function createCard( Card $carte){
+    public static function addCard( Card $card){
         try{
             $pdo = PDOUtils::getSharedInstance();
-            $results = $pdo->execSQL('INSERT INTO carte (type, nom, couleur, dos, role_de_carte, path) VALUES (?,?,?,?,?,?)', [$carte->getType(), $carte->getNom(), $carte->getCouleur(), $carte->getDos(), $carte->getRoleDeCarte(), $carte->getPath()]);
+            $results = $pdo->execSQL('INSERT INTO cards (name, type, description, image) VALUES (?,?,?,?)', [$card->getName(), $card->getType(), $card->getDescription(), $card->getImage()]);
             
             $_SESSION['success'] = "Ajout de la carte avec succès";
             
@@ -31,22 +29,22 @@ class CardController {
             $id_card = isset($_POST['id']) ? (int) $_POST['id'] : null;
 
             if ($id_card === null) {
-                $_SESSION['error'] = "ID produit invalide.";
-                header("Location: ../pages/dashboard.php");
+                $_SESSION['error'] = "ID carte invalide.";
+                header("Location: ../pages/admin/dashboard.php#cards");
                 exit();
             }
 
             try {
                 $pdo = PDOUtils::getSharedInstance();
-                $sql = "DELETE FROM carte WHERE id = ?";
+                $sql = "DELETE FROM cards WHERE id = ?";
                 $pdo->execSQL($sql, [$id_card]);
 
                 $_SESSION['success'] = "La carte a été supprimé avec succès.";
-                header("Location: ../pages/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#cards");
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
-                header("Location: ../pages/dashboard.php");
+                header("Location: ../pages/admin/dashboard.php#cards");
                 exit();
             }
         }
@@ -55,20 +53,15 @@ class CardController {
     public static function updateCard(Card $card)
     {
         $pdo = PDOUtils::getSharedInstance();
-        $pdo->execSQL('UPDATE carte SET type = ?, nom = ?, couleur = ?, dos = ?, role_de_carte = ?, path = ? WHERE id = ?',
+        $pdo->execSQL('UPDATE cards SET name = ?, type = ?, description = ?, image = ? WHERE id = ?',
         [
+            $card->getName(),
             $card->getType(),
-            $card->getNom(),
-            $card->getCouleur(),
-            $card->getDos(),
-            $card->getRoleDeCarte(),
-            $card->getPath(),
+            $card->getDescription(),
+            $card->getImage(),
             $card->getId()
         ]);
-
-        header("Location: ../pages/dashboard.php");
         exit();
-
     }
 
     

@@ -15,6 +15,7 @@
     align-items: center;
     padding-left: 80px;
     z-index: 10;
+    background-color: #3B60BC !important;
 }
 .container-logo a img{
     height: 100px;

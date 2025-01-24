@@ -1,39 +1,38 @@
 <?php
 
 class Order {
-    public $id;
-    public $id_user;
-    public $date;
+    public $_id;
+    public $_id_user;
+    public $_date;
 
-    public function __construct($id, $date, $id_user) {
-        $this->id = $id;
-        $this->id_user = $id_user;
-        $this->date = $date;
-        
+    public function __construct($_id,  $_id_user, $_date) {
+        $this->_id = $_id;
+        $this->_id_user = $_id_user;
+        $this->_date = $_date;
     }
 
     public function getId() {
-        return $this->id;
+        return $this->_id;
     }
 
     public function setId($id) {
-        $this->id = $id;
+        $this->_id = $id;
     }
     
     public function getIdUser() {
-        return $this->id_user;
+        return $this->_id_user;
     }
     
     public function setUserId($id_user) {
-        $this->id_user = $id_user;
+        $this->_id_user = $id_user;
     }
 
     public function getDate() {
-        return $this->date;
+        return $this->_date;
     }
     
     public function setDate($date) {
-        $this->date = $date;
+        $this->_date = $date;
     }
 
 }
