@@ -47,7 +47,7 @@ class DetailOrder {
         $this->_amount = $amount;
     }
 
-    public function setIdOrder($idorder){
+    public function setIdOrder($id_order){
         $this->_id_order = $id_order;
     }
 

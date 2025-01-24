@@ -76,7 +76,11 @@ if (!isset($_SESSION['user'])) {
         <div class="w-2/3 bg-white shadow-lg rounded-lg p-6">
             <h1 class="text-3xl font-bold text-[#3B60BC] mb-6">Mes Commandes</h1>
             
-            <?php if (empty($orders)): ?>
+            <?php
+            
+            $iduser = $user->getId();
+            $orders = OrderController::getOrdersForUser($iduser);
+            if (empty($orders)): ?>
                 <p>Aucune commande trouvée.</p>
             <?php else: ?>
                 <table class="w-full table-auto border-collapse border border-gray-300">
@@ -90,15 +94,15 @@ if (!isset($_SESSION['user'])) {
                     <tbody>
                         <?php foreach ($orders as $order): ?>
                             <?php
-                            $orderDetails = DetailsOrderController::getDetailsByOrderId($order->getId());
+                            $orderDetails = DetailOrderController::getDetailsByOrderId($order->getId());
                             if (!empty($orderDetails)): 
                                 foreach ($orderDetails as $detail):
-                                    $product = ProductController::getProductById($detail->getIdProduit());
+                                    $product = ProductController::getProductById($detail->getidProduct());
                             ?>
                             <tr>
                                 <td class="px-4 py-2 border"><?= htmlspecialchars($product->getName()); ?></td>
-                                <td class="px-4 py-2 border"><?= $detail->getQuantite(); ?></td>
-                                <td class="px-4 py-2 border"><?= number_format($detail->getPrix(), 2); ?>€</td>
+                                <td class="px-4 py-2 border"><?= $detail->getQuantity(); ?></td>
+                                <td class="px-4 py-2 border"><?= number_format($detail->getAmount(), 2); ?>€</td>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

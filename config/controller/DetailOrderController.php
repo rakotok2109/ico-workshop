@@ -15,7 +15,8 @@ class DetailOrderController
         $details = [];
         foreach ($result as $detail)
         {
-            $details[] = new DetailOrder($detail['id'], $detail['quantity'], $detail['amount'], $detail['id_order'], $detail['id_product']);
+           
+            $details[] = new DetailOrder($detail['quantity'],  $detail['amount'], $detail['id_order'], $detail['id_product'],$detail['id']);
         }
         return $details;
     }
